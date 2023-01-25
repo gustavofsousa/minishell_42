@@ -6,12 +6,12 @@
 #    By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/01/25 13:42:47 by gusousa          ###   ########.fr        #
+#    Updated: 2023/01/25 15:37:04 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:=	minishell
-MAKEFLAGS	:= --silent
+##MAKEFLAGS	:= --silent
 
 ####	Compilers	####
 CC		:=	cc
@@ -27,17 +27,18 @@ SRC		:=	main.c							\
 
 OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
 
-####	Commands	####
+######	Commands	######
 
 all:	$(OBJDIR) $(NAME)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
-$(NAME): 
+$(OBJDIR)%.o : $(SRCDIR)%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-
-
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -o $@
 
 clean:
 	rm -rf $(OBJDIR)

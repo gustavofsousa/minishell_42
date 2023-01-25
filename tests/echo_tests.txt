@@ -1,0 +1,10 @@
+
+echo
+echo echo
+echo hello
+echo hello morgan
+echo -n morgen
+echo -nn morgen
+echo -n -n -n morgen
+echo -n -nnnnn -n morgen
+echo-n -n -nnf morgen

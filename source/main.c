@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/01/25 15:36:14 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/01/26 17:52:27 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,13 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
-	info.prompt = readline("nosso_minisheel >");
-	printf("%s\n", info.prompt);
+	while (42)
+	{
+		reset()
+		info.prompt = readline("nosso_minisheel >");
+		printf("%s\n", info.prompt);
+		//Se for exit, dar break.
+	}
 
 	finish_program(&info);
 	return (0);

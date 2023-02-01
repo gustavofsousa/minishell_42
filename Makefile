@@ -6,7 +6,7 @@
 #    By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/01 10:44:37 by gusousa          ###   ########.fr        #
+#    Updated: 2023/02/01 12:09:22 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,9 +52,11 @@ $(LIBLIB):
 
 clean:
 	rm -rf $(OBJDIR)
+	make -C $(LIBDIR) clean
 
 fclean:	clean
 	rm -rf $(NAME)
+	make -C $(LIBDIR) fclean
 
 re: fclean all
 

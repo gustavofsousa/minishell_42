@@ -6,7 +6,7 @@
 #    By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/01 12:14:55 by gusousa          ###   ########.fr        #
+#    Updated: 2023/02/01 15:13:07 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ INCDIR	:=	include/
 LIBDIR	:=		./libft
 
 ####	Sources & objects	####
-SRC		:=	main.c							\
+SRC		:=	main.c parser.c							\
 
 OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
 

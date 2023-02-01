@@ -6,7 +6,7 @@
 #    By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/01 12:09:22 by gusousa          ###   ########.fr        #
+#    Updated: 2023/02/01 12:14:55 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ $(OBJDIR)%.o : $(SRCDIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(LINK) -o $@
+	$(CC) $(OBJ) $(LIBLIB) $(LINK) -o $@
 
 $(LIBLIB):
 	make -C $(LIBDIR) all

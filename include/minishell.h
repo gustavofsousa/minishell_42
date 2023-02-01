@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/01 10:30:25 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/01 12:11:27 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef struct s_betpip
 {
-	char			**sentence;
+	char			*sentence;
 	int				qtd_word;
 	struct s_betpip	*next;
 }	t_betpip;
@@ -28,6 +28,8 @@ typedef struct s_betpip
 typedef struct s_info
 {
 	char	*prompt;
+	char	**sentence;
+	int		qtd_sentence;
 
 
 

@@ -6,7 +6,7 @@
 #    By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/01 12:14:55 by gusousa          ###   ########.fr        #
+#    Updated: 2023/02/01 15:46:11 by parnaldo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,10 @@ NAME		:=	minishell
 
 ####	Compilers & flags	####
 CC		:=	cc
-CFLAGS	:=	-Wextra -Wall -Werror -g
+CFLAGS	:=	-Wextra -Wall -Werror -g -I ~/.brew/opt/readline/include
 
 ####	linkers		####
-LINK		:=	-lreadline
+LINK		:=	-lreadline -L ~/.brew/opt/readline/lib
 
 ####	Directories	####
 SRCDIR	:=	source/
@@ -28,6 +28,7 @@ LIBDIR	:=		./libft
 
 ####	Sources & objects	####
 SRC		:=	main.c							\
+			signal.c
 
 OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
 

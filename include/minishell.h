@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/01 12:11:27 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/01 15:45:36 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/ioctl.h>
 # include "../libft/libft.h"
 
 typedef struct s_betpip
@@ -36,5 +38,8 @@ typedef struct s_info
 
 }	t_info;
 
+//Signal
+void	check_eof(t_info *info);
+void	init_sig(void);
 
 #endif

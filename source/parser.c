@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/02 18:45:45 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/02 18:47:41 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	create_two_cells_begin(char *str, int n_times)
 	char	*first_word;
 	char	*second_word;
 
-	first_word = ft_substr(str, 0, n_times + 1);
+	first_word = ft_substr(str, 0, n_times);
 	second_word = ft_substr(str, n_times, ft_strlen(str));
 	printf("Célula criada->\t%s\n", first_word);
 	printf("Célula criada->\t%s\n", second_word);

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/02 15:58:33 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/02 18:30:10 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,69 @@
 void	create_new_cell(char *str)
 {
 
+}
+
+//crio nó até ele, com ele, depois dele;
+void	create_three_cells(char *str, char set, int n_times)
+{
+	char	*first_word;
+	char	*second_word;
+	char	*third_word;
+
+	len_first = 0;
+	while (str[len_first] != set)
+		len_first++;
+	first_word = ft_substr(str, 0, len_first + 1);
+	second_word = ft_substr(str, len_first, n_times + 1);
+	third_word = ft_substr(str, len_first + n_times, ft_strlen(str));
+	create_new_cell(first_word);
+	create_new_cell(second_word);
+	create_new_cell(third_word);
+	free(first_word);
+	free(second_word);
+	free(third_word);
+}
+
+// crio nó até achar ele, e a partir dele;
+void	create_two_cells_end(char *str, char set, int n_times)
+{
+	char	*first_word;
+	char	*second_word;
+
+	first_word = ft_substr(str, 0, ft_strlen(str) - 1 - n_times);
+	second_word = ft_substr(str, ft_strlen(str) - 1 - n_times, n_times);
+	create_new_cell(first_word);
+	create_new_cell(second_word);
+	free(first_word);
+	free(second_word);
+}
+
+// crio nó com ele e resto;
+void	create_two_cells_begin(char *str, char set, int n_times)
+{
+	char	*first_word;
+	char	*second_word;
+
+	first_word = ft_substr(str, 0, n_times + 1);
+	second_word = ft_substr(str, n_times, ft_strlen(str));
+	create_new_cell(first_word);
+	create_new_cell(second_word);
+	free(first_word);
+	free(second_word);
+}
+
+void	find_where(char *str, char set, int n_times)
+{
+
+	// Vejo se está no início
+	if (*str == set)
+		create_two_cells_begin(str, set, n_times);
+	// Vejo se está no fim
+	else if (str[ft_strlen(str) - 1])
+		create_two_cells_end(str, set, n_times);
+	// No meio
+	else
+		create_three_cells(str, set, n_times);
 }
 
 int	count_recurrence(char *str, char set)
@@ -49,7 +112,7 @@ void	split_and_create(char *str, char c)
 	else if (c == '|' && n_times == 2)
 		printf("Error for 2 pipes") //error here.
 	else if (c == '<' && n_times == 1)
-		find_where(Str, c, n_times);
+		find_where(str, c, n_times);
 	else if (c == '<' && n_times == 2)
 		find_where(str, c, n_times);
 	else if (c == '>' && n_times == 1)
@@ -59,24 +122,6 @@ void	split_and_create(char *str, char c)
 	else 
 		printf("Error com mais de 2 <<>>?") //error here
 
-	// O | está sozinho.
-	if (*str == c && *(str + 1) == '\0')
-		create_new_cell(ft_strchr(str, c));
-	// O | está no fim da linha.
-	else if (*str != c)
-
-	// Vejo se tem alguma palavra antes do char c e crio célula.
-	len = 0;
-	while (str[len] != '\0' && str[len] != c)
-		len++;
-	if (len > 0)
-	{
-		new_word = ft_substr(str, 0, len + 1);
-		create_new_cell(new_word);
-		free(new_word);
-	}
-	// Crio célula com o que achei no char c.
-	create_new_cell(ft_strchr(str, c));
 }
 
 /*

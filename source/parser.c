@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/01 16:22:59 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/02 15:58:33 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,47 @@ void	create_new_cell(char *str)
 
 }
 
+int	count_recurrence(char *str, char set)
+{
+	int	n_times;
+
+	n_times = 0;
+	while (*str)
+		if (*str++ == set)
+			n_times++;
+	return (n_times);
+}
+
+/*
+ * As três opções para crtce especial é:
+ * 1. Início da palavra
+ * 2. Entre duas palavras
+ * 3. Final da palavra.
+ * Podendo ser duplo ou não o 2 e 3.
+ * Preciso de
+ * Uma função que identifique (com comando de unico ou duplo)
+ * onde está na palavra
+ */
 void	split_and_create(char *str, char c)
 {
 	int	len;
 	char	*new_word;
+
+	n_times = count_recurrence(str, c);
+	if (c == '|' && n_times == 1)
+		find_where(str, c, n_times);
+	else if (c == '|' && n_times == 2)
+		printf("Error for 2 pipes") //error here.
+	else if (c == '<' && n_times == 1)
+		find_where(Str, c, n_times);
+	else if (c == '<' && n_times == 2)
+		find_where(str, c, n_times);
+	else if (c == '>' && n_times == 1)
+		find_where(str, c, n_times);
+	else if (c == '>' && n_times == 2)
+		find_where(str, c, n_times);
+	else 
+		printf("Error com mais de 2 <<>>?") //error here
 
 	// O | está sozinho.
 	if (*str == c && *(str + 1) == '\0')
@@ -47,26 +84,26 @@ void	split_and_create(char *str, char c)
  */
 void	divide_prompt(t_info *info)
 {
-	char	**str;
+	char	**mtx_str;
 
 	// Eu preciso achar se tem algum caracter especial
 	// Depois verifico se ele está na frente ou atrás
 	// Verifico se ele é duplo ou sozinho
 	// Crio subtrings com eles separados
-	// Tenho que procurar no iniicio, meio e fim de string.
-	str = ft_split(info->prompt, ' ');
-	while (*str)
+	// Tenho que procurar no inicio, meio e fim de string.
+	mtx_str = ft_split(info->prompt, ' ');
+	while (*mtx_str)
 	{
-		// Separar os elementos
+		Caracter especial
 		if (ft_strchr(*str, '|' ))
 			split_and_create(*str, '|');
 		else if (ft_strchr(*str, '<'))
 			split_and_create(*str, '<');
 		else if (ft_strchr(*str, '>'))
 			split_and_create(*str, '>');
-		//Criar célula com cada elemento
+		// Palavra normal
 		else
 			create_new_cell(*str);
-		str++;
+		mtx_str++;
 	}
 }

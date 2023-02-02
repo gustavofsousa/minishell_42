@@ -6,17 +6,18 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/01 15:13:37 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/02 18:41:37 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
+# include <stdio.h> //printf
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
+# include <stdlib.h> //free
 
 typedef struct s_cell
 {

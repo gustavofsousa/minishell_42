@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/03 10:24:29 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/03 11:14:02 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	create_new_cell(char *str)
 }
 */
 
+/*
 //crio nó até ele, com ele, depois dele;
 void	create_three_cells(char *str, char set, int n_times)
 {
@@ -101,12 +102,12 @@ int	count_recurrence(char *str, char set)
 	return (n_times);
 }
 
-/*
+
  * As três opções para crtce especial é:
  * 1. Início da palavra
  * 2. Entre duas palavras. Pode ser duplo.
  * 3. Final da palavra. Pode ser duplo.
- */
+ *
 void	split_and_create(char *str, char c)
 {
 	int	n_times;
@@ -128,27 +129,40 @@ void	split_and_create(char *str, char c)
 		printf("Error com mais de 2 <<>>?"); //error here
 
 }
+*/
 
 void	split_and_create(char *str)
 {
 	char	*new_word;
+	int		i;
 
 	while (*str)
 	{
+		i = 0;
 		if (*str == '|' || *str == '>' || *str == '<')
 		{
 			if (*(str + 1) == *str)
 			{
-				new_word = ft_substr(str, 0, 3);
+				new_word = ft_substr(str, 0, 2);
 				str++;
 			}
 			else
-				new_word = ft_substr(str, 0, 2);
+				new_word = ft_substr(str, 0, 1);
 			//create_new_cell(new_word);
-			printf("New cell->\t%s", new_word);
+			printf("New cell->\t%s\n", new_word);
+			free(new_word);
+			i = 1;
+		}
+		else
+		{
+			while (str[i] != '|' && str[i] != '>' && str[i] != '<' && str[i] != '\0')
+				i++;
+			new_word = ft_substr(str, 0, i);
+			//create_new_cell(new_word);
+			printf("New cell->\t%s\n", new_word);
 			free(new_word);
 		}
-		str++;
+		str += i;
 	}
 }
 
@@ -168,9 +182,9 @@ void	divide_prompt(t_info *info)
 	while (*mtx_str)
 	{
 		// Caracter especial
-		if (ft_strchr(*mtx_str, '|')
-				|| (ft_strchr(*mtx_str, '<')
-				|| (ft_strchr(*mtx_str, '>'))
+		if ((ft_strchr(*mtx_str, '|'))
+				|| (ft_strchr(*mtx_str, '<'))
+				|| (ft_strchr(*mtx_str, '>')))
 			split_and_create(*mtx_str);
 		// Palavra normal
 		else

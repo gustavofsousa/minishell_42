@@ -6,7 +6,7 @@
 #    By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/01 15:13:07 by gusousa          ###   ########.fr        #
+#    Updated: 2023/02/03 14:35:03 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ LIBDIR	:=		./libft
 
 ####	Sources & objects	####
 SRC		:=	main.c parser.c							\
+			list_cells.c
 
 OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
 

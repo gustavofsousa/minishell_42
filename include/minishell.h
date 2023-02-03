@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/02 18:41:37 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/03 14:35:42 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_cell
 {
 	char			*content;
 	int				token;
+	int				id;
 	struct s_cell	*next;
 }	t_cell;
 
@@ -39,11 +40,9 @@ typedef struct s_info
 	char	**sentence;
 	int		qtd_sentence;
 
-
-
-
 }	t_info;
 
-void	divide_prompt(t_info *info);
+t_cell	*divide_prompt(t_info *info);
+void	create_new_cell(t_cell **list_cells, char *str);
 
 #endif

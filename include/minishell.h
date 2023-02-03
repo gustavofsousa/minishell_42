@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/03 20:13:21 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/03 20:23:05 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,17 @@
 # include "../libft/libft.h"
 # include <stdlib.h> //free
 
+enum e_token
+{
+	words,
+	redirects,
+	pipes
+};
+
 typedef struct s_cell
 {
 	char			*content;
-	int				token;
+	enum e_token	token;
 	int				id;
 	struct s_cell	*next;
 }	t_cell;

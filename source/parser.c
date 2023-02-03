@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/02 18:47:41 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/03 10:24:29 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	create_two_cells_end(char *str, int n_times)
 	char	*first_word;
 	char	*second_word;
 
-	first_word = ft_substr(str, 0, ft_strlen(str) - 1 - n_times);
+	first_word = ft_substr(str, 0, ft_strlen(str) - n_times);
 	second_word = ft_substr(str, ft_strlen(str) - 1 - n_times, n_times);
 	//create_new_cell(first_word);
 	//create_new_cell(second_word);
@@ -129,8 +129,36 @@ void	split_and_create(char *str, char c)
 
 }
 
+void	split_and_create(char *str)
+{
+	char	*new_word;
+
+	while (*str)
+	{
+		if (*str == '|' || *str == '>' || *str == '<')
+		{
+			if (*(str + 1) == *str)
+			{
+				new_word = ft_substr(str, 0, 3);
+				str++;
+			}
+			else
+				new_word = ft_substr(str, 0, 2);
+			//create_new_cell(new_word);
+			printf("New cell->\t%s", new_word);
+			free(new_word);
+		}
+		str++;
+	}
+}
+
 /*
  * Função para dividir as palavras do prompt em nós de uma lista.
+ *
+ * Andando em cada palavra, vendo se tem caracter
+ * Se tiver, vê se tem um após ele
+ * Cria cell até ali, dá free.
+ * Repete o laço da onde acabou.
  */
 void	divide_prompt(t_info *info)
 {
@@ -140,12 +168,10 @@ void	divide_prompt(t_info *info)
 	while (*mtx_str)
 	{
 		// Caracter especial
-		if (ft_strchr(*mtx_str, '|' ))
-			split_and_create(*mtx_str, '|');
-		else if (ft_strchr(*mtx_str, '<'))
-			split_and_create(*mtx_str, '<');
-		else if (ft_strchr(*mtx_str, '>'))
-			split_and_create(*mtx_str, '>');
+		if (ft_strchr(*mtx_str, '|')
+				|| (ft_strchr(*mtx_str, '<')
+				|| (ft_strchr(*mtx_str, '>'))
+			split_and_create(*mtx_str);
 		// Palavra normal
 		else
 			printf("Célula criada->\t%s\n", *mtx_str);

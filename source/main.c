@@ -6,26 +6,28 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/04 10:15:43 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/04 11:05:08 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 
-void	finish_program(t_info *info)
+void	finish_program(t_info *info, t_cell **list_cells)
 {
 	int	i;
 
 	i = -1;
 	free(info->prompt);
-	if (info->sentence)
-	{
-		while (++i < info->qtd_sentence)
-			free(info->sentence);
-		free(info->sentence);
-	}
+	list_clear_cells(list_cells);
 	exit (0);
+}
+
+void	reset(t_cell **list_cells)
+{
+	if (*list_cells)
+		list_clear_cells(list_cells);
+	
 }
 
 void	init(t_info *info, t_cell **list_cells)
@@ -44,8 +46,8 @@ int	main(int argc, char **argv)
 	init(&info, &list_cells);
 	while (42)
 	{
-		//reset()
-		info.prompt = readline("nosso_minisheel> ");
+		reset(&list_cells);
+		info.prompt = readline("our_minishell> ");
 		add_history(info.prompt);
 		list_cells = divide_prompt(&info);
 		//categorize_elemnts(&list_cells);
@@ -55,6 +57,6 @@ int	main(int argc, char **argv)
 		//Se for exit, dar break.
 	}
 
-	finish_program(&info);
+	finish_program(&info, &list_cells);
 	return (0);
 }

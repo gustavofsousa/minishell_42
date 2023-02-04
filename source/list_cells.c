@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:09:14 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/04 10:48:31 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/04 11:07:09 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,12 @@ void	list_add_back(t_cell **list, t_cell *new_cell)
 {
 	if (*list == NULL)
 	{
-		printf("fez\n");
 		*list = new_cell;
-	printf("Create cell->\t%s\n", new_cell->content);
+		printf("Create cell->\t%s\n", new_cell->content);
 		return ;
 	}
-	if (*list)
-	{
-		while ((*list)->next != NULL)
-			*list = (*list)->next;
-	}
+	while ((*list)->next != NULL)
+		*list = (*list)->next;
 	(*list)->next = new_cell;
 	printf("Create cell->\t%s\n", new_cell->content);
 }

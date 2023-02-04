@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/03 21:06:39 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/04 09:58:14 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@ enum e_token
 {
 	word,
 	redirect,
-	pipe
+	piper
 };
 
 typedef struct s_cell
 {
 	char			*content;
 	enum e_token	token;
-	int				id;
 	struct s_cell	*next;
 }	t_cell;
 
@@ -47,7 +46,6 @@ typedef struct s_commands
 	char	*input;
 	char	*command;
 	char	*arguments;
-	char	*output;
 	char	*output;
 }	t_command;
 

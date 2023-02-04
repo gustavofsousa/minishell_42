@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 21:01:14 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/03 21:13:53 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/04 09:47:34 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	categorize_elemnts(t_cell **list_cells)
 	while (*list_cells)
 	{
 		if (ft_strncmp(*list_cells->content, "|", 1)
-			*list_cells->token = pipe;
+			*list_cells->token = piper;
 		else if (ft_strncmp(*list_cells->content, ">", 1)
 			*list_cells->token = redirect;
 		else if (ft_strncmp(*list_cells->content, "<", 1)

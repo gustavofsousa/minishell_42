@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_utils.c                                       :+:      :+:    :+:   */
+/*   list_cells.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:09:14 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/03 14:34:40 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/04 10:48:31 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	create_new_cell(t_cell **list_cells, char *str)
-{
-	t_cell	*new_cell;
-
-	new_cell = new_cell(str);
-	lst_add_back(list_cells, new_cell);
-
-}
-
-void	new_cell(char *str)
+t_cell	*new_cell(char *str)
 {
 	t_cell	*cell;
 
@@ -29,24 +20,34 @@ void	new_cell(char *str)
 	if (!cell)
 		return (NULL);
 	cell->content = str;
-	cell->id = id;
 	cell->next = NULL;
+	return (cell);
 }
 
 void	list_add_back(t_cell **list, t_cell *new_cell)
 {
-
-	if (!(*list))
+	if (*list == NULL)
 	{
+		printf("fez\n");
 		*list = new_cell;
+	printf("Create cell->\t%s\n", new_cell->content);
 		return ;
 	}
-	while (*list->next != NULL)
-		*list = *list->next;
-	list->next = new_node;
+	if (*list)
+	{
+		while ((*list)->next != NULL)
+			*list = (*list)->next;
+	}
+	(*list)->next = new_cell;
+	printf("Create cell->\t%s\n", new_cell->content);
 }
 
-void	list_clear_cells(t_cell list)
+void	create_new_cell(t_cell **list_cells, char *str)
+{
+	list_add_back(list_cells, new_cell(str));
+}
+
+void	list_clear_cells(t_cell **list)
 {
 	t_cell	*tmp;
 
@@ -54,7 +55,7 @@ void	list_clear_cells(t_cell list)
 	{
 		tmp = (*list)->next;
 		free(*list);
-		*list = aux;
+		*list = tmp;
 	}
 	*list = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/03 21:51:27 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/04 10:15:43 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,10 @@ void	finish_program(t_info *info)
 	exit (0);
 }
 
-void	count_sentence(t_info *info)
-{
-	int	i;
-
-	i = -1;
-	while (info->sentence[++i])
-		info->qtd_sentence++;
-}
-
-void	init(t_info *info)
+void	init(t_info *info, t_cell **list_cells)
 {
 	info->qtd_sentence = 0;
+	*list_cells = NULL;	
 }
 
 int	main(int argc, char **argv)
@@ -49,7 +41,7 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
-	init(&info);
+	init(&info, &list_cells);
 	while (42)
 	{
 		//reset()

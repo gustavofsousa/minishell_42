@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/04 11:10:16 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/04 14:06:42 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 
 enum e_token
 {
-	word,
-	redirect,
-	piper
+	word = 144,
+	redirect = 22,
+	piper = 89
 };
 
 typedef struct s_cell

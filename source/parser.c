@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/04 13:51:26 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/04 15:12:07 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ char	*check_if_double(char *str, int *i)
 {
 	if (*(str + 1) == *str && *(str + 1) != '|')
 	{
-		(*i)++;
+		(*i) = 2;
 		return (ft_substr(str, 0, 2));
 	}
 	else
+	{
+		(*i) = 1;
 		return (ft_substr(str, 0, 1));
+	}
 }
 
 /*
@@ -34,6 +37,7 @@ void	split_and_create(t_cell **list_cells, char *str)
 	char	*new_word;
 	int		i;
 
+	new_word = NULL;
 	while (*str)
 	{
 		i = 0;
@@ -43,7 +47,7 @@ void	split_and_create(t_cell **list_cells, char *str)
 			new_word = check_if_double(str, &i);
 			create_new_cell(list_cells, new_word);
 			free(new_word);
-			i++;
+			new_word = NULL;
 		}
 		// Copiar palavra normal
 		else
@@ -54,6 +58,7 @@ void	split_and_create(t_cell **list_cells, char *str)
 			new_word = ft_substr(str, 0, i);
 			create_new_cell(list_cells, new_word);
 			free(new_word);
+			new_word = NULL;
 		}
 		str += i;
 	}
@@ -64,7 +69,7 @@ void	split_and_create(t_cell **list_cells, char *str)
  *
  * Andando em cada palavra, vendo se tem caracter
  * Se tiver, vê se tem um após ele
- * Cria cell até ali, dá free.
+ * Cria cell até ali, dá free.|cat
  * Repete o laço da onde acabou.
  */
 t_cell	*divide_prompt(t_info *info)

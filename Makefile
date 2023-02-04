@@ -40,24 +40,28 @@ LIBLIB		:=	$(LIBDIR)/libft.a
 all:	$(OBJDIR) $(LIBLIB) $(NAME)
 
 $(OBJDIR):
-	mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJDIR)
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo objects created ;)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) $(LIBLIB) $(LINK) -o $@
+	@$(CC) $(OBJ) $(LIBLIB) $(LINK) -o $@
+	@echo Awesome! just execute it now
 
 $(LIBLIB):
-	make -C $(LIBDIR) all
+	@make -C $(LIBDIR) all
+	@echo libf compiled :)
 
 clean:
-	rm -rf $(OBJDIR)
-	make -C $(LIBDIR) clean
+	@rm -rf $(OBJDIR)
+	@make -C $(LIBDIR) clean
+	@echo Everything cleaned out
 
 fclean:	clean
-	rm -rf $(NAME)
-	make -C $(LIBDIR) fclean
+	@rm -rf $(NAME)
+	@make -C $(LIBDIR) fclean
 
 re: fclean all
 

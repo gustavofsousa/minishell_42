@@ -3,6 +3,7 @@ NAME = libft.a
 ##################	Compiler	##################
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
+MAKEFLAGS	=	--silent
 RM = rm -rf
 
 ###	Directories	####

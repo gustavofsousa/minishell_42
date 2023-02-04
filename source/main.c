@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/04 11:05:08 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/04 11:11:21 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 		info.prompt = readline("our_minishell> ");
 		add_history(info.prompt);
 		list_cells = divide_prompt(&info);
-		//categorize_elemnts(&list_cells);
+		categorize_elements(&list_cells);
 
 		//info.sentence = ft_split(info.prompt, '|');
 		//count_sentence(&info);

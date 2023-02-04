@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/01 15:48:44 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/02/04 10:59:00 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	init(t_info *info)
 int	main(int argc, char **argv)
 {
 	t_info	info;
-	int		i;
 
 	(void)argc;
 	(void)argv;
@@ -56,14 +55,9 @@ int	main(int argc, char **argv)
 		//reset()
 		info.prompt = readline("nosso_minisheel> ");
 		add_history(info.prompt);
-	
-		check_eof(&info);
-		info.sentence = ft_split(info.prompt, '|');
-		count_sentence(&info);
 		
-		i = info.qtd_sentence;
-		while (i--)
-			printf("%s\n", info.sentence[i]);
+		printf("%s\n", info.prompt);
+		check_eof(&info);
 		//Se for exit, dar break.
 	}
 

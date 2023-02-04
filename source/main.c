@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/04 11:11:21 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/04 13:02:37 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,22 @@ void	init(t_info *info, t_cell **list_cells)
 	*list_cells = NULL;	
 }
 
+void	print_all_list(t_cell *list)
+{
+	int	i;
+
+	i = 0;
+	printf("\n");
+	while (list)
+	{
+		printf("-----------\n");
+		printf("Cell nº:\t%d\n", ++i);
+		printf("Content:\t%s\n", list->content);
+		printf("Token:\t\t%u\n", list->token);
+		list = list->next;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_info	info;
@@ -50,8 +66,9 @@ int	main(int argc, char **argv)
 		info.prompt = readline("our_minishell> ");
 		add_history(info.prompt);
 		list_cells = divide_prompt(&info);
-		categorize_elements(&list_cells);
+//		categorize_elements(&list_cells);
 
+		print_all_list(list_cells);
 		//info.sentence = ft_split(info.prompt, '|');
 		//count_sentence(&info);
 		//Se for exit, dar break.

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/04 10:47:02 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/04 13:51:26 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	split_and_create(t_cell **list_cells, char *str)
 	while (*str)
 	{
 		i = 0;
+		// Copiar o metadado, duplo ou normal
 		if (*str == '|' || *str == '>' || *str == '<')
 		{
 			new_word = check_if_double(str, &i);
@@ -44,6 +45,7 @@ void	split_and_create(t_cell **list_cells, char *str)
 			free(new_word);
 			i++;
 		}
+		// Copiar palavra normal
 		else
 		{
 			while (str[i] != '|' && str[i] != '>'

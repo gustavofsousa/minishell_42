@@ -6,7 +6,7 @@
 #    By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/04 11:10:45 by gusousa          ###   ########.fr        #
+#    Updated: 2023/02/06 10:34:17 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LINK		:=	-lreadline
 SRCDIR	:=	source/
 OBJDIR	:=	obj/
 INCDIR	:=	include/
-LIBDIR	:=		./libft
+LIBDIR	:=	libft/
 
 ####	Sources & objects	####
 SRC		:=	main.c			parser.c							\
@@ -44,20 +44,20 @@ $(OBJDIR):
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo objects created ;)
+	@echo objects created 😉
 
 $(NAME): $(OBJ)
 	@$(CC) $(OBJ) $(LIBLIB) $(LINK) -o $@
-	@echo Awesome! just execute it now
+	@echo Awesome! just execute it now 🤪
 
 $(LIBLIB):
 	@make -C $(LIBDIR) all
-	@echo libf compiled :)
+	@echo libf compiled 🙃
 
 clean:
 	@rm -rf $(OBJDIR)
 	@make -C $(LIBDIR) clean
-	@echo Everything cleaned out
+	@echo Everything cleaned out🗑
 
 fclean:	clean
 	@rm -rf $(NAME)

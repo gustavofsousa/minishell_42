@@ -23,19 +23,21 @@ void	check_eof(t_info *info)
 
 void	handler(int sig)
 {
-	if(RL_ISSTATE(RL_STATE_READCMD))
-		ioctl(STDIN_FILENO, TIOCSTI, "\n");
-	else
-		write(1, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	(void) sig;
+
+  if(sig == SIGINT)
+  {
+    if(RL_ISSTATE(RL_STATE_READCMD))
+		  ioctl(STDIN_FILENO, TIOCSTI, "\n");
+	  else
+		  write(1, "\n", 1);
+	  rl_replace_line("", 0);
+	  rl_on_new_line();
+  }
 }
 
-void	init_sig(void)
+void	set_signal_handler(void)
 {
-  struct sigaction sa;
-
-  sa.sa_handler = handler;
-  sigaction(SIGINT, &sa, NULL);
+  signal(SIGINT, handler);
+  signal(SIGQUIT, SIG_IGN);
+  signal(SIGTSTP, SIG_IGN);
 }

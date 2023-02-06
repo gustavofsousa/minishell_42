@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	init(&info);
-	init_sig();
+	set_signal_handler();
 	while (42)
 	{
 		//reset()

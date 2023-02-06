@@ -40,6 +40,6 @@ typedef struct s_info
 
 //Signal
 void	check_eof(t_info *info);
-void	init_sig(void);
+void	set_signal_handler(void);
 
 #endif

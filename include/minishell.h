@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/06 11:09:59 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/06 13:23:17 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 # define MINISHELL_H
 
 # include <stdio.h> //printf
+# include <stdio.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/ioctl.h>
 # include "../libft/libft.h"
 # include <stdlib.h> //free
 
@@ -52,7 +55,10 @@ typedef struct s_commands
 void	divide_prompt(t_info *info, t_cell **list_cells);
 void	create_new_cell(t_cell **list_cells, char *str);
 void	categorize_elements(t_cell **list);
-
 void	list_clear_cells(t_cell **list);
+
+//Signal
+void	check_eof(t_info *info);
+void	set_signal_handler(void);
 
 #endif

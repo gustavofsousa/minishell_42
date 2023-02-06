@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/04 14:10:12 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/06 11:08:12 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int argc, char **argv)
 		reset(&list_cells);
 		info.prompt = readline("our_minishell> ");
 		add_history(info.prompt);
-		list_cells = divide_prompt(&info);
+		divide_prompt(&info, &list_cells);
 		categorize_elements(&list_cells);
 
 		print_all_list(list_cells);

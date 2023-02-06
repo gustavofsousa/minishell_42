@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/04 15:12:07 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/06 11:25:55 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,24 +72,29 @@ void	split_and_create(t_cell **list_cells, char *str)
  * Cria cell até ali, dá free.|cat
  * Repete o laço da onde acabou.
  */
-t_cell	*divide_prompt(t_info *info)
+void	divide_prompt(t_info *info, t_cell **list_cells)
 {
 	char	**mtx_str;
-	t_cell	*list_cells;
+	int		i;
 
-	list_cells = NULL;
 	mtx_str = ft_split(info->prompt, ' ');
-	while (*mtx_str)
+	i = 0;
+	while (mtx_str[i])
 	{
-		// Caracter especial
-		if ((ft_strchr(*mtx_str, '|'))
-			|| (ft_strchr(*mtx_str, '<'))
-			|| (ft_strchr(*mtx_str, '>')))
-			split_and_create(&list_cells, *mtx_str);
-		// Palavra normal
+		// Metadado junto com palavra.
+		if (ft_strchr(mtx_str[i], '|') || ft_strchr(mtx_str[i], '<')
+			|| ft_strchr(mtx_str[i], '>'))
+			split_and_create(list_cells, mtx_str[i]);
+		// Palavra ou metadado sozinho.
 		else
-			create_new_cell(&list_cells, *mtx_str);
-		mtx_str++;
+			create_new_cell(list_cells, mtx_str[i]);
+		i++;
 	}
-	return (list_cells);
+	if (mtx_str)
+	{
+		i = -1;
+		while (mtx_str[++i])
+			free(mtx_str[i]);
+		free (mtx_str);
+	}
 }

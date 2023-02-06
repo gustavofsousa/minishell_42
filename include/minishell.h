@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/04 14:06:42 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/06 11:09:59 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_commands
 	char	*output;
 }	t_command;
 
-t_cell	*divide_prompt(t_info *info);
+void	divide_prompt(t_info *info, t_cell **list_cells);
 void	create_new_cell(t_cell **list_cells, char *str);
 void	categorize_elements(t_cell **list);
 

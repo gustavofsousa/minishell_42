@@ -6,7 +6,7 @@
 #    By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/06 13:22:04 by parnaldo         ###   ########.fr        #
+#    Updated: 2023/02/06 19:20:34 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,17 @@ INCDIR	:=	include/
 LIBDIR	:=	libft/
 
 ####	Sources & objects	####
-SRC		:=	main.c			parser.c							\
-			list_cells.c	token.c								\
-			signal.c
+
+MAIN		:=	main.c
+PARSER		:=	parser.c list_cells.c token.c
+SIGNAL		:=	signal.c
+BUILTIN		:=	pwd.c
+#cd.c echo.c env.c exit.c export.c pwd.c unset.c
+
+SRC		:=	$(MAIN)				\
+			$(PARSER)			\
+			$(SIGNAL)				\
+			$(addprefix builtin/, $(BUILTIN))	
 
 OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
 
@@ -43,7 +51,7 @@ all:	$(OBJDIR) $(LIBLIB) $(NAME)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
-$(OBJDIR)%.o : $(SRCDIR)%.c
+$(OBJDIR)%.o : $(SRCDIR)/$(SRC)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo objects created 😉
 

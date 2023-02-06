@@ -6,22 +6,22 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/06 14:24:32 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/02/06 18:22:36 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "../libft/libft.h"
 # include <stdio.h> //printf
-# include <stdio.h>
-# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <stdio.h>
+# include <signal.h>
 # include <sys/ioctl.h>
-# include "../libft/libft.h"
 # include <stdlib.h> //free
-# include <unistd.h>//getcwd();
+# include <unistd.h>//getcwd(); fork().
 # include <stdlib.h>//exit. free.
 
 enum e_token
@@ -54,6 +54,7 @@ typedef struct s_commands
 	char	*output;
 }	t_command;
 
+//Parser
 void	divide_prompt(t_info *info, t_cell **list_cells);
 void	create_new_cell(t_cell **list_cells, char *str);
 void	categorize_elements(t_cell **list);
@@ -63,4 +64,7 @@ void	list_clear_cells(t_cell **list);
 void	check_eof(t_info *info);
 void	set_signal_handler(void);
 
+// Builtin
+void	ft_pwd();
+void	ft_echo(t_info *info);
 #endif

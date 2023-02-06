@@ -6,32 +6,43 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:54:17 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/01/30 23:02:33 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/02/06 18:20:11 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "../../include/minishell.h"
 
-int flag_echo(char c)
+char	*reduce_flag(char *str)
 {
-    if (c == 'n')
-        return (1);
-    return (0);
+	int	come_back;
+
+	while (*str)
+	{
+		if (*str == '-')
+		{
+			come_back = 0;
+			str++;
+			while (*(str + come_back) == 'n')
+				come_back++;
+			if (*(str + come_back) != ' ' && (*(str + come_back) != '\0'))
+				return (ft_strdup(str));
+		}
+		str++;
+	}
+	return (NULL);
 }
 
-void    ft_echo(char *str)
+void    ft_echo(t_info *info)
 {
-    int n_option;
+	int		nbr_child;
+	char	*ready_str;
 
-    n_option = 0;
-    if (*str == '-' && *(str+1) == 'n')
-    {
-        *str++;
-        if(flag_echo(*str))
-            *str++;
-        n_option = 1;
-    }
-    printf("%s", str);
-    if (n_option)
-        printf("\n");
+	nbr_child = fork();
+	if (nbr_child == 0)
+	{
+		ready_str = reduce_flag(*info->sentence);
+		printf("%s\n", ready_str);
+		free(ready_str);
+		exit(0);
+	}
 }

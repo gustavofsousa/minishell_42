@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:54:17 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/02/07 14:44:55 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/07 15:56:43 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	*reduce_flag(char *str)
 			return (ft_strdup(str));
 		str += i;
 	}
+	if (*str == '\0')
+		return (ft_strdup(""));
 	return (NULL);
 }
 

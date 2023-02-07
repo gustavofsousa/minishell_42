@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:54:17 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/02/06 18:20:11 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/07 14:44:55 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,27 @@
 
 char	*reduce_flag(char *str)
 {
-	int	come_back;
+	int	i;
 
 	while (*str)
 	{
+		i = 1;
+		//printf("%s\n", str);
 		if (*str == '-')
 		{
-			come_back = 0;
-			str++;
-			while (*(str + come_back) == 'n')
-				come_back++;
-			if (*(str + come_back) != ' ' && (*(str + come_back) != '\0'))
+			while (*(str + i) == 'n')
+				i++;
+			if (*(str + i) != ' ' && (*(str + i) != '\0'))
 				return (ft_strdup(str));
 		}
-		str++;
+		if (!ft_strchr(str, '-'))
+			return (ft_strdup(str));
+		str += i;
 	}
 	return (NULL);
 }
 
-void    ft_echo(t_info *info)
+void    ft_echo(char *str)
 {
 	int		nbr_child;
 	char	*ready_str;
@@ -40,7 +42,7 @@ void    ft_echo(t_info *info)
 	nbr_child = fork();
 	if (nbr_child == 0)
 	{
-		ready_str = reduce_flag(*info->sentence);
+		ready_str = reduce_flag(str);
 		printf("%s\n", ready_str);
 		free(ready_str);
 		exit(0);

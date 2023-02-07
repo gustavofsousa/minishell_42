@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/06 13:25:04 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/02/07 14:23:17 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,14 @@ int	main(int argc, char **argv)
 	while (42)
 	{
 		reset(&list_cells);
-		info.prompt = readline("our_minishell> ");
+		info.prompt = readline("🦞our_minishell> ");
 		add_history(info.prompt);
 		check_eof(&info);
 		divide_prompt(&info, &list_cells);
 		categorize_elements(&list_cells);
-		print_all_list(list_cells);
+
+		info.sentence = &info.prompt;
+		ft_echo(&info);
 		//Se for exit, dar break.
 	}
 	finish_program(&info, &list_cells);

@@ -6,7 +6,7 @@
 #    By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/07 14:09:44 by gusousa          ###   ########.fr        #
+#    Updated: 2023/02/07 14:27:07 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,10 +28,10 @@ LIBDIR	:=	libft/
 
 ####	Sources & objects	####
 
-MAIN		:=	main.c
+MAIN		:=	main_tests.c
 PARSER		:=	parser.c list_cells.c token.c
 SIGNAL		:=	signal.c
-BUILTIN		:=	pwd.c
+BUILTIN		:=	pwd.c echo.c
 #cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
 SRC		:=	$(MAIN)				\

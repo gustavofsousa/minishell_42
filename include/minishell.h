@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/06 18:22:36 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/07 14:30:38 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ void	set_signal_handler(void);
 
 // Builtin
 void	ft_pwd();
-void	ft_echo(t_info *info);
+void	ft_echo(char *str);
 #endif

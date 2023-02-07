@@ -6,7 +6,7 @@
 #    By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/06 19:20:34 by gusousa          ###   ########.fr        #
+#    Updated: 2023/02/07 14:09:44 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,14 +44,23 @@ OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
 ####	Libft		####
 LIBLIB		:=	$(LIBDIR)/libft.a
 
+LISTDIR = builtin parser
+
+#$(shell echo '$@ <- Nome da regra.')
+#$(shell echo '$< <- Nome da primeira dependência.')
+#$(shell echo '$^ <- Lista de dependências.')
+#$(shell echo '$? <- Lista de dependências mais recentes que a regra.')
+#$(shell echo '$* <- Nome do arquivo sem sufixo.')
+
 ######	Commands	######
 
 all:	$(OBJDIR) $(LIBLIB) $(NAME)
 
 $(OBJDIR):
-	@mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJDIR)/builtin
+	##@$(foreach dir, $(LISTDIR), mkdir -p $(dir))
 
-$(OBJDIR)%.o : $(SRCDIR)/$(SRC)%.c
+$(OBJDIR)%.o : $(SRCDIR)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo objects created 😉
 

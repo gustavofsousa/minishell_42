@@ -3,7 +3,8 @@
 
 int	main(void)
 {
-	char	str[] = "-n -nnnn -tn It's gonna be a long long time";
+	//char	str[] = "-n -nnnn -nnnnnnn It's gonna be a long long time";
+	char	str[] = "";
 	ft_echo(str);
 	return (0);
 }

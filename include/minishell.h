@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/07 21:58:47 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/09 16:06:20 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,14 @@ typedef struct s_info
 
 }	t_info;
 
-typedef struct s_commands
+typedef struct s_sentence
 {
-	char	*input;
-	char	*command;
-	char	*arguments;
-	char	*output;
-}	t_command;
+	int					input;
+	char				*command;
+	char				*args;// Tem que ser ** por causa do exeqv.
+	int					output;
+	struct s_sentence	*next;
+}	t_sentence;
 
 //Parser
 void	divide_prompt(t_info *info, t_cell **list_cells);
@@ -67,4 +68,5 @@ void	set_signal_handler(void);
 // Builtin
 void	ft_pwd();
 void	ft_echo(char *str);
+void	ft_exit(char *str);
 #endif

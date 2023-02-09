@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:46:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/09 12:18:43 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/09 15:54:33 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,13 @@ int	g_status = 0;
 
 int	is_numeric(char *str)
 {
-	char	**str_mtx;
-	int		i;
-	int		j;
-
-	str_mtx = ft_split(str, ' ');
-	i = 0;
-	while (str[i])
+	if (*str == '-' || *str == '+')
+		str++;
+	while (*str)
 	{
-		j = 0;
-		if (str_mtx[i][j] == '-' || str_mtx[i][j])
-			j++;
-		while (str_mtx[i][j])
-			if (!(ft_isdigit(str_mtx[i][j++])))
-				return (0);
-		i++;
+		if (!(ft_isdigit(str))
+			return (0);
+		str++;
 	}
 	return (1);
 }
@@ -63,10 +55,8 @@ void	ft_exit(char *str)
 	if (qtd_exit == 1)
 	{
 		ft_putstr_fd(str, 1);
-		ft_putstr_fd("exit with no args\n", 1);
+		ft_putstr_fd("exit with exit(0)\n", 1);
 		//exit(0);
-
-
 	}
 	else if (qtd_exit == 2)
 	{
@@ -76,9 +66,7 @@ void	ft_exit(char *str)
 			id = ft_atoi(str);
 			g_status = id;
 			ft_putstr_fd(str, 1);
-			ft_putstr_fd("\texit with id-> ", 1);
-			ft_putnbr_fd(id, 1);
-			ft_putstr_fd("\n", 1);
+			ft_putstr_fd("exit with id\n", 1);
 			//exit(id);
 		}
 		else
@@ -92,9 +80,9 @@ void	ft_exit(char *str)
 	}
 	else
 	{
-			ft_putstr_fd(str, 1);
-			ft_putstr_fd("\tExit: too many arguments\n", 2);
-			g_status = 1;
-			//exit(255);
+		ft_putstr_fd(str, 1);
+		ft_putstr_fd("\tExit: too many arguments\n", 2);
+		g_status = 1;
+		//exit(1);
 	}
 }

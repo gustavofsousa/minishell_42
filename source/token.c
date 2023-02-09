@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 21:01:14 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/04 15:26:45 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/09 17:27:51 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,11 @@ void	categorize_elements(t_cell **list)
 	{
 		if (!ft_strncmp((*list)->content, "|", 1))
 			(*list)->token = piper;
-		else if (!ft_strncmp((*list)->content, ">", 1))
+		else if (!ft_strncmp((*list)->content, ">", 1)
+				|| !ft_strncmp((*list)->content, "<", 1))
 			(*list)->token = redirect;
-		else if (!ft_strncmp((*list)->content, "<", 1))
-			(*list)->token = redirect;
-		else if (!ft_strncmp((*list)->content, ">>", 2))
-			(*list)->token = redirect;
-		else if (!ft_strncmp((*list)->content, "<<", 2))
+		else if (!ft_strncmp((*list)->content, ">>", 2)
+				|| !ft_strncmp((*list)->content, "<<", 2))
 			(*list)->token = redirect;
 		else
 			(*list)->token = word;

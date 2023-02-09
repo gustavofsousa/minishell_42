@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/07 14:23:17 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/09 16:07:36 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,29 @@ int	main(int argc, char **argv)
 		divide_prompt(&info, &list_cells);
 		categorize_elements(&list_cells);
 
-		info.sentence = &info.prompt;
-		ft_echo(&info);
+		print_all_list(list_cells);
+
+		// Expandir variável
+		//create_sentence(t_sentence); //faz aqui o redirect
+		//executioner(t_sentence);
+
+		//info.sentence = &info.prompt;
+		//ft_echo(&info);
 		//Se for exit, dar break.
 	}
 	finish_program(&info, &list_cells);
 	return (0);
 }
+
+/*
+executioer
+
+{
+	pipes();
+	choose_commands();
+}
+*/
+
+//Para env:
+// Remover o oldpwd
+// Setar o sh-lvl para 1.

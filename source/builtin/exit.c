@@ -6,7 +6,11 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:46:15 by gusousa           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/09 11:06:05 by gusousa          ###   ########.fr       */
+=======
+/*   Updated: 2023/02/08 14:44:40 by gusousa          ###   ########.fr       */
+>>>>>>> b70911a71541b2925a87d4979581b49f76c043ab
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +80,6 @@ void	ft_exit(char *str)
 			ft_putstr_fd("\texit: t: numeric argument required\n", 2);
 			g_status = 255;
 			//exit(255);
-
 		}
 	}
 	else

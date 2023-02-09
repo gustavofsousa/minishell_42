@@ -1,7 +1,7 @@
 
 #include "../include/minishell.h"
 
-int	main(void)
+void	echo_test(void)
 {
 	char	str[] = "-n -nnnn -nnnnnnn It's gonna be a long long time";
 	ft_echo(str);
@@ -9,9 +9,12 @@ int	main(void)
 	ft_echo(str2);
 	char	str1[] = "";
 	ft_echo(str1);
+}
 
-///		Exit
-		/*
+void	exit_test(char *str)
+{
+	(void)str;
+	ft_exit("");
 	ft_exit("42");
 	ft_exit("42 53 68");
 	ft_exit("259");
@@ -26,6 +29,19 @@ int	main(void)
 	ft_exit("ls -Z");
 	ft_exit("cd gdhahahad");
 	ft_exit("ls -la | wtf");
-	*/
+}
+
+int	main(void)
+{
+	char	*prompt;
+
+	while (42)
+	{
+		prompt = readline("🔩 Setor de testes> ");
+
+		//echo_test();
+		exit_test(prompt);
+		free(prompt);
+	}
 	return (0);
 }

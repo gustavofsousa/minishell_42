@@ -31,6 +31,13 @@ void	exit_test(char *str)
 	ft_exit("ls -la | wtf");
 }
 
+
+void env_test(char *str)
+{
+	(void) str;
+	ft_env();
+}
+
 int	main(void)
 {
 	char	*prompt;
@@ -40,7 +47,8 @@ int	main(void)
 		prompt = readline("🔩 Setor de testes> ");
 
 		//echo_test();
-		exit_test(prompt);
+		//exit_test(prompt);
+		env_test(prompt);
 		free(prompt);
 	}
 	return (0);

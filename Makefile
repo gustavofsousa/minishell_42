@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+         #
+#    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/07 14:27:07 by gusousa          ###   ########.fr        #
+#    Updated: 2023/02/10 08:29:53 by parnaldo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIBDIR	:=	libft/
 MAIN		:=	main_tests.c
 PARSER		:=	parser.c list_cells.c token.c
 SIGNAL		:=	signal.c
-BUILTIN		:=	pwd.c echo.c
+BUILTIN		:=	pwd.c echo.c exit.c env.c
 #cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
 SRC		:=	$(MAIN)				\

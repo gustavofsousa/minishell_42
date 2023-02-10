@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/06 11:08:12 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/10 09:30:47 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	main(int argc, char **argv)
 		add_history(info.prompt);
 		divide_prompt(&info, &list_cells);
 		categorize_elements(&list_cells);
+		handle_quotes(&list_cells);
 
 		print_all_list(list_cells);
 		//Se for exit, dar break.

@@ -37,6 +37,11 @@ void env_test(char *str)
 	(void) str;
 	ft_env();
 }
+void unset_test(char *str)
+{
+	(void) str;
+	ft_unset("s dfsfa galo fasdf");
+}
 
 int	main(void)
 {
@@ -48,7 +53,8 @@ int	main(void)
 
 		//echo_test();
 		//exit_test(prompt);
-		env_test(prompt);
+		//env_test(prompt);
+		unset_test(prompt);
 		free(prompt);
 	}
 	return (0);

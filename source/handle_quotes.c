@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/13 14:45:53 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/13 17:03:16 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,28 @@ void	delete_cell(t_cell **c_b_w, t_cell **list)
 	(*c_b_w)->next = (*list)->next;
 	free((*list)->content);
 	free(*list);
+	*list = NULL;
 	// Tem que ver se a list está perdendo a referencia para próxima rodada.
+}
+
+void	deceive_quotes(t_cell **c_w_b)
+{
+	char	*str;
+	int		i;
+	
+	str = ft_strdup((*c_w_b)->content);
+	free((*c_w_b)->content);
+	(*c_w_b)->content = NULL;
+	i = 0;
+	while (str[i])
+	{
+		if ((*c_w_b)->content == NULL && str[i] != '"')
+			(*c_w_b)->content = ft_strdup(&str[i]);
+		else if (str[i] != '"')
+			ft_strjoin((*c_w_b)->content, &str[i]);
+		i++;
+	}
+	free(str);
 }
 
 void	join_cells(t_cell **c_w_b, t_cell *list)
@@ -30,9 +51,7 @@ void	join_cells(t_cell **c_w_b, t_cell *list)
 		(*c_w_b)->content = ft_strjoin((*c_w_b)->content, str_keep);
 		free(str_keep);
 	}
-	str_keep = ft_strdup((*c_w_b)->content);
 	(*c_w_b)->content = ft_strjoin((*c_w_b)->content, list->content);
-	free(str_keep);
 }
 
 /* Tratativa de aspas.
@@ -61,9 +80,12 @@ void	handle_quotes(t_cell **list)
 		else if (quote == 1)
 		{
 			join_cells(&c_w_b, *list);
-			delete_cell(&c_w_b, list);
 			if (ft_strchr((*list)->content, '"'))
+			{
 				quote = 0;
+				deceive_quotes(&c_w_b);
+			}
+			delete_cell(&c_w_b, list);
 		}
 		*list = (c_w_b)->next;
 	}

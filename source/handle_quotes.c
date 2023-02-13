@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/13 17:03:16 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/13 18:32:50 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,51 @@ void	delete_cell(t_cell **c_b_w, t_cell **list)
 void	deceive_quotes(t_cell **c_w_b)
 {
 	char	*str;
+	char	*to_join;
+	int		begin;
+	int		end;
 	int		i;
+	int		first;
 	
 	str = ft_strdup((*c_w_b)->content);
 	free((*c_w_b)->content);
 	(*c_w_b)->content = NULL;
+	first = 1;
 	i = 0;
+	end = 0;
+	begin = 0;
+	while (str[i - 1])
+	{
+		if (str[i] != '"')
+			end++;
+		else if (str[i] == '"' || str[i] == '\0')
+		{
+			to_join = ft_substr(str, begin, end);
+			if (first == 1)
+			{
+				(*c_w_b)->content = ft_strdup(to_join);
+				first = 0;
+			}
+			else 
+				ft_strjoin((*c_w_b)->content, to_join);
+			free(to_join);
+			begin = end + 1;
+			end = 0;
+		}
+		i++;
+	}
+	/*
 	while (str[i])
 	{
+		// Se for a primeira vez para copiar.
 		if ((*c_w_b)->content == NULL && str[i] != '"')
 			(*c_w_b)->content = ft_strdup(&str[i]);
+		// Copiar as outras vezes
 		else if (str[i] != '"')
 			ft_strjoin((*c_w_b)->content, &str[i]);
 		i++;
 	}
+	*/
 	free(str);
 }
 

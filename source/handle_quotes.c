@@ -6,57 +6,59 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/10 09:53:13 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/13 13:21:00 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	delete_cell(t_cell **c_b_w, t_cell **list_cells)
+void	delete_cell(t_cell **c_b_w, t_cell **list)
 {
-	(*c_b_w)->next = (*list_cells)->next;
-	free((*list_cells)->content);
-	free(list_cells);
-	// Tem que ver se a list_cells está perdendo a referencia para próxima rodada.
+	(*c_b_w)->next = (*list)->next;
+	free((*list)->content);
+	free(*list);
+	// Tem que ver se a list está perdendo a referencia para próxima rodada.
 }
 
-void	handle_quotes(t_cell **list_cells)
+/* Tratativa de aspas.
+ * Quando achar uma aspas, copia os conteúdos dos próximos nós
+ * até encontrar a última aspas.
+ */
+void	handle_quotes(t_cell **list)
 {
 	t_cell	*list_keep;
-	t_cell	*cell_begin_word;
+	t_cell	*c_w_b;//cell_begin_word.
 	int		quote;
 	char	*str_keep;
 
-	list_keep = *list_cells;
+	list_keep = *list;
+	c_w_b = *list;
 	quote = 0;
-	while (*list_cells)
+	while (*list)
 	{
 		// Encontro da " primeira vez
-		if (ft_strchr((*list_cells)->content, '"') && quote == 0)
+		if (ft_strchr((*list)->content, '"') && quote == 0)
 		{
 			quote = 1;
-			cell_begin_word = *list_cells;
+			c_w_b = *list;
 		}
 		// Encontro da " segunda vez.
-		else if (ft_strchr((*list_cells)->content, '"') && quote == 1)
+		else if (ft_strchr((*list)->content, '"') && quote == 1)
 		{
-			str_keep = cell_begin_word->content;
-			cell_begin_word->content = ft_strjoin(cell_begin_word->content, (*list_cells)->content);
+			str_keep = ft_strdup(c_w_b->content);
+			c_w_b->content = ft_strjoin(c_w_b->content, (*list)->content);
 			free(str_keep);
-			delete_cell(&cell_begin_word, list_cells);
+			delete_cell(&c_w_b, list);
 		}
 		// Palavras entre inicio e fim de ".
 		else if (quote == 1)
 		{
-			str_keep = cell_begin_word->content;
-			cell_begin_word->content = ft_strjoin(cell_begin_word->content, " ");
+			str_keep = ft_strdup(c_w_b->content);
+			c_w_b->content = ft_strjoin(c_w_b->content, (*list)->content);
 			free(str_keep);
-			str_keep = cell_begin_word->content;
-			cell_begin_word->content = ft_strjoin(cell_begin_word->content, (*list_cells)->content);
-			free(str_keep);
-			delete_cell(&cell_begin_word, list_cells);
+			delete_cell(&c_w_b, list);
 		}
-		*list_cells = (cell_begin_word)->next;
+		*list = (c_w_b)->next;
 	}
-	*list_cells = list_keep;
+	*list = list_keep;
 }

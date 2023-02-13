@@ -6,21 +6,42 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 08:10:50 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/02/12 20:48:02 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/02/13 15:33:05 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	ft_env(void)
+char **ft_cpy_env(char **envs)
 {
-	extern char	**environ;
-	int			i;
+	int	len;
+	char **cpy_envs;
+
+	len = 0;
+	while (envs[len])
+		len++;
+	cpy_envs = malloc((len + 2) * sizeof(char *));
+	len = 0;
+	while (envs[len])
+	{
+		cpy_envs[len] = ft_strdup(envs[len]);
+		len++;
+	}
+	cpy_envs[len] = NULL;
+	return (cpy_envs);
+}
+
+int	ft_env(char **envs)
+{
+	int	i;
 
 	i = 0;
-	if (!environ)
+	if(!envs)
 		return (0);
-	while (environ[i])
-		printf("%s\n", environ[i++]);
+	while (envs[i])
+	{
+		printf("%s\n", envs[i]);
+		i++;
+	}
 	return (1);
 }

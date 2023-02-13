@@ -32,29 +32,35 @@ void	exit_test(char *str)
 }
 
 
-void env_test(char *str)
+void env_test(char *str, struct s_info info)
 {
-	(void) str;
-	ft_env();
+	if(ft_strncmp(str, "env", 3))
+		ft_env(info.env_cpy);
 }
 void unset_test(char *str)
 {
 	(void) str;
-	ft_unset("s dfsfa galo fasdf");
+//	ft_unset("s dfsfa galo fasdf");
 }
 
-int	main(void)
+int	main(int ac, char **av, char *envp[])
 {
 	char	*prompt;
+	int		i;
+	struct s_info	info;
 
+	(void) ac;
+	(void) av;
+	i = 0;
+	info.env_cpy = ft_cpy_env(envp);
 	while (42)
 	{
 		prompt = readline("🔩 Setor de testes> ");
 
 		//echo_test();
 		//exit_test(prompt);
-		//env_test(prompt);
-		unset_test(prompt);
+		env_test(prompt, info);
+		//unset_test(prompt);
 		free(prompt);
 	}
 	return (0);

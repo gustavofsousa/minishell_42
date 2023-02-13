@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/12 20:48:28 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:04:31 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_info
 	char	*prompt;
 	char	**sentence;
 	int		qtd_sentence;
-
+	char	**env_cpy;
 }	t_info;
 
 typedef struct s_sentence
@@ -69,7 +69,7 @@ void	set_signal_handler(void);
 void	ft_pwd();
 void	ft_echo(char *str);
 void	ft_exit(char *str);
-int		ft_env(void);
-int		ft_unset(char *arg);
-
+int		ft_env(char	**envs);
+int		ft_unset(char *arg, struct s_info *info);
+char	**ft_cpy_env(char	**envs);
 #endif

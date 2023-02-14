@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/14 16:24:04 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/14 16:28:36 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ void	ft_cd(char *arg);
 
 // main
 void	expand_variable(t_cell **list_cell, t_info info);
+void	golfer(t_sentence *sent, t_info *info);
 #endif

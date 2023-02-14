@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/14 11:16:07 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/14 12:10:13 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	deceive_quotes(t_cell **c_w_b)
 	int		i;
 	int		c;
 	int		m;
-	
+
+	printf("estou aqui");
 	str = ft_strdup((*c_w_b)->content);
 	i = 0;
 	m = 0;
@@ -55,7 +56,7 @@ void	deceive_quotes(t_cell **c_w_b)
 	(*c_w_b)->content[i] = '\0';
 	free(str);
 	printf("%s\n", (*c_w_b)->content);
-
+	printf("aqui");
 
 
 
@@ -106,53 +107,55 @@ void	deceive_quotes(t_cell **c_w_b)
 
 void	join_cells(t_cell **c_w_b, t_cell *list)
 {
-	char	*str_keep;
-	
 	if (list->space == 1)
+		(*c_w_b)->content = ft_strjoin_free((*c_w_b)->content, " ");
+	(*c_w_b)->content = ft_strjoin_free((*c_w_b)->content, list->content);
+}
+
+void	search_for_quotes(t_cell **list, t_cell **c_w_b)
+{
+	int		quote;
+
+	quote = 0;
+	// Encontro da " primeira vez
+	if (ft_strchr((*list)->content, '"') && quote == 0)
 	{
-		str_keep = ft_strdup(" ");
-		(*c_w_b)->content = ft_strjoin((*c_w_b)->content, str_keep);
-		free(str_keep);
+		quote = 1;
+		*c_w_b = *list;
 	}
-	(*c_w_b)->content = ft_strjoin((*c_w_b)->content, list->content);
+	// Palavras entre inicio e fim de ".
+	else if (quote == 1)
+	{
+		join_cells(c_w_b, *list);
+		if (ft_strchr((*list)->content, '"'))
+		{
+			quote = 0;
+			printf("echo");
+			deceive_quotes(c_w_b);
+		}
+		delete_cell(c_w_b, list);
+	}
+
 }
 
 /* Tratativa de aspas.
+ * Objetivo é juntar em uma única célula tudo que tiver entre aspas.
+ *
  * Quando achar uma aspas, copia os conteúdos dos próximos nós
  * até encontrar a última aspas.
  */
-void	handle_quotes(t_cell **list)
+void	handle_quotes(t_cell **list_cells)
 {
-	t_cell	*list_keep;
+	t_cell	*list_move;
 	t_cell	*c_w_b;//cell_begin_word.
-	int		quote;
 
-	list_keep = *list;
-	c_w_b = *list;
-	quote = 0;
-	while (*list)
+	list_move = *list_cells;
+	c_w_b = *list_cells;
+	while (list_move)
 	{
-		// Encontro da " primeira vez
-		if (ft_strchr((*list)->content, '"') && quote == 0)
-		{
-			quote = 1;
-			c_w_b = *list;
-		}
-		// Encontro da " segunda vez.
-		// Palavras entre inicio e fim de ".
-		else if (quote == 1)
-		{
-			join_cells(&c_w_b, *list);
-			if (ft_strchr((*list)->content, '"'))
-			{
-				quote = 0;
-				deceive_quotes(&c_w_b);
-			}
-			delete_cell(&c_w_b, list);
-		}
-		*list = (c_w_b)->next;
+		search_for_quotes(&list_move, &c_w_b);
+		list_move = (c_w_b)->next;
 	}
-	*list = list_keep;
 }
 
 // E quando tiver as duas "" no mesmo nó. "assim".

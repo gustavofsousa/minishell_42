@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/09 16:07:36 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/14 15:08:52 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,11 @@ int	main(int argc, char **argv)
 
 		print_all_list(list_cells);
 
-		// Expandir variável
-		//create_sentence(t_sentence); //faz aqui o redirect
-		//executioner(t_sentence);
+		expand_variable(&list_cells);
+		create_sentence(t_sentence); //faz aqui o redirect
+		golfer(t_sentence);
 
 		//info.sentence = &info.prompt;
-		//ft_echo(&info);
 		//Se for exit, dar break.
 	}
 	finish_program(&info, &list_cells);

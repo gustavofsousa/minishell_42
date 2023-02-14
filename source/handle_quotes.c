@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/13 18:32:50 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/14 11:16:07 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,44 @@ void	delete_cell(t_cell **c_b_w, t_cell **list)
 void	deceive_quotes(t_cell **c_w_b)
 {
 	char	*str;
+	/*
 	char	*to_join;
 	int		begin;
 	int		end;
-	int		i;
 	int		first;
+	*/
+	int		i;
+	int		c;
+	int		m;
 	
 	str = ft_strdup((*c_w_b)->content);
+	i = 0;
+	m = 0;
+	while (str[i])
+	{
+		if (str[i] == 34)//aspas duplas
+		{
+			str[i] = 7;
+			c = i;
+			while (str[c] != '\0')
+			{
+				(*c_w_b)->content[c - m] = str[c + 1];
+				c++;
+			}
+			m++;
+		}
+		i++;
+	}
+	(*c_w_b)->content[i] = '\0';
+	free(str);
+	printf("%s\n", (*c_w_b)->content);
+
+
+
+
+
+
+	/*
 	free((*c_w_b)->content);
 	(*c_w_b)->content = NULL;
 	first = 1;
@@ -57,6 +88,7 @@ void	deceive_quotes(t_cell **c_w_b)
 		}
 		i++;
 	}
+	*/
 	/*
 	while (str[i])
 	{
@@ -68,8 +100,8 @@ void	deceive_quotes(t_cell **c_w_b)
 			ft_strjoin((*c_w_b)->content, &str[i]);
 		i++;
 	}
-	*/
 	free(str);
+	*/
 }
 
 void	join_cells(t_cell **c_w_b, t_cell *list)

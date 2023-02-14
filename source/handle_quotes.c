@@ -6,22 +6,21 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/14 12:10:13 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/14 13:25:57 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	delete_cell(t_cell **c_b_w, t_cell **list)
+void	delete_cell(t_cell **init_cell, t_cell **list)
 {
-	(*c_b_w)->next = (*list)->next;
+	(*init_cell)->next = (*list)->next;
 	free((*list)->content);
 	free(*list);
 	*list = NULL;
-	// Tem que ver se a list está perdendo a referencia para próxima rodada.
 }
 
-void	deceive_quotes(t_cell **c_w_b)
+void	deceive_quotes(t_cell **init_cell)
 {
 	char	*str;
 	/*
@@ -35,7 +34,7 @@ void	deceive_quotes(t_cell **c_w_b)
 	int		m;
 
 	printf("estou aqui");
-	str = ft_strdup((*c_w_b)->content);
+	str = ft_strdup((*init_cell)->content);
 	i = 0;
 	m = 0;
 	while (str[i])
@@ -46,16 +45,16 @@ void	deceive_quotes(t_cell **c_w_b)
 			c = i;
 			while (str[c] != '\0')
 			{
-				(*c_w_b)->content[c - m] = str[c + 1];
+				(*init_cell)->content[c - m] = str[c + 1];
 				c++;
 			}
 			m++;
 		}
 		i++;
 	}
-	(*c_w_b)->content[i] = '\0';
+	(*init_cell)->content[i] = '\0';
 	free(str);
-	printf("%s\n", (*c_w_b)->content);
+	printf("%s\n", (*init_cell)->content);
 	printf("aqui");
 
 
@@ -63,8 +62,8 @@ void	deceive_quotes(t_cell **c_w_b)
 
 
 	/*
-	free((*c_w_b)->content);
-	(*c_w_b)->content = NULL;
+	free((*init_cell)->content);
+	(*init_cell)->content = NULL;
 	first = 1;
 	i = 0;
 	end = 0;
@@ -78,11 +77,11 @@ void	deceive_quotes(t_cell **c_w_b)
 			to_join = ft_substr(str, begin, end);
 			if (first == 1)
 			{
-				(*c_w_b)->content = ft_strdup(to_join);
+				(*init_cell)->content = ft_strdup(to_join);
 				first = 0;
 			}
 			else 
-				ft_strjoin((*c_w_b)->content, to_join);
+				ft_strjoin((*init_cell)->content, to_join);
 			free(to_join);
 			begin = end + 1;
 			end = 0;
@@ -94,68 +93,68 @@ void	deceive_quotes(t_cell **c_w_b)
 	while (str[i])
 	{
 		// Se for a primeira vez para copiar.
-		if ((*c_w_b)->content == NULL && str[i] != '"')
-			(*c_w_b)->content = ft_strdup(&str[i]);
+		if ((*init_cell)->content == NULL && str[i] != '"')
+			(*init_cell)->content = ft_strdup(&str[i]);
 		// Copiar as outras vezes
 		else if (str[i] != '"')
-			ft_strjoin((*c_w_b)->content, &str[i]);
+			ft_strjoin((*init_cell)->content, &str[i]);
 		i++;
 	}
 	free(str);
 	*/
 }
 
-void	join_cells(t_cell **c_w_b, t_cell *list)
+void	join_cells(t_cell **init_cell, t_cell *list)
 {
 	if (list->space == 1)
-		(*c_w_b)->content = ft_strjoin_free((*c_w_b)->content, " ");
-	(*c_w_b)->content = ft_strjoin_free((*c_w_b)->content, list->content);
+		(*init_cell)->content = ft_strjoin_free((*init_cell)->content, " ");
+	(*init_cell)->content = ft_strjoin_free((*init_cell)->content, list->content);
 }
 
-void	search_for_quotes(t_cell **list, t_cell **c_w_b)
+/*
+ * Quando achar uma aspas, copia os conteúdos dos próximos nós
+ * até encontrar a última aspas.
+ */
+void	search_for_quotes(t_cell **list, t_cell **init_cell, int quote)
 {
-	int		quote;
-
-	quote = 0;
-	// Encontro da " primeira vez
+	// Encontro da " primeira vez.
 	if (ft_strchr((*list)->content, '"') && quote == 0)
 	{
 		quote = 1;
-		*c_w_b = *list;
+		*init_cell = *list;
 	}
 	// Palavras entre inicio e fim de ".
-	else if (quote == 1)
+	if (quote == 1)
 	{
-		join_cells(c_w_b, *list);
+		join_cells(init_cell, *list);
+		// Final das aspas.
 		if (ft_strchr((*list)->content, '"'))
 		{
 			quote = 0;
-			printf("echo");
-			deceive_quotes(c_w_b);
+			deceive_quotes(init_cell);
 		}
-		delete_cell(c_w_b, list);
+		delete_cell(init_cell, list);
 	}
 
 }
 
-/* Tratativa de aspas.
+/*
+ * Tratativa de aspas.
  * Objetivo é juntar em uma única célula tudo que tiver entre aspas.
- *
- * Quando achar uma aspas, copia os conteúdos dos próximos nós
- * até encontrar a última aspas.
  */
 void	handle_quotes(t_cell **list_cells)
 {
 	t_cell	*list_move;
-	t_cell	*c_w_b;//cell_begin_word.
+	t_cell	*init_cell;//cell_begin_word.
+	int		quote;
 
+	quote = 0;
 	list_move = *list_cells;
-	c_w_b = *list_cells;
-	while (list_move)
+	init_cell = *list_cells;
+	while (list_move != NULL)
 	{
-		search_for_quotes(&list_move, &c_w_b);
-		list_move = (c_w_b)->next;
+		search_for_quotes(&list_move, &init_cell, quote);
+		printf("OUT\n");
+		list_move = (init_cell)->next;
 	}
 }
-
-// E quando tiver as duas "" no mesmo nó. "assim".

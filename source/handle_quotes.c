@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/14 13:25:57 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/14 19:08:03 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,10 @@ void	delete_cell(t_cell **init_cell, t_cell **list)
 void	deceive_quotes(t_cell **init_cell)
 {
 	char	*str;
-	/*
-	char	*to_join;
-	int		begin;
-	int		end;
-	int		first;
-	*/
 	int		i;
 	int		c;
 	int		m;
 
-	printf("estou aqui");
 	str = ft_strdup((*init_cell)->content);
 	i = 0;
 	m = 0;
@@ -54,61 +47,45 @@ void	deceive_quotes(t_cell **init_cell)
 	}
 	(*init_cell)->content[i] = '\0';
 	free(str);
-	printf("%s\n", (*init_cell)->content);
-	printf("aqui");
-
-
-
-
-
-	/*
-	free((*init_cell)->content);
-	(*init_cell)->content = NULL;
-	first = 1;
-	i = 0;
-	end = 0;
-	begin = 0;
-	while (str[i - 1])
-	{
-		if (str[i] != '"')
-			end++;
-		else if (str[i] == '"' || str[i] == '\0')
-		{
-			to_join = ft_substr(str, begin, end);
-			if (first == 1)
-			{
-				(*init_cell)->content = ft_strdup(to_join);
-				first = 0;
-			}
-			else 
-				ft_strjoin((*init_cell)->content, to_join);
-			free(to_join);
-			begin = end + 1;
-			end = 0;
-		}
-		i++;
-	}
-	*/
-	/*
-	while (str[i])
-	{
-		// Se for a primeira vez para copiar.
-		if ((*init_cell)->content == NULL && str[i] != '"')
-			(*init_cell)->content = ft_strdup(&str[i]);
-		// Copiar as outras vezes
-		else if (str[i] != '"')
-			ft_strjoin((*init_cell)->content, &str[i]);
-		i++;
-	}
-	free(str);
-	*/
 }
 
+int	cpy_in_quotes(t_cell **init_cell, char *content, int *i)
+{
+	int	fq;
+	char	quote;
+
+	quote = content[*i];
+	fq = 1;
+	while (content[*i] != '\0' && fq == 1)
+	{
+		ft_strjoin_char((*init_cell)->content, content[*i]);
+		if (content[*i] == quote)
+			fq = 0;
+		(*i)++;
+	}
+	return (fq);
+}
+
+// Precisa ver se ele está fazendo a cópia antes de chegar em uma aspas.
 void	join_cells(t_cell **init_cell, t_cell *list)
 {
-	if (list->space == 1)
-		(*init_cell)->content = ft_strjoin_free((*init_cell)->content, " ");
-	(*init_cell)->content = ft_strjoin_free((*init_cell)->content, list->content);
+	int	i;
+	int	fq;
+
+	fq = 0;
+	i = 0;
+	while (list->content[i])
+	{
+		if (list->content[i] == '"' || list->content[i] == '\'')
+			fq = cpy_in_quotes(init_cell, list->content, &i);
+		if (fq != 0)
+			printf("Error not closing quotes\n");//lidar com erro aqui
+		i++;
+	}
+
+//	if (list->space == 1)
+//		(*init_cell)->content = ft_strjoin_free((*init_cell)->content, " ");
+//	(*init_cell)->content = ft_strjoin_free((*init_cell)->content, list->content);
 }
 
 /*
@@ -131,7 +108,7 @@ void	search_for_quotes(t_cell **list, t_cell **init_cell, int quote)
 		if (ft_strchr((*list)->content, '"'))
 		{
 			quote = 0;
-			deceive_quotes(init_cell);
+			//deceive_quotes(init_cell);
 		}
 		delete_cell(init_cell, list);
 	}

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/14 15:08:52 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/14 16:30:33 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	finish_program(t_info *info, t_cell **list_cells)
 
 void	reset(t_cell **list_cells)
 {
+//	if (info->prompt)
+//		free(info.prompt);
 	if (*list_cells)
 		list_clear_cells(list_cells);
 	
@@ -34,6 +36,7 @@ void	init(t_info *info, t_cell **list_cells)
 {
 	info->qtd_sentence = 0;
 	*list_cells = NULL;	
+	//memset(info) // Ver se pode no pdf.
 }
 
 void	print_all_list(t_cell *list)
@@ -72,25 +75,15 @@ int	main(int argc, char **argv)
 
 		print_all_list(list_cells);
 
-		expand_variable(&list_cells);
+		//expand_variable(&list_cells);
 		create_sentence(t_sentence); //faz aqui o redirect
-		golfer(t_sentence);
+		golfer(t_sentence, &info);
 
-		//info.sentence = &info.prompt;
 		//Se for exit, dar break.
 	}
 	finish_program(&info, &list_cells);
 	return (0);
 }
-
-/*
-executioer
-
-{
-	pipes();
-	choose_commands();
-}
-*/
 
 //Para env:
 // Remover o oldpwd

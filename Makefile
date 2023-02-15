@@ -6,7 +6,7 @@
 #    By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/06 13:22:04 by parnaldo         ###   ########.fr        #
+#    Updated: 2023/02/15 11:15:27 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ LIBDIR	:=	libft/
 ####	Sources & objects	####
 SRC		:=	main.c			parser.c							\
 			list_cells.c	token.c								\
-			signal.c
+			signal.c						\
+			golfer.c		export_variables.c
 
 OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
 

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/06 13:23:17 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:16:50 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,14 @@ typedef struct s_info
 
 }	t_info;
 
-typedef struct s_commands
+typedef struct s_sentence
 {
-	char	*input;
-	char	*command;
-	char	*arguments;
-	char	*output;
-}	t_command;
+	int					input;
+	char				*command;
+	char				*args;// Tem que ser ** por causa do exeqv.
+	int					output;
+	struct s_sentence	*next;
+}	t_sentence;
 
 void	divide_prompt(t_info *info, t_cell **list_cells);
 void	create_new_cell(t_cell **list_cells, char *str);
@@ -60,5 +61,9 @@ void	list_clear_cells(t_cell **list);
 //Signal
 void	check_eof(t_info *info);
 void	set_signal_handler(void);
+
+// main
+void	expand_variable(t_cell **list_cell, t_info info);
+void	golfer(t_sentence *sent, t_info *info);
 
 #endif

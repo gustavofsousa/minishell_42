@@ -34,8 +34,15 @@ void	exit_test(char *str)
 
 void env_test(char *str, struct s_info info)
 {
+	int i = 0; 
 	if(!ft_strncmp(str, "env", 3))
-		ft_env(info.env_cpy);
+	{
+		//puts("env\n");
+		//ft_env(info.env_cpy);
+		while (info.env_cpy[i])
+			printf("%s\n", info.env_cpy[i++]);
+	}
+	
 }
 void unset_test(char *str, struct s_info *info)
 {

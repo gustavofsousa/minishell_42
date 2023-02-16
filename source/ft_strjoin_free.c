@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:28:59 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/14 18:37:56 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/16 14:14:20 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strjoin_char(char *s1, char c)
 	size_t	len_s1;
 	char	*new_string;
 
-	if (!s1)
+	if (!s1 || c == '\0')
 		return (NULL);
 	len_s1 = ft_strlen(s1);
 	new_string = malloc(len_s1 + 2);

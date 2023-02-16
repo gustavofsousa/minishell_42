@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/15 11:21:22 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/16 11:29:51 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	reset(t_cell **list_cells)
 
 void	init(t_info *info, t_cell **list_cells)
 {
-	info->qtd_sentence = 0;
+	info->qtd_sent = 0;
 	*list_cells = NULL;	
 }
 
@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 {
 	t_info	info;
 	t_cell	*list_cells;
-	t_sentence	*sentence;
+	//t_sentence	*sentence;
 
 	(void)argc;
 	(void)argv;
@@ -73,7 +73,7 @@ int	main(int argc, char **argv)
 		print_all_list(list_cells);
 
 		//expand_variable(&list_cells);
-		sentence = create_sentence(list_cells);
+		//sentence = create_sentence(list_cells, &info);
 		//golfer(t_sentence, &info);
 
 		//Se for exit, dar break.

@@ -34,24 +34,24 @@ void	exit_test(char *str)
 
 void env_test(char *str, struct s_info info)
 {
-	if(ft_strncmp(str, "env", 3))
+	if(ft_strncmp(str, "env", 4))
 		ft_env(info.env_cpy);
 }
-void unset_test(char *str)
+void unset_test(char *str, struct s_info *info)
 {
-	(void) str;
-//	ft_unset("s dfsfa galo fasdf");
+	if(ft_strncmp(str, "unset", 6))
+		ft_unset(str, info);
 }
 
 int	main(int ac, char **av, char *envp[])
 {
 	char	*prompt;
-	int		i;
+	//int		i;
 	struct s_info	info;
 
 	(void) ac;
 	(void) av;
-	i = 0;
+	//i = 0;
 	info.env_cpy = ft_cpy_env(envp);
 	while (42)
 	{
@@ -59,8 +59,8 @@ int	main(int ac, char **av, char *envp[])
 
 		//echo_test();
 		//exit_test(prompt);
-		env_test(prompt, info);
-		//unset_test(prompt);
+		//env_test(prompt, info);
+		unset_test(prompt, &info);
 		free(prompt);
 	}
 	return (0);

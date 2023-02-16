@@ -12,35 +12,61 @@
 
 #include "../../include/minishell.h"
 
-char	**created_env(struct s_info *info)
+/*static char	**created_env(struct s_info *info)
 {
 	int i;
 
-	i = 0;
+	(void)i;
 	(void) info;
 	//while (info->env_cpy[i])
 	return (NULL);
+}*/
+
+static int	ft_strlen_env(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '=')
+		i++;
+	return (i);
 }
 
 int	ft_unset(char *arg, struct s_info *info)
 {
 	int			i;
-	int			j;
+	int			counter;
+	int			len_var;
+	int			len_env;
 	char		**variables;
-
-	(void) info;
+	
 	i = 0;
-	j = 0;
+	counter = 0;
+	len_var = 0;
+	len_env = 0;
 	variables = ft_split(arg, ' ');
 	if (!variables)
 		return (0);
-	/*while (variables[i])
+	while (info->env_cpy[i])
 	{
-		//while (info->env_cpy)
+			counter = 0;
+			while (variables[counter])
+			{
+				len_var = ft_strlen(variables[counter]);
+				len_env = ft_strlen_env(info->env_cpy[i]);
+				//printf("%s\n", variables[counter]);
+				//printf("%s\n", info->env_cpy[i]);
+				if (!ft_strncmp(info->env_cpy[i], variables[counter], len_env) && len_env == len_var)
+				{
+					printf("OLAAaaaaa\n");
+				}
+				counter++;
+			}
+		i++;
 	}
-	*/
 	i = 0;
 	while (variables[i])
 		free(variables[i++]);
+	puts("estoy aka!");
 	return (1);
 }

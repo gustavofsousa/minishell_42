@@ -34,12 +34,12 @@ void	exit_test(char *str)
 
 void env_test(char *str, struct s_info info)
 {
-	if(ft_strncmp(str, "env", 4))
+	if(!ft_strncmp(str, "env", 3))
 		ft_env(info.env_cpy);
 }
 void unset_test(char *str, struct s_info *info)
 {
-	if(ft_strncmp(str, "unset", 6))
+	if(!ft_strncmp(str, "unset", 5))
 		ft_unset(str, info);
 }
 
@@ -59,7 +59,7 @@ int	main(int ac, char **av, char *envp[])
 
 		//echo_test();
 		//exit_test(prompt);
-		//env_test(prompt, info);
+		env_test(prompt, info);
 		unset_test(prompt, &info);
 		free(prompt);
 	}

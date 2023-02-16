@@ -32,41 +32,49 @@ static int	ft_strlen_env(char *str)
 	return (i);
 }
 
-int	ft_unset(char *arg, struct s_info *info)
+static int len_new_env(struct s_info *info, char **args)
 {
-	int			i;
-	int			counter;
-	int			len_var;
-	int			len_env;
-	char		**variables;
-	
+	int	i;
+	int	counter;
+	int len_env;
+	int len_var;
+	int	len;
+
+	len = 0;
+	len_env = 0;
+	len_var = 0;
 	i = 0;
 	counter = 0;
-	len_var = 0;
-	len_env = 0;
-	variables = ft_split(arg, ' ');
-	if (!variables)
-		return (0);
 	while (info->env_cpy[i])
 	{
 			counter = 0;
-			while (variables[counter])
+			while (args[counter])
 			{
-				len_var = ft_strlen(variables[counter]);
+				len_var = ft_strlen(args[counter]);
 				len_env = ft_strlen_env(info->env_cpy[i]);
-				//printf("%s\n", variables[counter]);
-				//printf("%s\n", info->env_cpy[i]);
-				if (!ft_strncmp(info->env_cpy[i], variables[counter], len_env) && len_env == len_var)
-				{
-					printf("OLAAaaaaa\n");
-				}
+				if (ft_strncmp(info->env_cpy[i], args[counter], len_env) && len_env == len_var)
+							len++;
 				counter++;
 			}
 		i++;
 	}
+	return (len);
+}
+
+int	ft_unset(char *arg, struct s_info *info)
+{
+	int			i;
+	char		**variables;
+	int			len_envs;
+
 	i = 0;
+	len_envs = 0;
+	variables = ft_split(arg, ' ');
+	if (!variables)
+		return (0);
+	len_envs = len_new_env(info, variables);
+	printf("len %d\n", len_envs);
 	while (variables[i])
 		free(variables[i++]);
-	puts("estoy aka!");
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/16 11:28:57 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/16 12:09:47 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	count_cells(t_cell *list)
  * Criar a sentença para enviar para os comandos.
  */
 // Fazer aqui o redirect.
+// e Heredoc
 t_sentence	*create_sentence(t_cell *list_cells, t_info *info)
 {
 	int	i;

@@ -20,7 +20,9 @@ char **ft_cpy_env(char **envs)
 	len = 0;
 	while (envs[len])
 		len++;
-	cpy_envs = malloc((len + 2) * sizeof(char *));
+	cpy_envs = malloc((len + 1) * sizeof(char *));
+	if (!cpy_envs)
+		return (NULL);
 	len = 0;
 	while (envs[len])
 	{

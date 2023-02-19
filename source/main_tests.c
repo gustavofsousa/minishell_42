@@ -50,6 +50,15 @@ void unset_test(char *str, struct s_info *info)
 		ft_unset(str, info);
 }
 
+void	export_test(char *str, struct s_info *info)
+{
+	if(ft_strncmp(str, "export", 6))
+		return ;
+	str += 6;
+	ft_export("olha=eu cadê=ocadu cadu=cadê", info);
+	ft_export("=pedro 1=sdfsd a=adfsd", info);
+}
+
 int	main(int ac, char **av, char *envp[])
 {
 	char	*prompt;
@@ -67,7 +76,10 @@ int	main(int ac, char **av, char *envp[])
 		//echo_test();
 		//exit_test(prompt);
 		env_test(prompt, info);
-		unset_test(prompt, &info);
+		//unset_test(prompt, &info);
+		(void) info;
+		if(prompt)
+			export_test(prompt, &info);
 		free(prompt);
 	}
 	return (0);

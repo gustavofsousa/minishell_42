@@ -31,7 +31,7 @@ LIBDIR	:=	libft/
 MAIN		:=	main_tests.c
 PARSER		:=	parser.c list_cells.c token.c
 SIGNAL		:=	signal.c
-BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c
+BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c
 #cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
 SRC		:=	$(MAIN)				\

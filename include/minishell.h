@@ -72,7 +72,7 @@ void	ft_exit(char *str);
 int		ft_env(char	**envs);
 int		ft_unset(char *arg, struct s_info *info);
 char	**ft_cpy_env(char	**envs);
-void	ft_export(char *arg);
+int		ft_export(char *arg, struct s_info *info);
 void	ft_cd(char *arg);
 
 // main

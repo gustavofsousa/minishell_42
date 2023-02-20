@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/20 17:47:05 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/20 21:01:51 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	search_for_quotes(t_cell **init_cell, t_cell **list, int *fq, char *quote)
 	else if (*fq > 0)
 	{
 		// O que entra aqui é o conteúdo da célula, podendo ou não ter aspas.
-		//if ((*list)->space == 1)
-		//	(*init_cell)->content = ft_strjoin_char((*init_cell)->content, ' ');
+		if ((*list)->space == 1)
+			(*init_cell)->content = ft_strjoin_char((*init_cell)->content, ' ');
 		join_cells(init_cell, ft_strdup((*list)->content), fq, quote);
 		delete_cell(init_cell, list);
 	}

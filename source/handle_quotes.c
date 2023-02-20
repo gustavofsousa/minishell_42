@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/20 17:24:05 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/20 17:47:05 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ void	join_cells(t_cell **init_cell, char *content, int *fq, char *quote)
 		}
 		else if ((*init_cell)->content == NULL)
 		{
-				free((*init_cell)->content);
-				(*init_cell)->content = ft_strdup(&content[i]);
+				(*init_cell)->content = malloc(2);
+				(*init_cell)->content[0] = content[i];
+				(*init_cell)->content[1] = '\0';
 		}
 		// Copiando.
 		else
@@ -81,7 +82,7 @@ void	search_for_quotes(t_cell **init_cell, t_cell **list, int *fq, char *quote)
 		(ft_strchr((*list)->content, '"') ||  ft_strchr((*list)->content, '\'')))
 	{
 		*fq = 1;
-		*quote = which_quotes((*list)->content);
+		*quote = which_quotes((*list)->content); //Ter um \o no fim?
 		*init_cell = *list;
 		first_word = ft_strdup((*list)->content);
 		free((*init_cell)->content);
@@ -89,7 +90,7 @@ void	search_for_quotes(t_cell **init_cell, t_cell **list, int *fq, char *quote)
 		join_cells(init_cell, first_word, fq, quote);
 	}
 	// Copiando as palavras quando acha as aspas, inicio meio e fim.
-	else if (*fq == 1)
+	else if (*fq > 0)
 	{
 		// O que entra aqui é o conteúdo da célula, podendo ou não ter aspas.
 		//if ((*list)->space == 1)

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/16 16:17:40 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/20 17:09:26 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	delete_cell(t_cell **init_cell, t_cell **list)
 {
 	(*init_cell)->next = (*list)->next;
-	free((*list)->content);
-	free(*list);
+	//free((*list)->content);
+	//free(*list);
 	*list = NULL;
 }
 
@@ -27,11 +27,16 @@ void	join_cells(t_cell **init_cell, char *content, int *fq, char *quote)
 {
 	int	i;
 
+printf("\t%s\n", content);
 	i = 0;
 	while (content[i])
 	{
-		// Fechando as aspas.
+		printf("para copiar->\t%c\n", content[i]);
+		// Achando 1ª aspas.
 		if (*fq == 1 && content[i] == *quote)
+			*fq = 2;
+		// Fechando as aspas.
+		else if (*fq == 2 && content[i] == *quote)
 			*fq = 0;
 		// Achando outro início de aspas.
 		else if (*fq == 0 && (content[i] == '"' || content[i] == '\''))
@@ -39,6 +44,7 @@ void	join_cells(t_cell **init_cell, char *content, int *fq, char *quote)
 			*fq = 1;//Com novas aspas.
 			*quote = content[i];
 		}
+		// Copiando.
 		else
 			(*init_cell)->content = ft_strjoin_char((*init_cell)->content, content[i]);
 		i++;
@@ -105,6 +111,6 @@ void	handle_quotes(t_cell **list_cells)
 		printf("%s\n", init_cell->content);
 		list_move = init_cell->next;
 	}
-	if (fq == 1)
+	if (fq > 0);
 		printf("Error, aspas não fechou");
 }

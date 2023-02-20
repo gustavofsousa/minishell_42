@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 15:28:59 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/16 14:14:20 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/20 16:55:32 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ char	*ft_strjoin_char(char *s1, char c)
 	free(s1);
 	new_string[len_s1] = c;
 	new_string[len_s1 + 1] = '\0';
+	printf("\t Como está-> %s\n", new_string);
 	return (new_string);
 }

@@ -6,16 +6,16 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:54:12 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/02/12 22:41:56 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/02/21 15:32:32 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int check_arg(char *arg)
+static int	check_arg(char *arg)
 {
-	int i;
-	int is_equals;
+	int	i;
+	int	is_equals;
 
 	i = 0;
 	is_equals = 0;
@@ -27,7 +27,7 @@ static int check_arg(char *arg)
 			is_equals = 1;
 		i++;
 	}
-	if(!is_equals)
+	if (!is_equals)
 		return (0);
 	return (1);
 }
@@ -40,7 +40,8 @@ static char	**created_new_env(struct s_info *info, int amount_args)
 	i = 0;
 	while (info->env_cpy[i])
 		i++;
-	i += amount_args + 1;
+	printf("%d\n", i);
+	i += amount_args;
 	new_env = malloc(i * sizeof(char *));
 	if (!new_env)
 		return (NULL);
@@ -60,15 +61,14 @@ static void replace_env(struct s_info *info, char **args, int amount_args)
 		return ;
 	while (info->env_cpy[i])
 	{
-			new_env[i] = ft_strdup(info->env_cpy[i]);
-			i++;
-			free(info->env_cpy[i]);
+		new_env[i] = ft_strdup(info->env_cpy[i]);
+		free(info->env_cpy[i]);
+		i++;
 	}
 	free(info->env_cpy);
 	while (count < amount_args)
 	{
-		puts("eu");
-		if(check_arg(args[count]))
+		if (check_arg(args[count]))
 		{
 			new_env[i] = ft_strdup(args[count]);
 			i++;
@@ -85,7 +85,7 @@ int	ft_export(char *arg, struct s_info *info)
 	int		new_envs;
 	int		i;
 
-	if(!arg)
+	if (!arg)
 		return (0);
 	new_envs = 0;
 	i = 0;
@@ -93,15 +93,12 @@ int	ft_export(char *arg, struct s_info *info)
 	while (args[i])
 	{
 		if (check_arg(args[i]))
-		{
-			printf("%s\n", args[i++]);
 			new_envs++;
-		}
 		else
-			printf("export: `%s': not a valid identifier\n", *args++);
+			printf("export: `%s': not a valid identifier\n", args[i]);
+		i++;
 	}
 	replace_env(info, args, new_envs);
-	printf("%d\n", new_envs);
 	//free args
 	//preciso da free na variaes
 	return (0);

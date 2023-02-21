@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:07:03 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/02/16 16:12:02 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/02/21 10:22:12 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ft_strlen_env(char *str)
 
 static int	is_equal(char **args, char *str)
 {
-	int counter;
+	int	counter;
 	int	len_var;
 	int	len_env;
 
@@ -42,16 +42,16 @@ static int	is_equal(char **args, char *str)
 	return (0);
 }
 
-static int len_new_env(struct s_info *info, char **args)
+static int	len_new_env(struct s_info *info, char **args)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = 0;
 	while (info->env_cpy[i])
 	{
-		if(!is_equal(args, info->env_cpy[i]))
+		if (!is_equal(args, info->env_cpy[i]))
 			len++;
 		i++;
 	}
@@ -76,7 +76,6 @@ int	ft_unset(char *arg, struct s_info *info)
 	new_env = malloc((len_envs + 1) * sizeof(char *));
 	if (!new_env)
 		return (0);
-	printf("len new env: %d\n", len_envs);
 	while (info->env_cpy[i])
 	{
 		if (!is_equal(args, info->env_cpy[i]))
@@ -89,6 +88,6 @@ int	ft_unset(char *arg, struct s_info *info)
 	}
 	free(info->env_cpy);
 	new_env[count] = NULL;
-	info->env_cpy = new_env;	
+	info->env_cpy = new_env;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/21 10:45:57 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/21 11:19:49 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	print_all_list(t_cell *list)
 	{
 		printf("-----------\n");
 		if (list->token == 144)
-			printf("Command&Word->\t%s", list->content);
+			printf("Command&Word->\t%s\n", list->content);
 		else if (list->token == 22)
-			printf("redirect->\t%s", list->content);
+			printf("redirect->\t%s\n", list->content);
 		else if (list->token == 89)
-			printf("Pipe->\t%s", list->content);
+			printf("Pipe->\t\t%s\n", list->content);
 		list = list->next;
 	}
 }

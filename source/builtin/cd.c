@@ -44,7 +44,7 @@ void ft_cd(char *path, t_info info)
 	else
 	{
 			if (path == NULL)
-				status = chdir(info->env_cpy.HOME);
+				status = chdir(getenv("HOME"));
 			else
 				status = chdir(path);
 			if (status == -1)

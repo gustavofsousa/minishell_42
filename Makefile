@@ -6,7 +6,7 @@
 #    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/12 19:28:50 by parnaldo         ###   ########.fr        #
+#    Updated: 2023/02/23 16:11:24 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,5 +82,8 @@ fclean:	clean
 	@make -C $(LIBDIR) fclean
 
 re: fclean all
+
+valgrind:
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes ./minishell
 
 .PHONY: re, fclean, clean, all

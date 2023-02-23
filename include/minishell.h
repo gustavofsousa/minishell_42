@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/14 16:28:36 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/23 16:59:48 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int		ft_env(char	**envs);
 int		ft_unset(char *arg, struct s_info *info);
 char	**ft_cpy_env(char	**envs);
 int		ft_export(char *arg, struct s_info *info);
-void	ft_cd(char *arg);
+void	ft_cd(char *path, t_info info);
 
 // main
 void	expand_variable(t_cell **list_cell, t_info info);

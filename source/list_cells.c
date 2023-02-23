@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:09:14 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/06 11:32:20 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/13 16:38:47 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_cell	*new_cell(char *str)
 		return (NULL);
 	cell->content = ft_strdup(str);//Tem que dar free
 	cell->next = NULL;
+	cell->space = 1;
 	return (cell);
 }
 
@@ -52,10 +53,14 @@ void	list_add_back(t_cell **list, t_cell *new_cell)
 		(*list)->next = new_cell;
 		*list = list_keep;
 	}
-	printf("Create cell->\t%s\n", new_cell->content);
 }
 
-void	create_new_cell(t_cell **list_cells, char *str)
+void	create_new_cell(t_cell **list_cells, char *str, int spce)
 {
-	list_add_back(list_cells, new_cell(str));
+	t_cell	*nc;
+
+	nc = new_cell(str);
+	if (spce == 0)
+		nc->space = 0;
+	list_add_back(list_cells, nc);
 }

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/06 11:25:55 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/21 10:43:10 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	split_and_create(t_cell **list_cells, char *str)
 		if (*str == '|' || *str == '>' || *str == '<')
 		{
 			new_word = check_if_double(str, &i);
-			create_new_cell(list_cells, new_word);
+			create_new_cell(list_cells, new_word, 0);
 			free(new_word);
 			new_word = NULL;
 		}
@@ -56,7 +56,7 @@ void	split_and_create(t_cell **list_cells, char *str)
 				&& str[i] != '<' && str[i] != '\0')
 				i++;
 			new_word = ft_substr(str, 0, i);
-			create_new_cell(list_cells, new_word);
+			create_new_cell(list_cells, new_word, 0);
 			free(new_word);
 			new_word = NULL;
 		}
@@ -87,7 +87,7 @@ void	divide_prompt(t_info *info, t_cell **list_cells)
 			split_and_create(list_cells, mtx_str[i]);
 		// Palavra ou metadado sozinho.
 		else
-			create_new_cell(list_cells, mtx_str[i]);
+			create_new_cell(list_cells, mtx_str[i], 1);
 		i++;
 	}
 	if (mtx_str)

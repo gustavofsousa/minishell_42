@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/24 19:15:28 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/24 20:52:52 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_cell
 typedef struct s_info
 {
 	char	*prompt;
-	char	**sentence;
 	int		qtd_sent;
 	char	**env_cpy;
 }	t_info;
@@ -51,7 +50,7 @@ typedef struct s_sentence
 {
 	int					input;
 	char				*command;
-	char				*args;// Tem que ser ** por causa do exeqv.
+	char				*args;// Tem que ser ** por causa do execv.
 	int					output;
 	struct s_sentence	*next;
 }	t_sentence;

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/24 18:50:53 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/24 19:14:31 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	reset(t_cell **list_cells)
 //		free(info.prompt);
 	if (*list_cells)
 		list_clear_cells(list_cells);
-	
 }
 
 void	init(t_info *info, t_cell **list_cells)

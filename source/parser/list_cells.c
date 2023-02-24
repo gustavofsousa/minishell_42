@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:09:14 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/24 18:31:04 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/24 20:54:50 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_cell	*new_cell(char *str)
 	cell = malloc(sizeof(t_cell));
 	if (!cell)
 		return (NULL);
-	cell->content = ft_strdup(str);//Tem que dar free
+	cell->content = ft_strdup(str);
 	cell->next = NULL;
 	cell->space = 1;
 	return (cell);

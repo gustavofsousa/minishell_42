@@ -6,11 +6,11 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/21 10:43:10 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:31:16 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 char	*check_if_double(char *str, int *i)
 {

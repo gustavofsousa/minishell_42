@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+         #
+#    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/23 14:29:44 by gusousa          ###   ########.fr        #
+#    Updated: 2023/02/24 18:52:16 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,16 +27,28 @@ INCDIR	:=	include/
 LIBDIR	:=	libft/
 
 ####	Sources & objects	####
-SRC		:=	main.c			parser.c							\
-			list_cells.c	token.c								\
-			signal.c											\
-			golfer.c		expand_variables.c					\
-			handle_quotes.c	ft_strjoin_free.c
+
+MAIN		:=	main.c	signal.c	golfer.c	expand_variables.c	ft_strjoin_free.c \
+				create_sentence.c
+PARSER		:=	parser.c list_cells.c token.c	handle_quotes.c
+BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c
+
+SRC		:=	$(MAIN)				\
+			$(addprefix parser/, $(PARSER))			\
+			$(addprefix builtin/, $(BUILTIN))	
 
 OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
 
 ####	Libft		####
 LIBLIB		:=	$(LIBDIR)/libft.a
+
+LISTDIR 	:=	builtin parser
+
+#$(shell echo '$@ <- Nome da regra.')
+#$(shell echo '$< <- Nome da primeira dependência.')
+#$(shell echo '$^ <- Lista de dependências.')
+#$(shell echo '$? <- Lista de dependências mais recentes que a regra.')
+#$(shell echo '$* <- Nome do arquivo sem sufixo.')
 
 ######	Commands	######
 
@@ -44,6 +56,7 @@ all:	$(OBJDIR) $(LIBLIB) $(NAME)
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
+	@$(foreach dir, $(LISTDIR), mkdir -p $(OBJDIR)/$(dir))
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -67,5 +80,8 @@ fclean:	clean
 	@make -C $(LIBDIR) fclean
 
 re: fclean all
+
+valgrind:
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes --track-fds=yes ./minishell
 
 .PHONY: re, fclean, clean, all

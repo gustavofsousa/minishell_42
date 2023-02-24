@@ -6,13 +6,12 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/16 11:33:59 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:42:22 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-/*
 void	create_forks(t_sentence *sent, int qtd_sent)
 {
 	int	nbr_child;
@@ -66,4 +65,3 @@ void	golfer(t_sentence *sent, t_info info)
 		//exeqv;
 		(void)sent;
 }
-*/

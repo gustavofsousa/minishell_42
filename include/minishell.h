@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
+/*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/23 14:27:59 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:34:58 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "../libft/libft.h"
 # include <stdio.h> //printf
-# include <stdio.h>
-# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <stdio.h>
+# include <signal.h>
 # include <sys/ioctl.h>
-# include "../libft/libft.h"
 # include <stdlib.h> //free
+# include <unistd.h>//getcwd(); fork().
+# include <stdlib.h>//exit. free.
 
 enum e_token
 {
@@ -42,7 +44,7 @@ typedef struct s_info
 	char	*prompt;
 	char	**sentence;
 	int		qtd_sent;
-
+	char	**env_cpy;
 }	t_info;
 
 typedef struct s_sentence
@@ -54,6 +56,7 @@ typedef struct s_sentence
 	struct s_sentence	*next;
 }	t_sentence;
 
+//Parser
 void	divide_prompt(t_info *info, t_cell **list_cells);
 void	categorize_elements(t_cell **list);
 void	handle_quotes(t_cell **list_cells);
@@ -71,4 +74,15 @@ void	golfer(t_sentence *sent, t_info *info);
 
 char	*ft_strjoin_free(char *s1, char *s2);
 char	*ft_strjoin_char(char *s1, char c);
+
+// Builtin
+void	ft_pwd();
+void	ft_echo(char *str);
+void	ft_exit(char *str);
+int		ft_env(char	**envs);
+int		ft_unset(char *arg, struct s_info *info);
+char	**ft_cpy_env(char	**envs);
+int		ft_export(char *arg, struct s_info *info);
+void	ft_cd(char *path)
+
 #endif

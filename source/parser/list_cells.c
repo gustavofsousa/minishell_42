@@ -6,11 +6,11 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:09:14 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/13 16:38:47 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:31:04 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	list_clear_cells(t_cell **list)
 {

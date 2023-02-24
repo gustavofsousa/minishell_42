@@ -6,11 +6,11 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 21:01:14 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/13 18:37:23 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/24 18:31:25 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 void	categorize_elements(t_cell **list)
 {

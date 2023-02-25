@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/24 19:14:31 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/25 12:42:40 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,23 @@ void	print_all_list(t_cell *list)
 		list = list->next;
 	}
 }
+void	print_sentence(t_sentence *sent)
+{
+	printf("\n");
+	while (sent)
+	{
+		printf("------sentence-----\n");
+	printf("Command->\t%s\n", sent->command);
+	printf("Arguments->\t%s\n", sent->args);
+		sent = sent->next;
+	}
+}
 
 int	main(int argc, char **argv)
 {
 	t_info	info;
 	t_cell	*list_cells;
-	//t_sentence	*sentence;
+	t_sentence	*sentence;
 
 	(void)argc;
 	(void)argv;
@@ -73,7 +84,8 @@ int	main(int argc, char **argv)
 		
 		print_all_list(list_cells);
 
-		//sentence = create_sentence(list_cells, &info);
+		sentence = create_sentence(list_cells, &info);
+		print_sentence(sentence);
 		//golfer(t_sentence, &info);
 	}
 	finish_program(&info, &list_cells);

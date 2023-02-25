@@ -6,13 +6,13 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/24 21:32:34 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/25 12:34:33 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-t_sentence	*new_sent(char *str1, char *str2)
+t_sentence	*new_sent(char *str1)
 {
 	t_sentence *sent;
 
@@ -20,7 +20,6 @@ t_sentence	*new_sent(char *str1, char *str2)
 	if (!sent)
 		return (NULL);
 	sent->command = ft_strdup(str1);
-	sent->args = ft_strdup(str2);
 	sent->next = NULL;
 	return (sent);
 }
@@ -69,18 +68,23 @@ t_sentence	*create_sentence(t_cell *list_in, t_info *info)
 	first_round = 1;
 	while (list_in)
 	{
-		if (first_round == 1)
-		{
-//			sent_addback(list_in->content[0], list_in->content[1]);
-			sent->command = ft_strdup(list_in->content);
-			first_round = 0;
-		}
-		else if (list_in->token == piper)
+		if (list_in->token == piper)
 			first_round = 1;
+		else if (first_round == 1)
+		{
+			sent_addback(&sent, new_sent(list_in->content));
+			first_round = 2;
+		}
 		else
 		{
-			sent->args == ft_strjoin(list_in->content);//colocar um if de se nao tiver nada, dar um dup.
-		}
+			if (first_round == 2)
+			{
+				sent->args = ft_strdup(list_in->content);
+				first_round = 0;
+			}
+			else
+		 		sent->args = ft_strjoin_free(sent->args, list_in->content);
+		 }
 		list_in = list_in->next;
 	}
 	// clear_list_initial().

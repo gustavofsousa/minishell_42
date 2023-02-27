@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/25 12:40:25 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/27 14:25:26 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct s_sentence
 	char				*command;
 	char				*args;// Tem que ser ** por causa do execv.
 	int					output;
-	struct s_sentence	*next;
 }	t_sentence;
 
 //Parser
@@ -70,7 +69,7 @@ void	set_signal_handler(void);
 // main
 void	expand_variable(t_cell **list_cell, t_info info);
 void	golfer(t_sentence *sent, t_info *info);
-t_sentence	*create_sentence(t_cell *list_in, t_info *info);
+t_list	*create_sentence(t_cell *list_in, t_info *info);
 
 char	*ft_strjoin_free(char *s1, char *s2);
 char	*ft_strjoin_char(char *s1, char c);

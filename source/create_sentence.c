@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/27 14:35:27 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/27 16:22:46 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	count_sentences(t_cell *list)
 	return (len);
 }
 
-t_cell	*new_sent(t_cell *list_in, t_list **list_sentence)
+t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence)
 {
 	int			n_round;
 	t_sentence	sent_node;
@@ -39,11 +39,15 @@ t_cell	*new_sent(t_cell *list_in, t_list **list_sentence)
 		else if (n_round == 1)
 			sent_node.args= ft_strdup(list_in->content);
 		else
+		{
+			if (list_in->space == 1)
+				sent_node.args = ft_strjoin_free(sent_node.args, " ");
 			sent_node.args = ft_strjoin_free(sent_node.args, list_in->content);
+		}
 		n_round++;
 		list_in = list_in->next;
 	}
-	ft_lstadd_back(list_sentence, ft_lstnew(&sent_node));
+	ft_lstadd_back_sent(list_sentence, ft_lstnew_sent(sent_node));
 	return (list_in);
 }
 
@@ -52,10 +56,10 @@ t_cell	*new_sent(t_cell *list_in, t_list **list_sentence)
  */
 // Fazer aqui o redirect.
 // e Heredoc
-t_list	*create_sentence(t_cell *list_in, t_info *info)
+t_list_sent	*create_sentence(t_cell *list_in, t_info *info)
 {
-	int		i;
-	t_list		*sent;
+	int			i;
+	t_list_sent	*sent;
 
 	sent = NULL;
 	info->qtd_sent = count_sentences(list_in);

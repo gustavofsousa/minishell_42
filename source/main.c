@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/27 14:29:17 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/27 16:31:05 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,23 @@ void	print_all_list(t_cell *list)
 	}
 }
 
-/*
-void	print_sentence(t_sentence *sent)
+void	print_sentence(t_list_sent *sent)
 {
 	printf("\n");
 	while (sent)
 	{
 		printf("------sentence-----\n");
-	printf("Command->\t%s\n", sent->command);
-	printf("Arguments->\t%s\n", sent->args);
+		printf("Command->\t%s\n", sent->content.command);
+		printf("Arguments->\t%s\n", sent->content.args);
 		sent = sent->next;
 	}
 }
-*/
 
 int	main(int argc, char **argv)
 {
 	t_info	info;
 	t_cell	*list_cells;
-	t_list	*sentence;
+	t_list_sent	*sentence;
 
 	(void)argc;
 	(void)argv;
@@ -76,7 +74,7 @@ int	main(int argc, char **argv)
 	set_signal_handler();
 	while (42)
 	{
-		reset(&list_cells);
+		//reset(&list_cells);
 		info.prompt = readline("🦞our_minishell> ");
 		add_history(info.prompt);
 		check_eof(&info);
@@ -91,7 +89,7 @@ int	main(int argc, char **argv)
 		//print_sentence(sentence);
 		//golfer(t_sentence, &info);
 	}
-	finish_program(&info, &list_cells);
+	//finish_program(&info, &list_cells);
 	return (0);
 }
 //Para env:

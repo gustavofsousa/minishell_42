@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:44:56 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/02/24 18:34:49 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/27 13:06:09 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	count_args(char *str)
 	int		i;
 	char	**mtx_str;
 
+	len = 0;
 	if (str == NULL)
 		return (0);
 	mtx_str = ft_split(str, ' ');

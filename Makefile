@@ -6,7 +6,7 @@
 #    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/24 18:52:16 by gusousa          ###   ########.fr        #
+#    Updated: 2023/02/27 13:05:14 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,8 @@ all:	$(OBJDIR) $(LIBLIB) $(NAME)
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
-	@$(foreach dir, $(LISTDIR), mkdir -p $(OBJDIR)/$(dir))
+	@mkdir -p $(addprefix $(OBJDIR), $(LISTDIR))
+#	@$(foreach dir, $(LISTDIR), mkdir -p $(OBJDIR)/$(dir))
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@

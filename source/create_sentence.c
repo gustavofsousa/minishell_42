@@ -37,7 +37,11 @@ t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence)
 		if (n_round == 0)
 			sent_node.command = ft_strdup(list_in->content);
 		else if (n_round == 1)
+		{
+			printf("content -> %s\n", list_in->content);
 			sent_node.args= ft_strdup(list_in->content);
+			printf("args -> %s\n", sent_node.args);
+		}
 		else
 		{
 			if (list_in->space == 1)
@@ -71,6 +75,7 @@ t_list_sent	*create_sentence(t_cell *list_in, t_info *info)
 		if (list_in == NULL)
 			break ;
 		list_in = list_in->next;
+		i++;
 	}
 	// clear_list_initial().
 	return (sent);

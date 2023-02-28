@@ -66,7 +66,7 @@ int	main(int argc, char **argv)
 {
 	t_info	info;
 	t_cell	*list_cells;
-	t_list_sent	*sentence;
+	//t_list_sent	*sentence;
 
 	(void)argc;
 	(void)argv;
@@ -85,9 +85,11 @@ int	main(int argc, char **argv)
 		
 		print_all_list(list_cells);
 
-		sentence = create_sentence(list_cells, &info);
+		//sentence = create_sentence(list_cells, &info);
 		//print_sentence(sentence);
 		//golfer(t_sentence, &info);
+		list_clear_cells(&list_cells);
+		//ft_lstclear_sent(&sentence);
 	}
 	//finish_program(&info, &list_cells);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/28 15:10:25 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:57:07 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	print_all_list(t_cell *list)
 	printf("\n");
 	while (list)
 	{
-		printf("-----------\n");
 		if (list->token == 144)
 			printf("Command&Word->\t%s\n", list->content);
 		else if (list->token == 22)
@@ -52,6 +51,7 @@ void	print_all_list(t_cell *list)
 			printf("Pipe->\t\t%s\n", list->content);
 		list = list->next;
 	}
+	printf("\n");
 }
 
 void	print_sentence(t_list_sent *sent)
@@ -59,7 +59,7 @@ void	print_sentence(t_list_sent *sent)
 	printf("\n");
 	while (sent)
 	{
-		printf("------sentence-----\n");
+		printf("-----------sentence----------\n");
 		printf("Command->\t%s\n", sent->content.command);
 		if(sent->content.args)
 			printf("Arguments->\t%s\n", sent->content.args);
@@ -91,8 +91,7 @@ int	main(int argc, char **argv)
 		print_all_list(list_cells);
 
 		sentence = create_sentence(list_cells, &info);
-		printf("Rato\n");
-		//print_sentence(sentence);
+		print_sentence(sentence);
 		//golfer(t_sentence, &info);
 	}
 	reset(&info, &list_cells, &sentence);

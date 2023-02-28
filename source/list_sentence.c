@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:07:01 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/27 16:28:39 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:54:27 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_list_sent	*ft_lstnew_sent(t_sentence content)
 {
 	t_list_sent	*node;
 
-	node = malloc(sizeof(t_list));
+	node = malloc(sizeof(t_list_sent));
 	if (!node)
 		return (NULL);
 	node->content = content;

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:46:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/28 20:15:22 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/28 20:22:48 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,41 +45,40 @@ int	count_words(char *str)
 	return (qtd_word);
 }
 
+void	exit_with_args(char *str, int id)
+{
+	if (is_numeric(str))
+	{
+		g_status = id;
+		ft_putstr_fd("exit\n", 1);
+		exit(id);
+	}
+	else
+	{
+		ft_putstr_fd("exit\n", 2);
+		ft_putstr_fd("exit: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(" numeric argument required\n", 2);
+		g_status = 255;
+		exit(255);
+	}
+}
+
 void	ft_exit(char *str)
 {
-	long long int	id;
-	int				qtd_exit;
-	
-	qtd_exit = count_words(str);
-	// sem argumento.
-	if (qtd_exit == 0)
+	int				qtd_args;
+
+	qtd_args = count_words(str);
+	if (qtd_args == 0)
 	{
 		ft_putstr_fd("exit\n", 1);
 		exit(0);
 	}
-	// 1 argumento.
-	else if (qtd_exit == 1)
+	else if (qtd_args == 1)
 	{
-		if (is_numeric(str))
-		{
-			id = ft_atoi(str);
-			g_status = id;
-			ft_putstr_fd("exit\n", 1);
-			exit(id);
-		}
-		else
-		{
-			ft_putstr_fd("exit\n", 2);
-			ft_putstr_fd("exit: ", 2);
-			ft_putstr_fd(str, 2);
-			ft_putstr_fd(" numeric argument required\n", 2);
-			g_status = 255;
-			exit(255);
-		}
-
+		exit_with_args(str, ft_atoi(str));
 	}
-	// Mais de 1 argumento.
-	else
+	else if (qtd_args > 1)
 	{
 		ft_putstr_fd("exit\n", 2);
 		ft_putstr_fd("exit: too many arguments\n", 2);

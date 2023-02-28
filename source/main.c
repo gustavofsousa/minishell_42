@@ -6,32 +6,36 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/27 16:31:05 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/28 14:55:36 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	finish_program(t_info *info, t_cell **list_cells)
+void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 {
-	free(info->prompt);
-	list_clear_cells(list_cells);
-	exit (0);
-}
-
-void	reset(t_cell **list_cells)
-{
-//	if (info->prompt)
-//		free(info.prompt);
-	if (*list_cells)
-		list_clear_cells(list_cells);
-}
-
-void	init(t_info *info, t_cell **list_cells)
-{
+	info->prompt = NULL;
+	info->env_cpy = NULL;
 	info->qtd_sent = 0;
 	*list_cells = NULL;	
-	//memset(info) // Ver se pode no pdf.
+	*sentence = NULL;
+}
+
+void	reset(t_info *info, t_cell **list_cells, t_list_sent **sentence)
+{
+	int	i;
+
+	free(info->prompt);
+	i = -1;
+	if (info->env_cpy)
+	{
+		while (info->env_cpy[++i])
+			free(info->env_cpy[i]);
+		free(info->env_cpy);
+	}
+	list_clear_cells(list_cells);
+	ft_lstclear_sent(sentence);
+	point_to_null(info, list_cells, sentence);
 }
 
 void	print_all_list(t_cell *list)
@@ -57,7 +61,8 @@ void	print_sentence(t_list_sent *sent)
 	{
 		printf("------sentence-----\n");
 		printf("Command->\t%s\n", sent->content.command);
-		printf("Arguments->\t%s\n", sent->content.args);
+		if(sent->content.args)
+			printf("Arguments->\t%s\n", sent->content.args);
 		sent = sent->next;
 	}
 }
@@ -66,15 +71,15 @@ int	main(int argc, char **argv)
 {
 	t_info	info;
 	t_cell	*list_cells;
-	//t_list_sent	*sentence;
+	t_list_sent	*sentence;
 
 	(void)argc;
 	(void)argv;
-	init(&info, &list_cells);
+	point_to_null(&info, &list_cells, &sentence);
 	set_signal_handler();
 	while (42)
 	{
-		//reset(&list_cells);
+		reset(&info, &list_cells, &sentence);
 		info.prompt = readline("🦞our_minishell> ");
 		add_history(info.prompt);
 		check_eof(&info);
@@ -85,13 +90,12 @@ int	main(int argc, char **argv)
 		
 		print_all_list(list_cells);
 
-		//sentence = create_sentence(list_cells, &info);
+		sentence = create_sentence(list_cells, &info);
 		//print_sentence(sentence);
 		//golfer(t_sentence, &info);
-		list_clear_cells(&list_cells);
-		//ft_lstclear_sent(&sentence);
 	}
-	//finish_program(&info, &list_cells);
+	reset(&info, &list_cells, &sentence);
+	exit(0);
 	return (0);
 }
 //Para env:

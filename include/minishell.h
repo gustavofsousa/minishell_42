@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/27 16:16:16 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/28 16:01:20 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	set_signal_handler(void);
 
 // main
 void	expand_variable(t_cell **list_cell, t_info info);
-void	golfer(t_sentence *sent, t_info *info);
+void	golfer(t_list_sent *sent, t_info *info);
 t_list_sent	*create_sentence(t_cell *list_in, t_info *info);
 
 char	*ft_strjoin_free(char *s1, char *s2);

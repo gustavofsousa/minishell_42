@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/24 19:20:43 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/28 16:09:47 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	count_sentence(t_sentence *sentence)
 }
 */
 
-void	golfer(t_sentence *sent, t_info *info)
+void	golfer(t_list_sent *sent, t_info *info)
 {
 /*
 	int	qtd_sent;
@@ -51,20 +51,20 @@ void	golfer(t_sentence *sent, t_info *info)
 */
 
 	//Escolher comando
-	if (ft_strncmp(sent->command, "pwd", ft_strlen(sent->command)))
+	if (!ft_strncmp(sent->content.command, "pwd", ft_strlen(sent->content.command)))
 		ft_pwd();
-	else if (ft_strncmp(sent->command, "echo", ft_strlen(sent->command)))
-		ft_echo(sent->args);
-	else if (ft_strncmp(sent->command, "exit", ft_strlen(sent->command)))
-		ft_exit(sent->args);
-	else if (ft_strncmp(sent->command, "env", ft_strlen(sent->command)))
+	else if (!ft_strncmp(sent->content.command, "echo", ft_strlen(sent->content.command)))
+		ft_echo(sent->content.args);
+	else if (!ft_strncmp(sent->content.command, "exit", ft_strlen(sent->content.command)))
+		ft_exit(sent->content.args);
+	else if (!ft_strncmp(sent->content.command, "env", ft_strlen(sent->content.command)))
 		ft_env(info->env_cpy);
-	else if (ft_strncmp(sent->command, "unset", ft_strlen(sent->command)))
-		ft_unset(sent->args, info);
-	else if (ft_strncmp(sent->command, "cd", ft_strlen(sent->command)))
-		ft_cd(sent->args);
-	else if (ft_strncmp(sent->command, "export", ft_strlen(sent->command)))
-		ft_export(sent->args, info);
+	else if (!ft_strncmp(sent->content.command, "unset", ft_strlen(sent->content.command)))
+		ft_unset(sent->content.args, info);
+	else if (!ft_strncmp(sent->content.command, "cd", ft_strlen(sent->content.command)))
+		ft_cd(sent->content.args);
+	else if (!ft_strncmp(sent->content.command, "export", ft_strlen(sent->content.command)))
+		ft_export(sent->content.args, info);
 	else
 		//exeqv;
 		(void)sent;

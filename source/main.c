@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/28 15:57:07 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/28 16:01:44 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,11 @@ int	main(int argc, char **argv)
 		categorize_elements(&list_cells);
 		//expand_variable(&list_cells);
 		handle_quotes(&list_cells);
-		
-		print_all_list(list_cells);
+		//print_all_list(list_cells);
 
 		sentence = create_sentence(list_cells, &info);
 		print_sentence(sentence);
-		//golfer(t_sentence, &info);
+		golfer(sentence, &info);
 	}
 	reset(&info, &list_cells, &sentence);
 	exit(0);

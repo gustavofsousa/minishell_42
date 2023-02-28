@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/27 16:22:46 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:12:13 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,11 @@ t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence)
 	n_round = 0;
 	while (list_in && list_in->token == word)
 	{
+		printf("new sent\n");
 		if (n_round == 0)
 			sent_node.command = ft_strdup(list_in->content);
 		else if (n_round == 1)
-		{
-			printf("content -> %s\n", list_in->content);
 			sent_node.args= ft_strdup(list_in->content);
-			printf("args -> %s\n", sent_node.args);
-		}
 		else
 		{
 			if (list_in->space == 1)
@@ -50,6 +47,8 @@ t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence)
 		}
 		n_round++;
 		list_in = list_in->next;
+		if (!list_in)
+			break;
 	}
 	ft_lstadd_back_sent(list_sentence, ft_lstnew_sent(sent_node));
 	return (list_in);
@@ -77,6 +76,6 @@ t_list_sent	*create_sentence(t_cell *list_in, t_info *info)
 		list_in = list_in->next;
 		i++;
 	}
-	// clear_list_initial().
+	printf("Rato %d\n", i);
 	return (sent);
 }

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/28 14:55:36 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/02/28 15:10:25 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int	main(int argc, char **argv)
 		print_all_list(list_cells);
 
 		sentence = create_sentence(list_cells, &info);
+		printf("Rato\n");
 		//print_sentence(sentence);
 		//golfer(t_sentence, &info);
 	}

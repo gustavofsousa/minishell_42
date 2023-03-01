@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/24 18:30:54 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/01 10:58:18 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	search_quotes(t_cell **init_cell, t_cell **list, int *fq, char *quote)
 	// Defino o início da minha célula, 1ª aspas.
 	if (*fq == 0
 		&& (ft_strchr((*list)->content, '"')
-		|| ft_strchr((*list)->content, '\'')))
+			|| ft_strchr((*list)->content, '\'')))
 	{
 		*fq = 1;
 		*quote = which_quotes((*list)->content);
@@ -91,7 +91,6 @@ void	search_quotes(t_cell **init_cell, t_cell **list, int *fq, char *quote)
 	// Copiando as palavras quando acha as aspas, inicio meio e fim.
 	else if (*fq > 0)
 	{
-		// O que entra aqui é o conteúdo da célula, podendo ou não ter aspas.
 		if ((*list)->space == 1)
 			(*init_cell)->content = ft_strjoin_char((*init_cell)->content, ' ');
 		join_cells(init_cell, ft_strdup((*list)->content), fq, quote);

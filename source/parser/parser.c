@@ -6,24 +6,43 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/24 18:31:16 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/01 18:08:02 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*check_if_double(char *str, int *i)
+/*
+ *	Verifico se tem duplo(metadado)
+ *	Verifico se tem flag space
+ *	Crio a nova célula.
+ */
+char	*copy_to_cell(char *str, int meta)
 {
-	if (*(str + 1) == *str && *(str + 1) != '|')
+	char	*new_word;
+	int		space;
+	int		i;
+
+	space = 0;
+	if (meta = 1)
 	{
-		(*i) = 2;
-		return (ft_substr(str, 0, 2));
+		//Se é duplo.
+		if (*(str + 1) == *str && *(str + 1) != '|')
+		{
+			i = 2;
+			new_word = ft_substr(str, 0, 2);
+		}
+		else
+		{
+			i = 1;
+			new_word = ft_substr(str, 0, 1);
+		}
+		if (*(str + i) == ' ')
+			space = 1;
 	}
-	else
-	{
-		(*i) = 1;
-		return (ft_substr(str, 0, 1));
-	}
+	new_word = ft_substr(str, 0, i);
+	create_new_cell(list_cells, new_word, space);
+	free(new_word);
 }
 
 /*
@@ -34,7 +53,6 @@ char	*check_if_double(char *str, int *i)
  */
 void	split_and_create(t_cell **list_cells, char *str)
 {
-	char	*new_word;
 	int		i;
 
 	new_word = NULL;
@@ -44,10 +62,7 @@ void	split_and_create(t_cell **list_cells, char *str)
 		// Copiar o metadado, duplo ou normal
 		if (*str == '|' || *str == '>' || *str == '<')
 		{
-			new_word = check_if_double(str, &i);
-			create_new_cell(list_cells, new_word, 0);
-			free(new_word);
-			new_word = NULL;
+			copy_to_cell();
 		}
 		// Copiar palavra normal
 		else
@@ -55,10 +70,7 @@ void	split_and_create(t_cell **list_cells, char *str)
 			while (str[i] != '|' && str[i] != '>'
 				&& str[i] != '<' && str[i] != '\0')
 				i++;
-			new_word = ft_substr(str, 0, i);
-			create_new_cell(list_cells, new_word, 0);
-			free(new_word);
-			new_word = NULL;
+			copy_to_cell();
 		}
 		str += i;
 	}

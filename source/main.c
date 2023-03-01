@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/28 16:16:18 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/01 13:43:08 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	print_sentence(t_list_sent *sent)
 	}
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	t_info	info;
 	t_cell	*list_cells;
@@ -80,6 +80,7 @@ int	main(int argc, char **argv)
 	while (42)
 	{
 		reset(&info, &list_cells, &sentence);
+		info.env_cpy = ft_cpy_env(envp);
 		info.prompt = readline("🦞our_minishell> ");
 		add_history(info.prompt);
 		check_eof(&info);

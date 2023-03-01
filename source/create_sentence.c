@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/28 15:58:04 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/01 15:08:31 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence)
 	t_sentence	sent_node;
 
 	n_round = 0;
-	while (list_in && list_in->token == word)
+	while (list_in && list_in->token != piper)
 	{
-		if (n_round == 0)
+		if (list_in->token == redirect)
+			list_in = list_in->next;
+		else if (n_round == 0)
 			sent_node.command = ft_strdup(list_in->content);
 		else if (n_round == 1)
 			sent_node.args = ft_strdup(list_in->content);

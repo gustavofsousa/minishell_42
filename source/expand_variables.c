@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/15 10:58:16 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/02 17:24:50 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,14 @@
  */
 void	substitute(t_cell **list)
 {
-	(void)list;
+	t_cell *temp;
+	
+	temp = (*list);
+	while (temp != NULL)
+	{
+		printf("%s\n", temp->content);
+		temp = temp->next;
+	}
 }
 
 /*
@@ -35,9 +42,13 @@ void	expand_variable(t_cell **list_cell, t_info info)
 	t_cell	*list_move;
 
 	list_move = *list_cell;
+	(void) info;
 	while (list_move != NULL)
 	{
-		if (ft_strchr(list_move->content, '$'))
+
+		printf("%s\n", list_move->content);
+		list_move = list_move->next;
+		/*if (ft_strchr(list_move->content, '$'))
 		{
 			if (look_for_variable(list_move, info))
 			{
@@ -45,5 +56,6 @@ void	expand_variable(t_cell **list_cell, t_info info)
 			}
 		}
 		list_move = list_move->next;
+		*/
 	}
 }

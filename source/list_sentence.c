@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:07:01 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/28 15:54:27 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/02 16:04:33 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_lstadd_back_sent(t_list_sent **lst, t_list_sent *new_node)
 		*lst = new_node;
 	else
 	{
+		// Talvez precise por um list_move.
 		while ((*lst)->next != NULL)
 			*lst = (*lst)->next;
 		(*lst)->next = new_node;

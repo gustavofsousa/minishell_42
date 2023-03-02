@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/01 15:55:09 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/02 19:30:59 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,15 @@ void	search_quotes(t_cell **init_cell, t_cell **list, int *fq, char *quote)
 		free((*init_cell)->content);
 		(*init_cell)->content = NULL;
 		join_cells(init_cell, first_word, fq, quote);
+		if ((*list)->space == 1)
+			(*init_cell)->content = ft_strjoin_char((*init_cell)->content, ' ');
 	}
 	// Copiando as palavras quando acha as aspas, inicio meio e fim.
 	else if (*fq > 0)
 	{
+		join_cells(init_cell, ft_strdup((*list)->content), fq, quote);
 		if ((*list)->space == 1)
 			(*init_cell)->content = ft_strjoin_char((*init_cell)->content, ' ');
-		join_cells(init_cell, ft_strdup((*list)->content), fq, quote);
 		delete_cell(init_cell, list);
 	}
 }

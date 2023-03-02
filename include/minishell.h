@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/28 16:01:20 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/02 20:40:33 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdlib.h> //free
 # include <unistd.h>//getcwd(); fork().
 # include <stdlib.h>//exit. free.
+# include <fcntl.h>//open().
 
 enum e_token
 {
@@ -94,5 +95,8 @@ void	ft_cd(char *path);
 void	ft_lstclear_sent(t_list_sent **lst);
 void	ft_lstadd_back_sent(t_list_sent **lst, t_list_sent *new_node);
 t_list_sent	*ft_lstnew_sent(t_sentence content);
+
+//create_sentence.c
+void	open_redirect(t_cell *list_in, t_sentence *sent);
 
 #endif

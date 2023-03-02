@@ -6,13 +6,13 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 17:17:39 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/28 16:17:48 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/02 12:31:07 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_pwd()
+void	ft_pwd(void)
 {
 	char	*path;
 

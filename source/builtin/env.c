@@ -6,16 +6,16 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 08:10:50 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/02/23 14:42:43 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/02 09:41:36 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char **ft_cpy_env(char **envs)
+char	**ft_cpy_env(char **envs)
 {
-	int	len;
-	char **cpy_envs;
+	int		len;
+	char	**cpy_envs;
 
 	len = 0;
 	while (envs[len])
@@ -39,7 +39,10 @@ int	ft_env(char **envs)
 
 	i = 0;
 	if (!envs)
+	{
+		printf("env:");
 		return (0);
+	}
 	while (envs[i])
 	{
 		printf("%s\n", envs[i]);

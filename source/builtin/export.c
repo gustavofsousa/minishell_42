@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:54:12 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/02/21 15:32:32 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/02 12:29:01 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static char	**created_new_env(struct s_info *info, int amount_args)
 	i = 0;
 	while (info->env_cpy[i])
 		i++;
-	printf("%d\n", i);
 	i += amount_args;
 	new_env = malloc(i * sizeof(char *));
 	if (!new_env)
@@ -48,7 +47,24 @@ static char	**created_new_env(struct s_info *info, int amount_args)
 	return (new_env);
 }
 
-static void replace_env(struct s_info *info, char **args, int amount_args)
+static void	cpy_args(int i, int amount_args, char **new_env, char **args)
+{
+	int	count;
+
+	count = 0;
+	while (count < amount_args)
+	{
+		if (check_arg(args[count]))
+		{
+			new_env[i] = ft_strdup(args[count]);
+			i++;
+		}
+		count++;
+	}
+	new_env[i] = NULL;
+}
+
+static void	replace_env(struct s_info *info, char **args, int amount_args)
 {
 	char	**new_env;
 	int		i;
@@ -66,16 +82,7 @@ static void replace_env(struct s_info *info, char **args, int amount_args)
 		i++;
 	}
 	free(info->env_cpy);
-	while (count < amount_args)
-	{
-		if (check_arg(args[count]))
-		{
-			new_env[i] = ft_strdup(args[count]);
-			i++;
-		}
-		count++;
-	}
-	new_env[i] = NULL;
+	cpy_args(i, amount_args, new_env, args);
 	info->env_cpy = new_env;
 }
 
@@ -99,7 +106,9 @@ int	ft_export(char *arg, struct s_info *info)
 		i++;
 	}
 	replace_env(info, args, new_envs);
-	//free args
-	//preciso da free na variaes
+	i = 0;
+	while (args[i])
+		free(args[i++]);
+	free(args[i]);
 	return (0);
 }

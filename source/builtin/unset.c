@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:07:03 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/02/21 10:22:12 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/02 10:03:01 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,27 @@ static int	len_new_env(struct s_info *info, char **args)
 	return (len);
 }
 
+static void	cpy_variable(struct s_info *info, char **args, char **new_env)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (info->env_cpy[i])
+	{
+		if (!is_equal(args, info->env_cpy[i]))
+		{
+			new_env[count] = ft_strdup(info->env_cpy[i]);
+			count++;
+		}
+		free(info->env_cpy[i]);
+		i++;
+	}
+	free(info->env_cpy);
+	new_env[count] = NULL;
+}
+
 int	ft_unset(char *arg, struct s_info *info)
 {
 	int			i;
@@ -76,18 +97,7 @@ int	ft_unset(char *arg, struct s_info *info)
 	new_env = malloc((len_envs + 1) * sizeof(char *));
 	if (!new_env)
 		return (0);
-	while (info->env_cpy[i])
-	{
-		if (!is_equal(args, info->env_cpy[i]))
-		{
-			new_env[count] = ft_strdup(info->env_cpy[i]);
-			count++;
-		}
-		free(info->env_cpy[i]);
-		i++;
-	}
-	free(info->env_cpy);
-	new_env[count] = NULL;
+	cpy_variable(info, args, new_env);
 	info->env_cpy = new_env;
 	return (1);
 }

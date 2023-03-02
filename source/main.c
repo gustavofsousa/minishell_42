@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/01 13:43:08 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/02 09:40:17 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 {
 	info->prompt = NULL;
-	info->env_cpy = NULL;
+	//info->env_cpy = NULL;
 	info->qtd_sent = 0;
 	*list_cells = NULL;	
 	*sentence = NULL;
@@ -23,9 +23,8 @@ void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 
 void	reset(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 {
-	int	i;
-
 	free(info->prompt);
+	/*
 	i = -1;
 	if (info->env_cpy)
 	{
@@ -33,6 +32,7 @@ void	reset(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 			free(info->env_cpy[i]);
 		free(info->env_cpy);
 	}
+	*/
 	list_clear_cells(list_cells);
 	ft_lstclear_sent(sentence);
 	point_to_null(info, list_cells, sentence);
@@ -77,10 +77,10 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	point_to_null(&info, &list_cells, &sentence);
 	set_signal_handler();
+	info.env_cpy = ft_cpy_env(envp);
 	while (42)
 	{
 		reset(&info, &list_cells, &sentence);
-		info.env_cpy = ft_cpy_env(envp);
 		info.prompt = readline("🦞our_minishell> ");
 		add_history(info.prompt);
 		check_eof(&info);
@@ -89,7 +89,6 @@ int	main(int argc, char **argv, char **envp)
 		//expand_variable(&list_cells);
 		handle_quotes(&list_cells);
 		//print_all_list(list_cells);
-
 		sentence = create_sentence(list_cells, &info);
 		//print_sentence(sentence);
 		golfer(sentence, &info);

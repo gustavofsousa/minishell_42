@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/03 14:50:29 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/03 14:52:52 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	reset(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 	list_clear_cells(list_cells);
 	ft_lstclear_sent(sentence);
 	point_to_null(info, list_cells, sentence);
+	//close fd's i opened.
 }
 
 void	print_all_list(t_cell *list)

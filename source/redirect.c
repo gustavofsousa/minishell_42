@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/03 14:50:11 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/03 15:20:42 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	deal_error(t_sentence *sent, char redir)
 	{
 		if (sent->output == -1)
 			//exit(0);
-		//printf("%s/n", strerror(errno));
-		perror("Error in redirect:");
+		perror("Error in redirect");
 	}
 }
 
@@ -34,9 +33,13 @@ void	create_new_fd(t_sentence *sent, t_cell *list_in, char redir, char redir2)
 	if (redir == '>')
 	{
 		if (redir2 == '>')
-			sent->output = open(list_in->next->content,  O_CREAT, O_WRONLY,O_APPEND);
+			sent->output = open(list_in->next->content, O_WRONLY | O_CREAT | O_APPEND,
+					0644);
+//									S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		else
-			sent->output = open(list_in->next->content,  O_CREAT, O_WRONLY,O_TRUNC);
+			sent->output = open(list_in->next->content,  O_CREAT | O_WRONLY | O_TRUNC,
+					0644);
+//            S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	}
 	else
 	{

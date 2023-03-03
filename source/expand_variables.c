@@ -34,6 +34,8 @@ int	look_for_variable(t_cell *list, t_info info)
 {
 	(void)list;
 	(void)info;
+
+	//verificar se tem essa variavel na env, se sim retornar o index
 	return (1);
 }
 

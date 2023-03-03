@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/02 18:58:30 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/03 14:50:29 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,13 @@ void	print_sentence(t_list_sent *sent)
 	while (sent)
 	{
 		printf("-----------sentence----------\n");
-		printf("Command->\t%s\n", sent->content.command);
-		if(sent->content.args)
-			printf("Arguments->\t%s\n", sent->content.args);
+		printf("Input:%d\t", sent->content.input);
+		printf("Command->%s\t", sent->content.command);
+		printf("Arguments->%s\t", sent->content.args);
+		printf("Output:%d\n", sent->content.output);
 		sent = sent->next;
 	}
+	printf("\n");
 }
 
 int	main(int argc, char **argv)
@@ -90,7 +92,7 @@ int	main(int argc, char **argv)
 		//print_all_list(list_cells);
 
 		sentence = create_sentence(list_cells, &info);
-		//print_sentence(sentence);
+		print_sentence(sentence);
 		golfer(sentence, &info);
 	}
 	reset(&info, &list_cells, &sentence);

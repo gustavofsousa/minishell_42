@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/28 16:09:47 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/04 09:58:08 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	golfer(t_list_sent *sent, t_info *info)
 	if (!ft_strncmp(sent->content.command, "pwd", ft_strlen(sent->content.command)))
 		ft_pwd();
 	else if (!ft_strncmp(sent->content.command, "echo", ft_strlen(sent->content.command)))
-		ft_echo(sent->content.args);
+		ft_echo(sent->content.args, sent->content.output);
 	else if (!ft_strncmp(sent->content.command, "exit", ft_strlen(sent->content.command)))
 		ft_exit(sent->content.args);
 	else if (!ft_strncmp(sent->content.command, "env", ft_strlen(sent->content.command)))

@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:54:17 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/02/28 16:19:48 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/04 09:57:42 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ char	*reduce_flag(char *str)
 	return (ft_strdup("\n"));
 }
 
-void    ft_echo(char *str)
+void    ft_echo(char *str, int fd)
 {
 	char	*ready_str;
 
 	ready_str = reduce_flag(str);
-	ft_putstr_fd(ready_str, 1); //Essa ft porque o printf espera o \n no caso de "".
+	ft_putstr_fd(ready_str, fd); //Essa ft porque o printf espera o \n no caso de "".
 	free(ready_str);
 }

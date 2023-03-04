@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/03 15:56:43 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/04 09:56:29 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	deal_error(t_sentence *sent, char redir)
 	if (redir == '>')
 	{
 		if (sent->output == -1)
-			//exit(0);
-		perror("Error in redirect");
+		{
+			perror("Error in redirect");
+			//finish_program();
+		}
 	}
 }
 
@@ -82,4 +84,6 @@ void	open_redirect(t_cell *list_in, t_sentence *sent)
 		create_new_fd(sent, list_in,  redir, redir2);
 		deal_error(sent, redir);
 	}
+	else
+		ft_putstr_fd("syntax error near unexpected token 'newline'", 2);
 	}

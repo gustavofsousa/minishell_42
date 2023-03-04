@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 12:02:58 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/04 18:39:33 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,22 @@ int	count_sentence(t_sentence *sentence)
 
 int	do_the_execve(char	**args_mtx, char **envp)
 {
-	//ft_split(PATH, ':');
+	char **path;
+	char *str_path;
+	int i;
+
+	i = 0;
+	str_path = NULL;
+	while (envp[i])
+	{
+		if(!ft_strncmp("PATH", envp[i], 4))
+		{
+			str_path = ft_strdup(envp[i]+5);
+			break ;
+		}
+		i++;
+	}
+	path = ft_split(str_path, ':');
 	//path = acces();
 	// Criar um fork. O execve mata o processo.
 	//ret = execve(path, ft_split(sent->content.args), info->env_cpy);
@@ -86,5 +101,7 @@ void	golfer(t_list_sent *sent, t_info *info)
 		do_the_builtin(sent->content.command, sent->content.args,
 				sent->content.output, info);
 	else
+	{
 		do_the_execve(ft_split(sent->content.args, ' '), info->env_cpy);
+	}
 }

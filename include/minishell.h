@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 12:01:28 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/04 17:45:13 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_info
 	char	*prompt;
 	int		qtd_sent;
 	char	**env_cpy;
+	int		*fd_heredoc;
 }	t_info;
 
 typedef struct s_sentence
@@ -88,27 +89,27 @@ void	set_signal_handler(void);
 // main
 void	expand_variable(t_cell **list_cell, t_info info);
 void	golfer(t_list_sent *sent, t_info *info);
-t_list_sent	*create_sentence(t_cell *list_in, t_info *info);
 
 char	*ft_strjoin_free(char *s1, char *s2);
 char	*ft_strjoin_char(char *s1, char c);
 
 // Builtin
-void	ft_pwd();
-void	ft_echo(char *str, int fd);
-void	ft_exit(char *str);
-int		ft_env(char	**envsi, int fd);
-int		ft_unset(char *arg, struct s_info *info);
-char	**ft_cpy_env(char	**envs);
-int		ft_export(char *arg, struct s_info *info);
-void	ft_cd(char *path);
+void		ft_pwd();
+void		ft_echo(char *str, int fd);
+void		ft_exit(char *str);
+int			ft_env(char	**envsi, int fd);
+int			ft_unset(char *arg, struct s_info *info);
+char		**ft_cpy_env(char	**envs);
+int			ft_export(char *arg, struct s_info *info);
+void		ft_cd(char *path);
 
 // List_sentence
-void	ft_lstclear_sent(t_list_sent **lst);
-void	ft_lstadd_back_sent(t_list_sent **lst, t_list_sent *new_node);
+void		ft_lstclear_sent(t_list_sent **lst);
+void		ft_lstadd_back_sent(t_list_sent **lst, t_list_sent *new_node);
 t_list_sent	*ft_lstnew_sent(t_sentence content);
 
 //create_sentence.c
-void	open_redirect(t_cell *list_in, t_sentence *sent);
+t_list_sent	*create_sentence(t_cell *list_in, t_info *info);
+void		open_redirect(t_cell *list_in, t_sentence *sent, t_info *info);
 
 #endif

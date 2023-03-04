@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:46:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/28 20:22:48 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/04 10:17:08 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ void	exit_with_args(char *str, int id)
 	}
 	else
 	{
-		ft_putstr_fd("exit\n", 2);
-		ft_putstr_fd("exit: ", 2);
+		ft_putstr_fd("exit\nexit: ", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd(" numeric argument required\n", 2);
 		g_status = 255;
@@ -80,8 +79,7 @@ void	ft_exit(char *str)
 	}
 	else if (qtd_args > 1)
 	{
-		ft_putstr_fd("exit\n", 2);
-		ft_putstr_fd("exit: too many arguments\n", 2);
+		ft_putstr_fd("exit\nexit: too many arguments\n", 2);
 		g_status = 1;
 	}
 }

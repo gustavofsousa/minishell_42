@@ -6,14 +6,15 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 17:55:04 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/04 17:57:33 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 extern int	errno;
-void	do_heredoc(t_info *info)
+
+void	do_heredoc(t_cell *list_in, t_info *info)
 {
 	char	*cmd;
 	int		i;
@@ -38,11 +39,13 @@ void	do_heredoc(t_info *info)
 	while (42)
 	{
 		cmd = readline(">");
-		if (!ft_strncmp(cmd, list_in->next.content, ft_strlen(cmd)))
+		if (!ft_strncmp(cmd, list_in->next->content, ft_strlen(cmd)))
 			break;
 		ft_putendl_fd(cmd, fildes[1]);
 		free(cmd);
+		cmd = NULL;
 	}
+	free(cmd);
 	close (fildes[1]);
 }
 
@@ -80,7 +83,7 @@ void	create_new_fd(t_sentence *sent, t_cell *list_in, char redir, char redir2, t
 	else
 	{
 		if (redir2 == '<')
-			do_heredoc(info);
+			do_heredoc(list_in, info);
 		else
 			sent->input = open(list_in->next->content, O_RDONLY);
 	}

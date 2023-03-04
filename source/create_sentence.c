@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 17:19:44 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/04 18:00:33 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence, t_info *info)
 	n_round = 0;
 	sent_node.input = 0;
 	sent_node.output = 1;
+	sent_node.args = NULL;
 	while (list_in && list_in->token != piper)
 	{
 		if (list_in->token == redirect)

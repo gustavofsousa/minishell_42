@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 12:07:04 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/04 18:20:19 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	search_quotes(t_cell **init_cell, t_cell **list, int *fq, char *quote)
  * Tratativa de aspas.
  * Objetivo é juntar em uma única célula tudo que tiver entre aspas.
  */
-void	handle_quotes(t_cell **list_cells)
+int	handle_quotes(t_cell **list_cells)
 {
 	t_cell	*list_move;
 	t_cell	*init_cell;
@@ -124,5 +124,9 @@ void	handle_quotes(t_cell **list_cells)
 			list_move = list_move->next;
 	}
 	if (fq > 0)
+	{
 		printf("Error, aspas não fechou");
+		return (-1);
+	}
+	return (-1);
 }

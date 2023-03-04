@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/03 14:52:52 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/04 12:02:40 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	print_sentence(t_list_sent *sent)
 	{
 		printf("-----------sentence----------\n");
 		printf("Input:%d\t", sent->content.input);
-		printf("Command->%s\t", sent->content.command);
+		printf("Command->%u\t", sent->content.command);
 		printf("Arguments->%s\t", sent->content.args);
 		printf("Output:%d\n", sent->content.output);
 		sent = sent->next;

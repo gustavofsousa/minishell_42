@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 09:58:08 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/04 12:02:58 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,38 @@ int	count_sentence(t_sentence *sentence)
 }
 */
 
+int	do_the_execve(char	**args_mtx, char **envp)
+{
+	//ft_split(PATH, ':');
+	//path = acces();
+	// Criar um fork. O execve mata o processo.
+	//ret = execve(path, ft_split(sent->content.args), info->env_cpy);
+	//return (ret);
+	//free(args_mtx);
+	(void)args_mtx;
+	(void)envp;
+	return (1);
+}
+
+int	do_the_builtin(enum e_command command, char *args, int fd, t_info *info)
+{
+	if (command == pwd)
+		ft_pwd(fd);
+	else if (command == echo)
+		ft_echo(args, fd);
+	else if (command == exiter)
+		ft_exit(args);
+	else if (command == env)
+		ft_env(info->env_cpy, fd);
+	else if (command == unset)
+		ft_unset(args, info);
+	else if (command == cd)
+		ft_cd(args);
+	else if (command == exporter)
+		ft_export(args, info);
+	return (1);
+}
+
 void	golfer(t_list_sent *sent, t_info *info)
 {
 /*
@@ -50,22 +82,9 @@ void	golfer(t_list_sent *sent, t_info *info)
 		create_forks(sent, qtd_sent);
 */
 
-	//Escolher comando
-	if (!ft_strncmp(sent->content.command, "pwd", ft_strlen(sent->content.command)))
-		ft_pwd();
-	else if (!ft_strncmp(sent->content.command, "echo", ft_strlen(sent->content.command)))
-		ft_echo(sent->content.args, sent->content.output);
-	else if (!ft_strncmp(sent->content.command, "exit", ft_strlen(sent->content.command)))
-		ft_exit(sent->content.args);
-	else if (!ft_strncmp(sent->content.command, "env", ft_strlen(sent->content.command)))
-		ft_env(info->env_cpy);
-	else if (!ft_strncmp(sent->content.command, "unset", ft_strlen(sent->content.command)))
-		ft_unset(sent->content.args, info);
-	else if (!ft_strncmp(sent->content.command, "cd", ft_strlen(sent->content.command)))
-		ft_cd(sent->content.args);
-	else if (!ft_strncmp(sent->content.command, "export", ft_strlen(sent->content.command)))
-		ft_export(sent->content.args, info);
+	if (sent->content.command != no_builtin)
+		do_the_builtin(sent->content.command, sent->content.args,
+				sent->content.output, info);
 	else
-		//exeqv;
-		(void)sent;
+		do_the_execve(ft_split(sent->content.args, ' '), info->env_cpy);
 }

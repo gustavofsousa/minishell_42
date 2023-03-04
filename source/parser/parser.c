@@ -6,24 +6,40 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/24 18:31:16 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/02 19:27:29 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*check_if_double(char *str, int *i)
+/*
+ *	Verifico se tem duplo(metadado)
+ *	Verifico se tem flag space
+ *	Crio a nova célula.
+ */
+int	copy_to_cell(t_cell **list_cells, char *str)
 {
+	char	*new_word;
+	int		space;
+	int		i;
+
+	space = 0;
+	//Se é duplo.
 	if (*(str + 1) == *str && *(str + 1) != '|')
 	{
-		(*i) = 2;
-		return (ft_substr(str, 0, 2));
+		i = 2;
+		new_word = ft_substr(str, 0, 2);
 	}
 	else
 	{
-		(*i) = 1;
-		return (ft_substr(str, 0, 1));
+		i = 1;
+		new_word = ft_substr(str, 0, 1);
 	}
+	if (*(str + i) == '\0')
+		space = 1;
+	create_new_cell(list_cells, new_word, space);
+	free(new_word);
+	return (i);
 }
 
 /*
@@ -34,20 +50,16 @@ char	*check_if_double(char *str, int *i)
  */
 void	split_and_create(t_cell **list_cells, char *str)
 {
-	char	*new_word;
 	int		i;
+	char	*new_word;
 
-	new_word = NULL;
 	while (*str)
 	{
 		i = 0;
 		// Copiar o metadado, duplo ou normal
 		if (*str == '|' || *str == '>' || *str == '<')
 		{
-			new_word = check_if_double(str, &i);
-			create_new_cell(list_cells, new_word, 0);
-			free(new_word);
-			new_word = NULL;
+			i = copy_to_cell(list_cells, str);
 		}
 		// Copiar palavra normal
 		else
@@ -56,9 +68,11 @@ void	split_and_create(t_cell **list_cells, char *str)
 				&& str[i] != '<' && str[i] != '\0')
 				i++;
 			new_word = ft_substr(str, 0, i);
-			create_new_cell(list_cells, new_word, 0);
+			if (*(str + i) == '\0')
+				create_new_cell(list_cells, new_word, 1);
+			else
+				create_new_cell(list_cells, new_word, 0);
 			free(new_word);
-			new_word = NULL;
 		}
 		str += i;
 	}

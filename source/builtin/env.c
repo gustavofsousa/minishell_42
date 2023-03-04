@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 08:10:50 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/02 09:41:36 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/04 12:09:37 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**ft_cpy_env(char **envs)
 	return (cpy_envs);
 }
 
-int	ft_env(char **envs)
+int	ft_env(char **envs, int fd)
 {
 	int	i;
 
@@ -45,7 +45,7 @@ int	ft_env(char **envs)
 	}
 	while (envs[i])
 	{
-		printf("%s\n", envs[i]);
+		ft_putendl_fd(envs[i], fd);
 		i++;
 	}
 	return (1);

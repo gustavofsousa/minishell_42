@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/28 15:58:04 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/04 12:03:39 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,47 @@ int	count_sentences(t_cell *list)
 	return (len);
 }
 
+enum e_command	set_command(char *command)
+{
+	int	len;
+
+	len = ft_strlen(command);
+	if (!ft_strncmp(command, "pwd", len))
+		return (pwd);
+	else if (!ft_strncmp(command, "echo", len))
+		return (echo);
+	else if (!ft_strncmp(command, "exit", len))
+		return (exiter);
+	else if (!ft_strncmp(command, "env", len))
+		return (env);
+	else if (!ft_strncmp(command, "unset", len))
+		return (unset);
+	else if (!ft_strncmp(command, "cd", len))
+		return (cd);
+	else if (!ft_strncmp(command, "export", len))
+		return (exporter);
+	return (no_builtin);
+}
+
 t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence)
 {
 	int			n_round;
 	t_sentence	sent_node;
 
 	n_round = 0;
-	while (list_in && list_in->token == word)
+	sent_node.input = 0;
+	sent_node.output = 1;
+	while (list_in && list_in->token != piper)
 	{
-		if (n_round == 0)
-			sent_node.command = ft_strdup(list_in->content);
+		if (list_in->token == redirect)
+		{
+			open_redirect(list_in, &sent_node);
+			list_in = list_in->next;
+			if (list_in == NULL)
+				break ;
+		}
+		else if (n_round == 0)
+			sent_node.command = set_command(list_in->content);
 		else if (n_round == 1)
 			sent_node.args = ft_strdup(list_in->content);
 		else
@@ -46,7 +77,7 @@ t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence)
 		}
 		n_round++;
 		list_in = list_in->next;
-		if (!list_in)
+		if (list_in == NULL)
 			break ;
 	}
 	ft_lstadd_back_sent(list_sentence, ft_lstnew_sent(sent_node));
@@ -68,7 +99,6 @@ t_list_sent	*create_sentence(t_cell *list_in, t_info *info)
 	i = 0;
 	while (i < info->qtd_sent)
 	{
-		//extract_redirect();
 		list_in = new_sent(list_in, &sent);
 		if (list_in == NULL)
 			break ;

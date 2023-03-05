@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 18:22:10 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/05 18:30:53 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 
 void	reset(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 {
-	int	i;
+//	int	i;
 
 	free(info->prompt);
-	i = -1;
+//	i = -1;
 	/*
 	if (info->env_cpy)
 	{
@@ -104,8 +104,8 @@ int	main(int argc, char **argv, char **envp)
 		if (handle_quotes(&list_cells) == -1)
 			finish_program(&info, &list_cells, &sentence);
 		//print_all_list(list_cells);
-		//sentence = create_sentence(list_cells, &info);
-		print_sentence(sentence);
+		sentence = create_sentence(list_cells, &info);
+		//print_sentence(sentence);
 		golfer(sentence, &info);
 	}
 	reset(&info, &list_cells, &sentence);

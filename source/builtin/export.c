@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:54:12 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/02 12:29:01 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:22:39 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ static void	replace_env(struct s_info *info, char **args, int amount_args)
 {
 	char	**new_env;
 	int		i;
-	int		count;
 
-	count = 0;
 	i = 0;
 	new_env = created_new_env(info, amount_args);
 	if (!new_env)

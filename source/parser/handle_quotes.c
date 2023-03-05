@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 18:20:19 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/05 18:28:57 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,5 @@ int	handle_quotes(t_cell **list_cells)
 		printf("Error, aspas não fechou");
 		return (-1);
 	}
-	return (-1);
+	return (1);
 }

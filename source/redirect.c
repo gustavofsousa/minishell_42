@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 17:57:33 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/05 18:34:34 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ void	do_heredoc(t_cell *list_in, t_info *info)
 	int		i;
 	int		*new_fd;
 	int		fildes[2];
-	int		sucess;
+	int		success;
 
-	sucess = pipe(fildes);
+	success = pipe(fildes);
+	if (success == -1)
+		return ;
 	i = 1;
 	if (info->fd_heredoc)
 	{

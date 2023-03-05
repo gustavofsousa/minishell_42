@@ -6,7 +6,7 @@
 #    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/03/04 18:07:04 by gusousa          ###   ########.fr        #
+#    Updated: 2023/03/05 18:26:13 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,15 +73,15 @@ $(OBJDIR):
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo objects created 😉
+	@echo "objects created 😉 ->$(MAGENTA) $@$(WHITE)"
 
 $(NAME): $(OBJ)
 	@$(CC) $(OBJ) $(LIBLIB) $(LINK) -o $@
-	@echo Awesome! just execute it now 🤪
+	@echo "Awesome! just execute it now 🤪"
 
 $(LIBLIB):
 	@make -C $(LIBDIR) all
-	@echo libf compiled 🙃
+	@echo "libf compiled 🙃"
 
 clean:
 	@rm -rf $(OBJDIR)

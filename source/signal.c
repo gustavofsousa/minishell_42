@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:38:39 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/02/28 10:16:09 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/06 09:12:24 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	check_eof(t_info *info)
 		ft_putstr_fd("\x1b[1A", 1);
         ft_putstr_fd("\033[17C", 1);
 		write(1, "exit\n", 5);
+		//free
 		exit(0);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 18:39:33 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/06 10:43:41 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,16 @@ int	count_sentence(t_sentence *sentence)
 }
 */
 
-int	do_the_execve(char	**args_mtx, char **envp)
+int	do_the_execve(char	**args_mtx, char **envp, char *command)
 {
 	char **path;
 	char *str_path;
 	int i;
+	int ret;
+	int acces;
 
 	i = 0;
+	ret = -1;
 	str_path = NULL;
 	while (envp[i])
 	{
@@ -56,14 +59,18 @@ int	do_the_execve(char	**args_mtx, char **envp)
 		}
 		i++;
 	}
+	printf("%s\n", str_path);
 	path = ft_split(str_path, ':');
+	i = 0;
+	acces = access("/bin/ls", X_OK);
+	printf("%s\n", ft_strjoin(path[0], command));
+	if (fork() == 0)
+		ret = execv("/bin/ls", args_mtx);
 	//path = acces();
 	// Criar um fork. O execve mata o processo.
 	//ret = execve(path, ft_split(sent->content.args), info->env_cpy);
 	//return (ret);
 	//free(args_mtx);
-	(void)args_mtx;
-	(void)envp;
 	return (1);
 }
 
@@ -102,6 +109,6 @@ void	golfer(t_list_sent *sent, t_info *info)
 				sent->content.output, info);
 	else
 	{
-		do_the_execve(ft_split(sent->content.args, ' '), info->env_cpy);
+		do_the_execve(ft_split(sent->content.args, ' '), info->env_cpy, "/ls");
 	}
 }

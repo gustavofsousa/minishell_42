@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/05 18:43:38 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/06 13:22:55 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 	info->fd_heredoc = NULL;
 }
 
-void	reset(t_info *info, t_cell **list_cells, t_list_sent **sentence)
+void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence)
 {
 	int	i;
 
@@ -35,14 +35,27 @@ void	reset(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 		free(info->env_cpy);
 	}
 	list_clear_cells(list_cells);
-	ft_lstclear_sent(sentence);
+	ft_lstclear_sent(&sentence);
 	if (info->fd_heredoc)
+	{
+		i = -1;
+		while (info->fd_heredoc[++i] != -1)
+			close(info->fd_heredoc[i]);
 		free(info->fd_heredoc);
-	point_to_null(info, list_cells, sentence);
+	}
+	point_to_null(info, list_cells, &sentence);
 	//close fd's i opened.
+	while (sentence)
+	{
+		if (sentence->content.input != 0)
+			close(sentence->content.input);
+		if (sentence->content.output != 1)
+			close(sentence->content.output);
+		sentence = sentence->next;
+	}
 }
 
-void	finish_program(t_info *info, t_cell **list_cells, t_list_sent **sentence)
+void	finish_program(t_info *info, t_cell **list_cells, t_list_sent *sentence)
 {
 	reset(info, list_cells, sentence);
 	exit (0);
@@ -92,7 +105,7 @@ int	main(int argc, char **argv, char **envp)
 	info.env_cpy = ft_cpy_env(envp);
 	while (42)
 	{
-		reset(&info, &list_cells, &sentence);
+		reset(&info, &list_cells, sentence);
 		info.prompt = readline("🦞our_minishell> ");
 		add_history(info.prompt);
 		check_eof(&info);
@@ -100,13 +113,13 @@ int	main(int argc, char **argv, char **envp)
 		categorize_elements(&list_cells);
 		//expand_variable(&list_cells);
 		if (handle_quotes(&list_cells) == -1)
-			finish_program(&info, &list_cells, &sentence);
+			finish_program(&info, &list_cells, sentence);
 		//print_all_list(list_cells);
 		sentence = create_sentence(list_cells, &info);
 		//print_sentence(sentence);
 		golfer(sentence, &info);
 	}
-	reset(&info, &list_cells, &sentence);
+	reset(&info, &list_cells, sentence);
 	exit(0);
 	return (0);
 }

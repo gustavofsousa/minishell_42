@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/05 19:02:23 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/06 13:23:28 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	create_forks(t_list_sent **senti, int qtd_pipes)
 
 	sent = *senti;
 	n_sent = -1;
+	i = -1;
 	while (++i < qtd_pipes)
 	{
 		success = pipe(fildes);//Primeiro le, segundo escreve.

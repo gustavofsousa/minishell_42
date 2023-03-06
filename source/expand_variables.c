@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 17:58:13 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/06 16:24:52 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 /*
  * Apaga onde estava o nome da variável e coloca o valor dela.
  */
-
 
 int len_word(char *str)
 {
@@ -51,10 +50,8 @@ void	substitute(t_cell **list, t_info info, int index)
 	while (info.env_cpy[index][len_w] != '=')
 		len_w++;
 	len_content = ft_strlen((*list)->content) - (len_w + 1);
-	printf("%d\n", len_content);
 	len_new_content = ft_strlen(info.env_cpy[index]) - len_w;
 	len_new_content += len_content;
-	printf("len total %d\n", len_new_content);
 	str = malloc(len_new_content * sizeof(char));
 	while ((*list)->content[i] != '$')
 	{
@@ -69,7 +66,6 @@ void	substitute(t_cell **list, t_info info, int index)
 	free((*list)->content);
 	(*list)->content = NULL;
 	(*list)->content = str;
-	printf("list->content = %s\n", (*list)->content);
 }
 
 /*
@@ -98,13 +94,29 @@ int	look_for_variable(t_cell *list, t_info info)
 		len = ft_strlen(str_env+1);
 		if (!ft_strncmp(str_env+1, info.env_cpy[index], len))
 		{
-			printf("%s\n", info.env_cpy[index]+(len+1));
 			return (index);
 		}
 		index++;
 	}
 	free(str_env);
 	return (1);
+}
+
+int	check_quotes(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if(str[i] == 39 && str[i+1] == 34)
+		{
+			printf("%d\n %d\n", str[i], str[i+1]);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
 
 void	expand_variable(t_cell **list_cell, t_info info)
@@ -119,13 +131,18 @@ void	expand_variable(t_cell **list_cell, t_info info)
 	while (list_move != NULL)
 	{
 		//vai ter duas condições e a com aspas
-		printf("%s\n", list_move->content);
 		if (ft_strchr(list_move->content, '$'))
 		{
 			if (ft_strchr(list_move->content, 39))
 			{
-				if (!ft_strchr(list_move->content, 34))
-					return ;
+				if (ft_strnstr(list_move->content, "'\"", 2) || 
+						(ft_strchr(list_move->content, 39) && 
+						 !ft_strchr(list_move->content, 34)))
+				{
+					printf("%s\n", list_move->content);
+					puts("estou aqui");
+					break ;
+				}
 			}
 			index = look_for_variable(list_move, info);
 			if (index)

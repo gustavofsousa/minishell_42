@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/06 13:22:55 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/07 14:21:51 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 {
 	info->prompt = NULL;
-	info->env_cpy = NULL;
 	info->qtd_sent = 0;
 	*list_cells = NULL;	
 	*sentence = NULL;
@@ -27,13 +26,6 @@ void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence)
 	int	i;
 
 	free(info->prompt);
-	i = -1;
-	if (info->env_cpy)
-	{
-		while (info->env_cpy[++i])
-			free(info->env_cpy[i]);
-		free(info->env_cpy);
-	}
 	list_clear_cells(list_cells);
 	ft_lstclear_sent(&sentence);
 	if (info->fd_heredoc)
@@ -57,7 +49,17 @@ void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence)
 
 void	finish_program(t_info *info, t_cell **list_cells, t_list_sent *sentence)
 {
+	int	i;
+
 	reset(info, list_cells, sentence);
+	i = -1;
+	if (info->env_cpy)
+	{
+		while (info->env_cpy[++i])
+			free(info->env_cpy[i]);
+		free(info->env_cpy);
+	}
+	info->env_cpy = NULL;
 	exit (0);
 }
 
@@ -119,8 +121,7 @@ int	main(int argc, char **argv, char **envp)
 		//print_sentence(sentence);
 		golfer(sentence, &info);
 	}
-	reset(&info, &list_cells, sentence);
-	exit(0);
+	finish_program(&info, &list_cells, sentence);
 	return (0);
 }
 //Para env:

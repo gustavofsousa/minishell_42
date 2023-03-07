@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/06 16:24:52 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:15:26 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
  * Apaga onde estava o nome da variável e coloca o valor dela.
  */
 
-int len_word(char *str)
+int	len_word(char *str)
 {
-	int start;
+	int	start;
 	int	end;
 
 	start = 0;
@@ -33,17 +33,36 @@ int len_word(char *str)
 	return (end - start);
 }
 
+void	create_new_content(t_cell **list, t_info info, int index, int len_w)
+{	
+	int		aux;
+	int		i;
+	char	*str;
+
+	str = malloc(len_new_content * sizeof(char));
+	while ((*list)->content[i] != '$')
+	{
+		str[i] = (*list)->content[i];
+		i++;
+	}
+	aux = i + (len_w + 1);
+	//free na list->content
+	while (info.env_cpy[index][++len_w])
+		str[i++] = info.env_cpy[index][len_w];
+	while ((*list)->content[aux])
+		str[i++] = (*list)->content[aux++];
+	str[i] = '\0';
+	free((*list)->content);
+	(*list)->content = NULL;
+	(*list)->content = str;
+}
+
 void	substitute(t_cell **list, t_info info, int index)
 {
-	int len_content;
-	int len_w;
-	int len_new_content;
-	int	i;
-	int aux;
-	char *str;
+	int		len_content;
+	int		len_w;
+	int		len_new_content;
 
-	i = 0;
-	aux = 0;
 	len_content = 0;
 	len_w = 0;
 	len_new_content = 0;
@@ -52,33 +71,18 @@ void	substitute(t_cell **list, t_info info, int index)
 	len_content = ft_strlen((*list)->content) - (len_w + 1);
 	len_new_content = ft_strlen(info.env_cpy[index]) - len_w;
 	len_new_content += len_content;
-	str = malloc(len_new_content * sizeof(char));
-	while ((*list)->content[i] != '$')
-	{
-		str[i] = (*list)->content[i];
-		i++;
-	}
-	aux = i+(len_w+1);
-	while (info.env_cpy[index][++len_w])
-		str[i++] = info.env_cpy[index][len_w];
-	while ((*list)->content[aux])
-         str[i++] = (*list)->content[aux++];
-	free((*list)->content);
-	(*list)->content = NULL;
-	(*list)->content = str;
+	create_new_content(list, info, index, len_w);
 }
-
 /*
  * Compara se depois do $ a variável está com nome igual.
  */
-
 int	look_for_variable(t_cell *list, t_info info)
-{	
-	int	index;
-	char *str;
-	char *str_env;
-	int len;
-	int len_w;
+{
+	int		index;
+	char	*str;
+	char	*str_env;
+	int		len;
+	int		len_w;
 
 	len = 0;
 	len_w = 0;
@@ -91,41 +95,20 @@ int	look_for_variable(t_cell *list, t_info info)
 	index = 0;
 	while (info.env_cpy[index])
 	{
-		len = ft_strlen(str_env+1);
-		if (!ft_strncmp(str_env+1, info.env_cpy[index], len))
-		{
+		len = ft_strlen(str_env + 1);
+		if (!ft_strncmp(str_env + 1, info.env_cpy[index], len))
 			return (index);
-		}
 		index++;
 	}
 	free(str_env);
 	return (1);
 }
 
-int	check_quotes(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i])
-	{
-		if(str[i] == 39 && str[i+1] == 34)
-		{
-			printf("%d\n %d\n", str[i], str[i+1]);
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
 void	expand_variable(t_cell **list_cell, t_info info)
 {
 	t_cell	*list_move;
 	int		index;
-	int		is_quotes;
 
-	is_quotes = 0;
 	index = 0;
 	list_move = *list_cell;
 	while (list_move != NULL)
@@ -134,22 +117,16 @@ void	expand_variable(t_cell **list_cell, t_info info)
 		if (ft_strchr(list_move->content, '$'))
 		{
 			if (ft_strchr(list_move->content, 39))
-			{
-				if (ft_strnstr(list_move->content, "'\"", 2) || 
-						(ft_strchr(list_move->content, 39) && 
-						 !ft_strchr(list_move->content, 34)))
-				{
-					printf("%s\n", list_move->content);
-					puts("estou aqui");
+				if (ft_strnstr(list_move->content, "'\"", 3)
+					|| (ft_strchr(list_move->content, 39)
+						&& !ft_strchr(list_move->content, 34)))
 					break ;
-				}
-			}
 			index = look_for_variable(list_move, info);
 			if (index)
 			{
 				substitute(&list_move, info, index);
 			}
-		}	
+		}
 		list_move = list_move->next;
 	}
 }

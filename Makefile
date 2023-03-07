@@ -6,7 +6,7 @@
 #    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/03/07 19:05:45 by gusousa          ###   ########.fr        #
+#    Updated: 2023/03/07 19:22:35 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ MAIN		:=	main.c	signal.c	golfer.c	expand_variables.c	ft_strjoin_free.c \
 				create_sentence.c	list_sentence.c	redirect.c
 PARSER		:=	parser.c list_cells.c token.c	handle_quotes.c
 BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c
-EXTERN		:= 	do_the_exec.c path.c
+EXTERN		:= 	path.c
 
 SRC		:=	$(MAIN)				\
 			$(addprefix parser/, $(PARSER))			\

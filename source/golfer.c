@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/07 19:04:41 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/07 19:21:34 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	golfer(t_list_sent *sent, t_info *info)
 
 	// Multipiping
 	qtd_pipe = count_sentence(sent) - 1;
+	info->qtd_sent = qtd_pipe + 1;
 	if (qtd_pipe > 0)
 		create_forks(&sent, qtd_pipe);
 

@@ -6,9 +6,11 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:51:14 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/07 18:36:29 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/07 19:32:52 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../include/minishell.h"
 
 char	*get_command(int way)
 {
@@ -40,7 +42,7 @@ char **get_path(char **envp)
 	{
 		if (!ft_strncmp("PATH", *envp, 4))
 		{
-			path = ft_strdup(&(envp + 5));
+			path = ft_strdup(*(envp + 5));
 			break ;
 		}
 		envp++;
@@ -57,7 +59,6 @@ char *get_right_path(char **mtx_path, char *command)
 	char *path_command;
 
 	path_command = NULL;
-	acess_return = -1;
 	i = 0;
 	while (mtx_path[i] == NULL)
 	{
@@ -71,4 +72,49 @@ char *get_right_path(char **mtx_path, char *command)
 		i++;
 	}
 	return (path_command);
+}
+
+int	do_the_execve(t_info *info, t_list_sent *sent, char *args_out, int n_com)
+{
+	char	*command;
+	char	**mtx_path;
+	char	*right_path;
+	char	*my_args;
+	char	**right_args;
+	int		success;
+	int		nbr_child;
+
+	nbr_child = 2;
+	success = -1;
+	command = get_command(n_com);
+	mtx_path = get_path(info->env_cpy);
+	right_path = get_right_path(mtx_path, command);
+	my_args = ft_strjoin(command, " ");
+	my_args = ft_strjoin_free(my_args, args_out);
+	right_args = ft_split(my_args, ' ');
+
+	if (info->qtd_sent > 0)
+	{
+		dup2(sent->content.input, 0);
+		dup2(sent->content.output, 1);
+	}
+	else
+		nbr_child = fork();
+	if (nbr_child == 0)
+	{
+		//close_fdes();
+		success = execve(right_path, right_args, info->env_cpy);
+	}
+	/*
+	free(command);
+	while (mtx_path)
+		free((*mtx_path)++);
+	free(mtx_path);
+	free(right_path);
+	free(my_args);
+	while (right_args)
+		free((*right_args)++);
+	free(right_args);
+	*/
+	return (success);
 }

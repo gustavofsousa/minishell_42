@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 08:10:50 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/04 12:09:37 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/05 18:41:59 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_env(char **envs, int fd)
 	i = 0;
 	if (!envs)
 	{
-		printf("env:");
+		ft_putstr_fd("env:", fd);
 		return (0);
 	}
 	while (envs[i])

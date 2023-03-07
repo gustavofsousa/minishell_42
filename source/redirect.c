@@ -6,16 +6,49 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 09:56:29 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/05 18:34:34 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 extern int	errno;
-void	do_heredoc(t_sentence *sent)
+
+void	do_heredoc(t_cell *list_in, t_info *info)
 {
-	(void)sent;
+	char	*cmd;
+	int		i;
+	int		*new_fd;
+	int		fildes[2];
+	int		success;
+
+	success = pipe(fildes);
+	if (success == -1)
+		return ;
+	i = 1;
+	if (info->fd_heredoc)
+	{
+		while (info->fd_heredoc[i] != -10)
+			i++;
+	}
+	new_fd = malloc (sizeof(int) * i);
+	new_fd[i--] = -10;
+	new_fd[i] = fildes[0];
+	while (i--)
+		new_fd[i] = info->fd_heredoc[i];
+	free(info->fd_heredoc);
+	info->fd_heredoc = new_fd;
+	while (42)
+	{
+		cmd = readline(">");
+		if (!ft_strncmp(cmd, list_in->next->content, ft_strlen(cmd)))
+			break;
+		ft_putendl_fd(cmd, fildes[1]);
+		free(cmd);
+		cmd = NULL;
+	}
+	free(cmd);
+	close (fildes[1]);
 }
 
 void	deal_error(t_sentence *sent, char redir)
@@ -28,9 +61,17 @@ void	deal_error(t_sentence *sent, char redir)
 			//finish_program();
 		}
 	}
+	else if (redir == '<')
+	{
+		if (sent->input == -1)
+		{
+			perror("Error in redirect");
+			//finish_program();
+		}
+	}
 }
 
-void	create_new_fd(t_sentence *sent, t_cell *list_in, char redir, char redir2)
+void	create_new_fd(t_sentence *sent, t_cell *list_in, char redir, char redir2, t_info *info)
 {
 	if (redir == '>')
 	{
@@ -44,8 +85,8 @@ void	create_new_fd(t_sentence *sent, t_cell *list_in, char redir, char redir2)
 	else
 	{
 		if (redir2 == '<')
-			do_heredoc(sent);
-		else//?
+			do_heredoc(list_in, info);
+		else
 			sent->input = open(list_in->next->content, O_RDONLY);
 	}
 }
@@ -71,7 +112,7 @@ void	close_old_fd(t_sentence *sent, char redir)
  * E tratar error se o open falhar (retorno -1, e o errno diz qual foi)
  * Coloco o fd como output(> ou >>) ou input(<) daquela sentença.
  */
-void	open_redirect(t_cell *list_in, t_sentence *sent)
+void	open_redirect(t_cell *list_in, t_sentence *sent, t_info *info)
 {
 	char	redir;
 	char	redir2;
@@ -81,7 +122,7 @@ void	open_redirect(t_cell *list_in, t_sentence *sent)
 	if (list_in->next && list_in->next->token == word)
 	{
 		close_old_fd(sent, redir);
-		create_new_fd(sent, list_in,  redir, redir2);
+		create_new_fd(sent, list_in,  redir, redir2, info);
 		deal_error(sent, redir);
 	}
 	else

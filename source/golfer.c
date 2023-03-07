@@ -6,38 +6,11 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/06 10:43:41 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/07 14:10:06 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/*
-void	create_forks(t_sentence *sent, int qtd_sent)
-{
-	int	nbr_child;
-
-	nbr_child = 0;
-	while (qtd_sent--)
-	{
-		//pipe();
-		nbr_child = fork();
-	}
-}
-
-int	count_sentence(t_sentence *sentence)
-{
-	int	len;
-
-	len = 0;
-	while (sentence)
-	{
-		len++;
-		sentence = sentence->next;
-	}
-	return (len);
-}
-*/
 
 int	do_the_execve(char	**args_mtx, char **envp, char *command)
 {
@@ -93,16 +66,59 @@ int	do_the_builtin(enum e_command command, char *args, int fd, t_info *info)
 	return (1);
 }
 
+int	create_forks(t_list_sent **senti, int qtd_pipes)
+{
+	int			i;
+	int			n_sent;
+	int			nbr_child;
+	int			fildes[2];
+	int			success;
+	t_list_sent	*sent;
+
+	sent = *senti;
+	n_sent = -1;
+	i = -1;
+	while (++i < qtd_pipes)
+	{
+		success = pipe(fildes);//Primeiro le, segundo escreve.
+		if (success == 0)
+		{
+				sent->content.output = fildes[1];
+				sent = sent->next;
+				if (sent == NULL)
+					break;
+				sent->content.input = fildes[0];
+		}
+	}
+	nbr_child = 0;
+	while (n_sent--)
+	{
+		nbr_child = fork();
+	}
+	return (nbr_child);
+}
+
+int	count_sentence(t_list_sent *sentence)
+{
+	int	len;
+
+	len = 0;
+	while (sentence)
+	{
+		len++;
+		sentence = sentence->next;
+	}
+	return (len);
+}
+
 void	golfer(t_list_sent *sent, t_info *info)
 {
-/*
-	int	qtd_sent;
+	int	qtd_pipe;
 
 	// Multipiping
-	qtd_sent = count_sentence(sent);
-	if (qtd_sent > 1)
-		create_forks(sent, qtd_sent);
-*/
+	qtd_pipe = count_sentence(sent) - 1;
+	if (qtd_pipe > 0)
+		create_forks(&sent, qtd_pipe);
 
 	if (sent->content.command != no_builtin)
 		do_the_builtin(sent->content.command, sent->content.args,

@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:07:03 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/02 10:03:01 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/05 18:22:03 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,10 @@ static void	cpy_variable(struct s_info *info, char **args, char **new_env)
 
 int	ft_unset(char *arg, struct s_info *info)
 {
-	int			i;
 	char		**args;
 	int			len_envs;
 	char		**new_env;
-	int			count;
 
-	count = 0;
-	i = 0;
 	len_envs = 0;
 	if (!arg)
 		return (0);

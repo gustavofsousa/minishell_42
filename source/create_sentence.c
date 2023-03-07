@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 12:03:39 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/04 18:00:33 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ enum e_command	set_command(char *command)
 	return (no_builtin);
 }
 
-t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence)
+t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence, t_info *info)
 {
 	int			n_round;
 	t_sentence	sent_node;
@@ -56,11 +56,12 @@ t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence)
 	n_round = 0;
 	sent_node.input = 0;
 	sent_node.output = 1;
+	sent_node.args = NULL;
 	while (list_in && list_in->token != piper)
 	{
 		if (list_in->token == redirect)
 		{
-			open_redirect(list_in, &sent_node);
+			open_redirect(list_in, &sent_node, info);
 			list_in = list_in->next;
 			if (list_in == NULL)
 				break ;
@@ -99,7 +100,7 @@ t_list_sent	*create_sentence(t_cell *list_in, t_info *info)
 	i = 0;
 	while (i < info->qtd_sent)
 	{
-		list_in = new_sent(list_in, &sent);
+		list_in = new_sent(list_in, &sent, info);
 		if (list_in == NULL)
 			break ;
 		i++;

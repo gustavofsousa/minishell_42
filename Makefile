@@ -6,7 +6,7 @@
 #    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/02/27 16:17:24 by gusousa          ###   ########.fr        #
+#    Updated: 2023/03/08 14:39:10 by parnaldo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,8 @@ LIBDIR	:=	libft/
 
 ####	Sources & objects	####
 
-MAIN		:=	main.c	signal.c	golfer.c	expand_variables.c	ft_strjoin_free.c \
-				create_sentence.c	list_sentence.c
+MAIN		:=	main.c	signal.c	golfer.c	expand_variables.c expand_variables_utils.c \
+				ft_strjoin_free.c create_sentence.c	list_sentence.c
 PARSER		:=	parser.c list_cells.c token.c	handle_quotes.c
 BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c
 

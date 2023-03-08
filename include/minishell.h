@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/28 16:01:20 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/08 14:42:34 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,9 @@ void	ft_cd(char *path);
 void	ft_lstclear_sent(t_list_sent **lst);
 void	ft_lstadd_back_sent(t_list_sent **lst, t_list_sent *new_node);
 t_list_sent	*ft_lstnew_sent(t_sentence content);
+
+// Expand Variable
+int		calc_len_content(t_cell **list, t_info info, int index);
+int		len_word(char *str);
 
 #endif

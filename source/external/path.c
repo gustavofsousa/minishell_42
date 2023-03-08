@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:51:14 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/08 15:26:04 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/08 16:08:56 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,23 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 	success = -1;
 	mtx_path = get_path(info->env_cpy);
 	command = get_command(sent->content.args);
-
 	right_path = get_right_path(mtx_path, command);
-	printf("Right path->\t%s\n", right_path);
 	right_args = ft_split(my_args, ' ');
 
-	if (info->qtd_sent > 0)
+	if (info->qtd_sent > 1)
 	{
 		dup2(sent->content.input, 0);
 		dup2(sent->content.output, 1);
 	}
 	else
 		nbr_child = fork();
+	printf("Nbr child->\t%d\n", nbr_child);
 	if (nbr_child == 0)
 	{
 		//close_fdes();
 		success = execve(right_path, right_args, info->env_cpy);
 	}
+	//O pai fica esperando com um waitpid, ate executar o comando. Precisa saber o PID do ultimo processo filho.
 	/*
 	free(command);
 	while (mtx_path)

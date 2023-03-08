@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/07 19:21:34 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/08 13:18:06 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,6 @@ void	golfer(t_list_sent *sent, t_info *info)
 				sent->content.output, info);
 	else
 	{
-		do_the_execve(info, sent, sent->content.args, sent->content.command);
+		do_the_execve(info, sent);
 	}
 }

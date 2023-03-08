@@ -6,29 +6,20 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:51:14 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/07 19:32:52 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/08 15:26:04 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-char	*get_command(int way)
+char	*get_command(char *str)
 {
-	if (way == 0)
-		return (ft_strdup("pwd"));
-	else if (way == 1)
-		return (ft_strdup("echo"));
-	else if (way == 2)
-		return (ft_strdup("exit"));
-	else if (way == 3)
-		return (ft_strdup("env"));
-	else if (way == 4)
-		return (ft_strdup("unset"));
-	else if (way == 5)
-		return (ft_strdup("export"));
-	else if (way == 6)
-		return (ft_strdup("cd"));
-	return (NULL);
+	int	i;
+
+	i = 0;
+	while (str[i] != ' ' && str[i] != '\0')
+		i++;
+	return (ft_substr(str, 0, i));
 }
 
 char **get_path(char **envp)
@@ -38,11 +29,11 @@ char **get_path(char **envp)
 	
 	path = NULL;
 	path_mtx = NULL;
-	while (envp)
+	while (*envp)
 	{
 		if (!ft_strncmp("PATH", *envp, 4))
 		{
-			path = ft_strdup(*(envp + 5));
+			path = ft_strdup((*envp + 5));
 			break ;
 		}
 		envp++;
@@ -60,7 +51,7 @@ char *get_right_path(char **mtx_path, char *command)
 
 	path_command = NULL;
 	i = 0;
-	while (mtx_path[i] == NULL)
+	while (mtx_path[i] != NULL)
 	{
 		path_command = ft_strjoin(mtx_path[i], "/");
 		path_command = ft_strjoin_free(path_command, command);
@@ -74,7 +65,7 @@ char *get_right_path(char **mtx_path, char *command)
 	return (path_command);
 }
 
-int	do_the_execve(t_info *info, t_list_sent *sent, char *args_out, int n_com)
+int	do_the_execve(t_info *info, t_list_sent *sent)
 {
 	char	*command;
 	char	**mtx_path;
@@ -86,11 +77,11 @@ int	do_the_execve(t_info *info, t_list_sent *sent, char *args_out, int n_com)
 
 	nbr_child = 2;
 	success = -1;
-	command = get_command(n_com);
 	mtx_path = get_path(info->env_cpy);
+	command = get_command(sent->content.args);
+
 	right_path = get_right_path(mtx_path, command);
-	my_args = ft_strjoin(command, " ");
-	my_args = ft_strjoin_free(my_args, args_out);
+	printf("Right path->\t%s\n", right_path);
 	right_args = ft_split(my_args, ' ');
 
 	if (info->qtd_sent > 0)

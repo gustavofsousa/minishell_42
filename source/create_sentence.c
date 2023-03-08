@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 18:00:33 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/08 14:48:34 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence, t_info *info)
 			sent_node.args = ft_strjoin_free(sent_node.args, list_in->content);
 		}
 		n_round++;
+		if (n_round == 1 && sent_node.command == no_builtin)
+		{
+			sent_node.args = ft_strdup(list_in->content);
+			n_round++;
+		}
 		list_in = list_in->next;
 		if (list_in == NULL)
 			break ;

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:09:14 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/24 20:54:50 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 14:10:43 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,12 @@ void	create_new_cell(t_cell **list_cells, char *str, int spce)
 	if (spce == 0)
 		nc->space = 0;
 	list_add_back(list_cells, nc);
+}
+
+void	delete_cell(t_cell **init_cell, t_cell **list)
+{
+	(*init_cell)->next = (*list)->next;
+	free((*list)->content);
+	free(*list);
+	*list = NULL;
 }

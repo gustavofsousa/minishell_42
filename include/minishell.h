@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 10:55:17 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:11:32 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_list_sent
 void	divide_prompt(t_info *info, t_cell **list_cells);
 void	categorize_elements(t_cell **list);
 int		handle_quotes(t_cell **list_cells);
+void	delete_cell(t_cell **init_cell, t_cell **list);
 
 void	list_clear_cells(t_cell **list);
 void	create_new_cell(t_cell **list_cells, char *str, int spce);

@@ -6,7 +6,7 @@
 #    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/03/09 11:01:18 by parnaldo         ###   ########.fr        #
+#    Updated: 2023/03/09 14:27:28 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,24 +28,25 @@ LIBDIR	:=	libft/
 
 ####	Sources & objects	####
 
-MAIN		:=	main.c	signal.c	golfer.c	redirect.c	ft_strjoin_free.c \
-				create_sentence.c	list_sentence.c	expand_variables.c expand_variables_utils.c 
-
-PARSER		:=	parser.c list_cells.c token.c	handle_quotes.c
+MAIN		:=	main.c	signal.c	golfer.c	utils_join.c
+PARSER		:=	parser.c list_cells.c token.c	handle_quotes.c	\
+				expand_variables.c	expand_variables_utils.c	
 BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c
 EXTERN		:= 	path.c
+SENTENCE	:=	create_sentence.c	redirect.c	list_sentence.c
 
 SRC		:=	$(MAIN)				\
 			$(addprefix parser/, $(PARSER))			\
 			$(addprefix builtin/, $(BUILTIN))		\
-			$(addprefix external/, $(EXTERN))	
+			$(addprefix external/, $(EXTERN))		\
+			$(addprefix sentence/, $(SENTENCE))
 
 OBJ		:=	$(addprefix $(OBJDIR), $(SRC:.c=.o))
 
 ####	Libft		####
 LIBLIB		:=	$(LIBDIR)/libft.a
 
-LISTDIR 	:=	builtin parser external
+LISTDIR 	:=	builtin parser external	sentence
 
 #$(shell echo '$@ <- Nome da regra.')
 #$(shell echo '$< <- Nome da primeira dependência.')

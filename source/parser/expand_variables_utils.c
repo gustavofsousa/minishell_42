@@ -6,11 +6,11 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 11:23:25 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/08 14:42:56 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:24:18 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	len_word(char *str)
 {

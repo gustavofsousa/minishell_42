@@ -6,20 +6,29 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/05 18:28:57 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 14:10:49 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	delete_cell(t_cell **init_cell, t_cell **list)
+char	*ft_strdup_char(char c)
 {
-	(*init_cell)->next = (*list)->next;
-	free((*list)->content);
-	free(*list);
-	*list = NULL;
+	char	*str;
+
+	str = malloc(2);
+	str[0] = c;
+	str[1] = '\0';
+	return (str);
 }
 
+/*
+ * O primeiro if é quando reecontro a 1ˆa aspas.
+ * O segundo if é quandoo encontro a 2^a aspas, fechando as aspas.
+ * O terceiro if é quando acho outro início de aspas.
+ * O quarto if é quando começa o célula com nova aspas.
+ * O else é quando encontro palavra, copio a letra.
+ */
 void	join_cells(t_cell **init_cell, char *content, int *fq, char *quote)
 {
 	int	i;
@@ -27,28 +36,20 @@ void	join_cells(t_cell **init_cell, char *content, int *fq, char *quote)
 	i = 0;
 	while (content[i])
 	{
-		// Achando 1ª aspas.
 		if (*fq == 1 && content[i] == *quote)
 			*fq = 2;
-		// Fechando as aspas.
 		else if (*fq == 2 && content[i] == *quote)
 			*fq = 0;
-		// Achando outro início de aspas.
 		else if (*fq == 0 && (content[i] == '"' || content[i] == '\''))
 		{
-				*fq = 1;//Com novas aspas.
+				*fq = 1;
 				*quote = content[i];
 		}
 		else if ((*init_cell)->content == NULL)
-		{
-				(*init_cell)->content = malloc(2);
-				(*init_cell)->content[0] = content[i];
-				(*init_cell)->content[1] = '\0';
-		}
-		// Copiando.
+			(*init_cell)->content = ft_strdup_char(content[i]);
 		else
 			(*init_cell)->content = ft_strjoin_char((*init_cell)->content,
-				content[i]);
+					content[i]);
 		i++;
 	}
 	free(content);
@@ -68,14 +69,15 @@ char	which_quotes(char *str)
 }
 
 /*
- * Quando achar uma aspas, copia os conteúdos dos próximos nós
- * até encontrar a última aspas.
+ * Acho a primeira aspas e defino a célula inicial.
+ * Copio a primeira célula tirando a aspas.
+ * Junto as outras células nessa célula definida inicial.
+ * até que a fq(flag quote) seja desligada.
  */
 void	search_quotes(t_cell **init_cell, t_cell **list, int *fq, char *quote)
 {
 	char	*first_word;
 
-	// Defino o início da minha célula, 1ª aspas.
 	if (*fq == 0
 		&& (ft_strchr((*list)->content, '"')
 			|| ft_strchr((*list)->content, '\'')))
@@ -90,7 +92,6 @@ void	search_quotes(t_cell **init_cell, t_cell **list, int *fq, char *quote)
 		if ((*list)->space == 1)
 			(*init_cell)->content = ft_strjoin_char((*init_cell)->content, ' ');
 	}
-	// Copiando as palavras quando acha as aspas, inicio meio e fim.
 	else if (*fq > 0)
 	{
 		join_cells(init_cell, ft_strdup((*list)->content), fq, quote);
@@ -124,6 +125,7 @@ int	handle_quotes(t_cell **list_cells)
 			list_move = list_move->next;
 	}
 	if (fq > 0)
+	//Tratamento de erro é aqui.
 	{
 		printf("Error, aspas não fechou");
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 14:49:08 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 15:11:28 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 	int		nbr_child;
 
 	nbr_child = 2;
-	success = -1;
+	success = 0;
 	right_path = prepare_path(info, sent);
 	right_args = ft_split(sent->content.args, ' ');
 
@@ -46,7 +46,7 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 	return (success);
 }
 
-int	create_forks(t_list_sent **senti, int qtd_pipes)
+void	create_forks(t_list_sent **senti, t_info *info)
 {
 	int			i;
 	int			n_sent;
@@ -57,8 +57,8 @@ int	create_forks(t_list_sent **senti, int qtd_pipes)
 
 	sent = *senti;
 	n_sent = -1;
-	i = -1;
-	while (++i < qtd_pipes)
+	i = 0;
+	while (++i < info->qtd_sent)
 	{
 		success = pipe(fildes);//Primeiro le, segundo escreve.
 		if (success == 0)
@@ -78,7 +78,6 @@ int	create_forks(t_list_sent **senti, int qtd_pipes)
 			break;
 		sent = sent->next;
 	}
-	return (nbr_child);
 }
 
 int	count_sentence(t_list_sent *sentence)
@@ -96,19 +95,20 @@ int	count_sentence(t_list_sent *sentence)
 
 void	golfer(t_list_sent *sent, t_info *info)
 {
-	int	qtd_pipe;
 	int return_execv;
 
-	// Multipiping
-	return_execv = -1;
-	qtd_pipe = count_sentence(sent) - 1;
-	info->qtd_sent = qtd_pipe + 1;
-	if (qtd_pipe > 0)
-		create_forks(&sent, qtd_pipe);
-
+	return_execv = 0;
+	info->qtd_sent = count_sentence(sent);
+	if (info->qtd_sent > 1)
+		create_forks(&sent, info);
 	if (sent->content.command != no_builtin)
 		do_the_builtin(sent->content.command, sent->content.args,
 				sent->content.output, info);
 	else
 		return_execv = do_the_execve(info, sent);
+	if (return_execv == -1)
+	{
+		perror("Error in execve");
+		// Limpsr as paradas.
+	}
 }

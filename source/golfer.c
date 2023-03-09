@@ -6,29 +6,44 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 11:01:41 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:49:08 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	do_the_builtin(enum e_command command, char *args, int fd, t_info *info)
+int	do_the_execve(t_info *info, t_list_sent *sent)
 {
-	if (command == pwd)
-		ft_pwd(fd);
-	else if (command == echo)
-		ft_echo(args, fd);
-	else if (command == exiter)
-		ft_exit(args);
-	else if (command == env)
-		ft_env(info->env_cpy, fd);
-	else if (command == unset)
-		ft_unset(args, info);
-	else if (command == cd)
-		ft_cd(args);
-	else if (command == exporter)
-		ft_export(args, info);
-	return (1);
+	char	*right_path;
+	char	**right_args;
+	int		success;
+	int		nbr_child;
+
+	nbr_child = 2;
+	success = -1;
+	right_path = prepare_path(info, sent);
+	right_args = ft_split(sent->content.args, ' ');
+
+	if (info->qtd_sent > 1)
+	{
+		dup2(sent->content.input, 0);
+		dup2(sent->content.output, 1);
+	}
+	else
+		nbr_child = fork();
+	if (nbr_child == 0)
+	{
+		//close_fdes();
+		success = execve(right_path, right_args, info->env_cpy);
+	}
+	//O pai fica esperando com um waitpid, ate executar o comando. Precisa saber o PID do ultimo processo filho.
+	/*
+	free(right_path);
+	while (right_args)
+		free((*right_args)++);
+	free(right_args);
+	*/
+	return (success);
 }
 
 int	create_forks(t_list_sent **senti, int qtd_pipes)

@@ -6,7 +6,7 @@
 #    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/03/09 14:27:28 by gusousa          ###   ########.fr        #
+#    Updated: 2023/03/09 14:50:09 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ LIBDIR	:=	libft/
 MAIN		:=	main.c	signal.c	golfer.c	utils_join.c
 PARSER		:=	parser.c list_cells.c token.c	handle_quotes.c	\
 				expand_variables.c	expand_variables_utils.c	
-BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c
+BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c	\
+				do_the_builtin.c
 EXTERN		:= 	path.c
 SENTENCE	:=	create_sentence.c	redirect.c	list_sentence.c
 

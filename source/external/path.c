@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:51:14 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/09 10:47:45 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/09 14:49:12 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,47 +65,18 @@ char *get_right_path(char **mtx_path, char *command)
 	return (path_command);
 }
 
-int	do_the_execve(t_info *info, t_list_sent *sent)
+char	*prepare_path(t_info *info, t_list_sent *sent)
 {
-	char	*command;
 	char	**mtx_path;
-	char	*right_path;
-	char	*my_args;
-	char	**right_args;
-	int		success;
-	int		nbr_child;
+	char	*command;
 
-	nbr_child = 2;
-	success = -1;
 	mtx_path = get_path(info->env_cpy);
 	command = get_command(sent->content.args);
-	right_path = get_right_path(mtx_path, command);
-	right_args = ft_split(my_args, ' ');
-
-	if (info->qtd_sent > 1)
-	{
-		dup2(sent->content.input, 0);
-		dup2(sent->content.output, 1);
-	}
-	else
-		nbr_child = fork();
-	//printf("Nbr child->\t%d\n", nbr_child);
-	if (nbr_child == 0)
-	{
-		//close_fdes();
-		success = execve(right_path, right_args, info->env_cpy);
-	}
-	//O pai fica esperando com um waitpid, ate executar o comando. Precisa saber o PID do ultimo processo filho.
 	/*
 	free(command);
 	while (mtx_path)
 		free((*mtx_path)++);
 	free(mtx_path);
-	free(right_path);
-	free(my_args);
-	while (right_args)
-		free((*right_args)++);
-	free(right_args);
 	*/
-	return (success);
+	return (get_right_path(mtx_path, command));
 }

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 17:25:43 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 18:58:38 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 	char	**right_args;
 	int		success;
 	int		nbr_pid;
+	int		pre_status;
 
 	nbr_pid = 0;
 	success = 0;
@@ -47,6 +48,7 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 
 	if (info->qtd_sent == 1)
 		nbr_pid = fork();
+	pre_status = 0;
 	if (nbr_pid == 0)
 	{
 		dup2(sent->content.input, 0);
@@ -97,15 +99,15 @@ void	create_forks(t_list_sent **senti, t_info *info)
 {
 	int			n_sent;
 	int			nbr_pid;
+	int			pre_status;
 
+	pre_status = 0;
 	open_pipes(senti, info);
 	n_sent = -1;
 	nbr_pid = 0;
 	while (++n_sent < info->qtd_sent)
 	{
 		nbr_pid = fork();
-		//if (sent->next == NULL)
-		//	info->last_pid = getpid(nbr_pid);
 		if (nbr_pid == 0)
 			break;
 		else if (nbr_pid > 0)
@@ -113,7 +115,11 @@ void	create_forks(t_list_sent **senti, t_info *info)
 		else
 		{
 			perror("error in fork");
-			//setar global.
+			waitpid(info->last_pid, &pre_status, WNOHANG);
+			if (WIFEXITED(pre_status))
+				g_status = WEXITSTATUS(pre_status);
+			if (WIFSIGNALED(pre_status))
+				g_status = 128 + WTERMSIG(pre_status);
 		}
 		*senti = (*senti)->next;
 	}
@@ -135,7 +141,9 @@ int	count_sentence(t_list_sent *sentence)
 void	golfer(t_list_sent *sent, t_info *info)
 {
 	int return_execv;
+	int	pre_status;
 
+	pre_status = 0;
 	return_execv = 0;
 	info->qtd_sent = count_sentence(sent);
 	if (info->qtd_sent > 1)
@@ -156,7 +164,10 @@ void	golfer(t_list_sent *sent, t_info *info)
 	}
 	else
 	{
-		//waitpid(info->last_pid);
-		// settar a global do pai
+		waitpid(info->last_pid, &pre_status, WNOHANG);
+		if (WIFEXITED(pre_status))
+			g_status = WEXITSTATUS(pre_status);
+		if (WIFSIGNALED(pre_status))
+			g_status = 128 + WTERMSIG(pre_status);
 	}
 }

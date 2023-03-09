@@ -6,13 +6,11 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:46:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 10:17:08 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 18:58:10 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-int	g_status = 0;
 
 int	is_numeric(char *str)
 {

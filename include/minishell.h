@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 17:05:08 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 19:00:07 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 # include <unistd.h>//getcwd(); fork().
 # include <stdlib.h>//exit. free.
 # include <fcntl.h>//open().
+# include <sys/types.h>//waitpid.
+# include <sys/wait.h>//waitpid.
+
+int	g_status;
 
 enum e_token
 {

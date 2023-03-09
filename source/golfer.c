@@ -6,33 +6,61 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 16:01:25 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 17:25:43 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+void	close_fdes(t_info *info)
+{
+	t_list_sent *sentence;
+
+	sentence = info->head;
+	while (sentence)
+	{
+		if (sentence->content.input != 0)
+		{
+			close(sentence->content.input);
+			sentence->content.input = 0;
+		}
+		if (sentence->content.output != 1)
+		{
+			close(sentence->content.output);
+			sentence->content.output = 1;
+		}
+		sentence = sentence->next;
+	}
+}
 
 int	do_the_execve(t_info *info, t_list_sent *sent)
 {
 	char	*right_path;
 	char	**right_args;
 	int		success;
-	int		nbr_child;
+	int		nbr_pid;
 
-	nbr_child = 2;
+	nbr_pid = 0;
 	success = 0;
 	right_path = prepare_path(info, sent);
 	right_args = ft_split(sent->content.args, ' ');
 
 	if (info->qtd_sent == 1)
-		nbr_child = fork();
-	if (nbr_child == 0)
+		nbr_pid = fork();
+	if (nbr_pid == 0)
 	{
 		dup2(sent->content.input, 0);
 		dup2(sent->content.output, 1);
-		//close_fdes(info);
+		close_fdes(info);
 		success = execve(right_path, right_args, info->env_cpy);
 	}
+	else if (nbr_pid > 0)
+	{
+		//waitpid(info->last_pid);
+		// settar a global do pai
+	}
+	else
+		perror("error in fork");
 	/*
 	free(right_path);
 	while (right_args)
@@ -68,18 +96,25 @@ static void	open_pipes(t_list_sent **senti, t_info *info)
 void	create_forks(t_list_sent **senti, t_info *info)
 {
 	int			n_sent;
-	int			nbr_child;
+	int			nbr_pid;
 
 	open_pipes(senti, info);
 	n_sent = -1;
-	nbr_child = 0;
+	nbr_pid = 0;
 	while (++n_sent < info->qtd_sent)
 	{
-		nbr_child = fork();
+		nbr_pid = fork();
 		//if (sent->next == NULL)
-		//	info->last_pid = getpid(nbr_child);
-		if (nbr_child == 0)
+		//	info->last_pid = getpid(nbr_pid);
+		if (nbr_pid == 0)
 			break;
+		else if (nbr_pid > 0)
+			info->last_pid = nbr_pid;
+		else
+		{
+			perror("error in fork");
+			//setar global.
+		}
 		*senti = (*senti)->next;
 	}
 }
@@ -119,6 +154,9 @@ void	golfer(t_list_sent *sent, t_info *info)
 			// Limpsr as paradas.
 		}
 	}
-	//waitpid(info->last_pid);
-	// settar a global do pai
+	else
+	{
+		//waitpid(info->last_pid);
+		// settar a global do pai
+	}
 }

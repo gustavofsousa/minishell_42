@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 16:16:38 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 17:05:08 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,6 @@ typedef struct s_cell
 	struct s_cell	*next;
 }	t_cell;
 
-typedef struct s_info
-{
-	char	*prompt;
-	int		qtd_sent;
-	char	**env_cpy;
-	int		*fd_heredoc;
-	int		last_pid;
-	t_list_sent	**head;
-}	t_info;
-
 typedef struct s_sentence
 {
 	int					input;
@@ -75,6 +65,16 @@ typedef struct s_list_sent
 	t_sentence			content;
 	struct s_list_sent	*next;
 }	t_list_sent;
+
+typedef struct s_info
+{
+	char		*prompt;
+	int			qtd_sent;
+	char		**env_cpy;
+	int			*fd_heredoc;
+	int			last_pid;
+	t_list_sent	*head;
+}	t_info;
 
 //Parser
 void	divide_prompt(t_info *info, t_cell **list_cells);

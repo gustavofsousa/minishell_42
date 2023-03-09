@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 14:52:04 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 16:16:38 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_info
 	int		qtd_sent;
 	char	**env_cpy;
 	int		*fd_heredoc;
+	int		last_pid;
+	t_list_sent	**head;
 }	t_info;
 
 typedef struct s_sentence

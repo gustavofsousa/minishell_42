@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 15:11:28 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 16:01:25 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,15 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 	right_path = prepare_path(info, sent);
 	right_args = ft_split(sent->content.args, ' ');
 
-	if (info->qtd_sent > 1)
-	{
-		dup2(sent->content.input, 0);
-		dup2(sent->content.output, 1);
-	}
-	else
+	if (info->qtd_sent == 1)
 		nbr_child = fork();
 	if (nbr_child == 0)
 	{
-		//close_fdes();
+		dup2(sent->content.input, 0);
+		dup2(sent->content.output, 1);
+		//close_fdes(info);
 		success = execve(right_path, right_args, info->env_cpy);
 	}
-	//O pai fica esperando com um waitpid, ate executar o comando. Precisa saber o PID do ultimo processo filho.
 	/*
 	free(right_path);
 	while (right_args)
@@ -46,17 +42,14 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 	return (success);
 }
 
-void	create_forks(t_list_sent **senti, t_info *info)
+static void	open_pipes(t_list_sent **senti, t_info *info)
 {
 	int			i;
-	int			n_sent;
-	int			nbr_child;
-	int			fildes[2];
 	int			success;
+	int			fildes[2];
 	t_list_sent	*sent;
 
 	sent = *senti;
-	n_sent = -1;
 	i = 0;
 	while (++i < info->qtd_sent)
 	{
@@ -70,13 +63,24 @@ void	create_forks(t_list_sent **senti, t_info *info)
 				sent->content.input = fildes[0];
 		}
 	}
+}
+
+void	create_forks(t_list_sent **senti, t_info *info)
+{
+	int			n_sent;
+	int			nbr_child;
+
+	open_pipes(senti, info);
+	n_sent = -1;
 	nbr_child = 0;
-	while (n_sent--)
+	while (++n_sent < info->qtd_sent)
 	{
 		nbr_child = fork();
+		//if (sent->next == NULL)
+		//	info->last_pid = getpid(nbr_child);
 		if (nbr_child == 0)
 			break;
-		sent = sent->next;
+		*senti = (*senti)->next;
 	}
 }
 
@@ -101,14 +105,20 @@ void	golfer(t_list_sent *sent, t_info *info)
 	info->qtd_sent = count_sentence(sent);
 	if (info->qtd_sent > 1)
 		create_forks(&sent, info);
-	if (sent->content.command != no_builtin)
-		do_the_builtin(sent->content.command, sent->content.args,
-				sent->content.output, info);
-	else
-		return_execv = do_the_execve(info, sent);
-	if (return_execv == -1)
+	if (sent != NULL)
 	{
-		perror("Error in execve");
-		// Limpsr as paradas.
+		if (sent->content.command != no_builtin)
+			do_the_builtin(sent->content.command, sent->content.args,
+					sent->content.output, info);
+		else
+			return_execv = do_the_execve(info, sent);
+		if (return_execv == -1)
+		{
+			perror("Error in execve");
+			//setar gloval do filho.
+			// Limpsr as paradas.
+		}
 	}
+	//waitpid(info->last_pid);
+	// settar a global do pai
 }

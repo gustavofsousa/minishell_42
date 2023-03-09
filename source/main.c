@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 10:54:04 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:14:03 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 {
 	info->prompt = NULL;
 	info->qtd_sent = 0;
+	info->last_pid = 0;
 	*list_cells = NULL;	
 	*sentence = NULL;
 	info->fd_heredoc = NULL;
@@ -40,9 +41,15 @@ void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence)
 	while (sentence)
 	{
 		if (sentence->content.input != 0)
+		{
 			close(sentence->content.input);
+			sentence->content.input = 0;
+		}
 		if (sentence->content.output != 1)
+		{
 			close(sentence->content.output);
+			sentetnce->content.output = 1;
+		}
 		sentence = sentence->next;
 	}
 }

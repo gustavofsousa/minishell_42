@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 10:55:17 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/09 17:23:16 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,9 @@ int	do_the_execve(t_info *info, t_list_sent *sent);
 // Expand Variable
 int		calc_len_content(t_cell **list, t_info info, int index);
 int		len_word(char *str);
+
+// Env
+int	ft_strlen_env(char *s);
+int	is_equal_env(char *arg, char **env);
 
 #endif

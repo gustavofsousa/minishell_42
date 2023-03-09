@@ -6,21 +6,11 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:07:03 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/05 18:22:03 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 12:10:34 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-static int	ft_strlen_env(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '=')
-		i++;
-	return (i);
-}
 
 static int	is_equal(char **args, char *str)
 {

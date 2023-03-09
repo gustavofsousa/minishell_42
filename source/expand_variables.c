@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/08 14:42:01 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/09 08:15:33 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ void	substitute(t_cell **list, t_info info, int index)
 
 	len_w = 0;
 	while (info.env_cpy[index][len_w] != '=')
-		len_w++;	
+		len_w++;
 	create_new_content(list, info, index, len_w);
 }
 /*
  * Compara se depois do $ a variável está com nome igual.
  */
+
 int	look_for_variable(t_cell *list, t_info info)
 {
 	int		index;
@@ -81,7 +82,7 @@ int	look_for_variable(t_cell *list, t_info info)
 		index++;
 	}
 	free(str_env);
-	return (1);
+	return (-1);
 }
 
 void	expand_variable(t_cell **list_cell, t_info info)
@@ -102,10 +103,8 @@ void	expand_variable(t_cell **list_cell, t_info info)
 						&& !ft_strchr(list_move->content, 34)))
 					break ;
 			index = look_for_variable(list_move, info);
-			if (index)
-			{
+			if (index > -1)
 				substitute(&list_move, info, index);
-			}
 		}
 		list_move = list_move->next;
 	}

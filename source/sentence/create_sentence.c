@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 13:34:47 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 17:15:17 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	count_sentences(t_cell *list)
 {
 	int	len;
 
+	if (list == NULL)
+		return (0);
 	len = 1;
 	while (list)
 	{
@@ -111,5 +113,6 @@ t_list_sent	*create_sentence(t_cell *list_in, t_info *info)
 		i++;
 		list_in = list_in->next;
 	}
+	info->head = sent;
 	return (sent);
 }

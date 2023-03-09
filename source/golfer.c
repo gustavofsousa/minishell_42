@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/08 15:36:55 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 11:01:41 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,10 @@ int	count_sentence(t_list_sent *sentence)
 void	golfer(t_list_sent *sent, t_info *info)
 {
 	int	qtd_pipe;
+	int return_execv;
 
 	// Multipiping
+	return_execv = -1;
 	qtd_pipe = count_sentence(sent) - 1;
 	info->qtd_sent = qtd_pipe + 1;
 	if (qtd_pipe > 0)
@@ -93,7 +95,5 @@ void	golfer(t_list_sent *sent, t_info *info)
 		do_the_builtin(sent->content.command, sent->content.args,
 				sent->content.output, info);
 	else
-	{
-		do_the_execve(info, sent);
-	}
+		return_execv = do_the_execve(info, sent);
 }

@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:51:14 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/08 16:08:56 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/09 10:47:45 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 	}
 	else
 		nbr_child = fork();
-	printf("Nbr child->\t%d\n", nbr_child);
+	//printf("Nbr child->\t%d\n", nbr_child);
 	if (nbr_child == 0)
 	{
 		//close_fdes();

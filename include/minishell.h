@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 17:23:16 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/10 12:45:38 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <unistd.h>//getcwd(); fork().
 # include <stdlib.h>//exit. free.
 # include <fcntl.h>//open().
+
+int	g_status;
 
 enum e_token
 {
@@ -118,6 +120,8 @@ int	do_the_execve(t_info *info, t_list_sent *sent);
 // Expand Variable
 int		calc_len_content(t_cell **list, t_info info, int index);
 int		len_word(char *str);
+int		check_is_status(char *content);
+int		created_status(t_cell *list);
 
 // Env
 int	ft_strlen_env(char *s);

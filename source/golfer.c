@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 17:20:36 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 18:16:52 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,9 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 {
 	char	*right_path;
 	char	**right_args;
-	int		success;
 	int		nbr_pid;
 
 	nbr_pid = 0;
-	success = 0;
 	right_path = prepare_path(info, sent);
 	right_args = ft_split(sent->content.args, ' ');
 
@@ -52,15 +50,19 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 		nbr_pid = fork();
 	if (nbr_pid == 0)
 	{
+		printf("My command->%s\tinput->%d\t output%d\n", sent->content.args, sent->content.input, sent->content.output);
 		config_fd_system(sent, info);
-		success = execve(right_path, right_args, info->env_cpy);
+		execve(right_path, right_args, info->env_cpy);
+			perror("Error in execve");
+		return (-1);
 	}
 	else if (nbr_pid > 0)
 		wait_children_die(info);
 	else if (nbr_pid == -1)
 		perror("error in fork unico");
+	printf("soh o pai\n");
 	freeing_local(right_path, right_args);
-	return (success);
+	return (0);
 }
 
 static void	open_pipes(t_list_sent **senti, t_info *info)
@@ -108,6 +110,19 @@ void	create_forks(t_list_sent **senti, t_info *info)
 	wait_children_die(info);
 }
 
+void	run_sentence()
+{
+// Tentar o waipid( -1, ... , ...);
+	while(sent)
+	{
+	// Execve chama fork sempre dentro dele
+	// O builtin verifica a qtd_sent
+	// E dah fork ou nao.
+	sent = sesnt->next.
+	}
+	wait_child_die();
+}
+
 static int	count_sentence(t_list_sent *sentence)
 {
 	int	len;
@@ -121,29 +136,25 @@ static int	count_sentence(t_list_sent *sentence)
 	return (len);
 }
 
-void	golfer(t_list_sent *sent, t_info *info)
+int	golfer(t_list_sent *sent, t_info *info)
 {
-	int return_execv;
-
-	return_execv = 0;
 	info->qtd_sent = count_sentence(sent);
-	if (info->qtd_sent > 1)
-		create_forks(&sent, info);
-	if (sent != NULL)
+	if (info->qtd_sent > 1)//entra nas func
+		create_forks(&sent, info);//some
+	if (sent != NULL)//some
 	{
-		if (sent->content.command != no_builtin)
+		if (sent->content.command != no_builtin)//entra na run_sent
 			do_the_builtin(sent, info);
 		else
-			return_execv = do_the_execve(info, sent);
-		if (return_execv == -1)
 		{
-			perror("Error in execve");
-			//setar gloval do filho.
-			// Limpsr as paradas.
+			if (do_the_execve(info, sent) == -1)
+				{
+					// olhar o errno (do execve) e setar a global de acordo.
+					g_status = 127;
+					return (-1);
+					// Limpsr as paradas.
+				}
 		}
 	}
-	else
-	{
-		wait_children_die(info);
-	}
+	return (0);
 }

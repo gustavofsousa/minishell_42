@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 13:11:00 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 17:57:19 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ int	main(int argc, char **argv, char **envp)
 		if (handle_quotes(&list_cells) == -1)
 			finish_program(&info, &list_cells, sentence);
 		sentence = create_sentence(list_cells, &info);
-		golfer(sentence, &info);
-		if (g_status != 0 || info.last_pid == 0)
+		if (golfer(sentence, &info) == -1)
 		{
 			puts("filho morreu");
 			finish_program(&info, &list_cells, sentence);

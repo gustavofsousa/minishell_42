@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 12:27:56 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 17:16:28 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 17:58:54 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence)
 			close(info->fd_heredoc[i]);
 		free(info->fd_heredoc);
 	}
+	close_fdes(info);
 	point_to_null(info, list_cells, &sentence);
 	//close fd's i opened in redirect.
-	close_fdes(info);
 }
 
 void	finish_program(t_info *info, t_cell **list_cells, t_list_sent *sentence)

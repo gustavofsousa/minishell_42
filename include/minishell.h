@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 19:00:07 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 12:31:54 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	set_signal_handler(void);
 // main
 void	expand_variable(t_cell **list_cell, t_info info);
 void	golfer(t_list_sent *sent, t_info *info);
+void	config_fd_system(t_list_sent *sent, t_info *info);
 
 char	*ft_strjoin_free(char *s1, char *s2);
 char	*ft_strjoin_char(char *s1, char c);
@@ -109,7 +110,7 @@ int			ft_unset(char *arg, struct s_info *info);
 char		**ft_cpy_env(char	**envs);
 int			ft_export(char *arg, struct s_info *info);
 void		ft_cd(char *path);
-int			do_the_builtin(enum e_command command, char *args, int fd, t_info *info);
+int			do_the_builtin(t_list_sent *sent, t_info *info);
 
 // List_sentence
 void		ft_lstclear_sent(t_list_sent **lst);
@@ -126,5 +127,10 @@ char	*prepare_path(t_info *info, t_list_sent *sent);
 // Expand Variable
 int		calc_len_content(t_cell **list, t_info info, int index);
 int		len_word(char *str);
+
+//Finish program and things.
+void	close_fdes(t_info *info);
+void	freeing_local(char *right_path, char **right_args);
+void	finish_program(t_info *info, t_cell **list_cells, t_list_sente *sentence);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 10:02:26 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 12:36:48 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,37 +38,8 @@ void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence)
 		free(info->fd_heredoc);
 	}
 	point_to_null(info, list_cells, &sentence);
-	//close fd's i opened.
-	while (sentence)
-	{
-		if (sentence->content.input != 0)
-		{
-			close(sentence->content.input);
-			sentence->content.input = 0;
-		}
-		if (sentence->content.output != 1)
-		{
-			close(sentence->content.output);
-			sentence->content.output = 1;
-		}
-		sentence = sentence->next;
-	}
-}
-
-void	finish_program(t_info *info, t_cell **list_cells, t_list_sent *sentence)
-{
-	int	i;
-
-	reset(info, list_cells, sentence);
-	i = -1;
-	if (info->env_cpy)
-	{
-		while (info->env_cpy[++i])
-			free(info->env_cpy[i]);
-		free(info->env_cpy);
-	}
-	info->env_cpy = NULL;
-	exit (0);
+	//close fd's i opened in redirect.
+	close_fdes(info);
 }
 
 void	print_all_list(t_cell *list)

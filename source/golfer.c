@@ -6,46 +6,17 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 10:01:59 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 12:37:12 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	close_fdes(t_info *info)
+void	config_fd_system(t_list_sent *sent, t_info *info)
 {
-	t_list_sent *sentence;
-
-	sentence = info->head;
-	while (sentence)
-	{
-		if (sentence->content.input != 0)
-		{
-			close(sentence->content.input);
-			sentence->content.input = 0;
-		}
-		if (sentence->content.output != 1)
-		{
-			close(sentence->content.output);
-			sentence->content.output = 1;
-		}
-		sentence = sentence->next;
-	}
-}
-
-void	freeing_local(char *right_path , char **right_args)
-{
-	int		i;
-
-	if (right_path)
-		free(right_path);
-	if (right_args)
-	{
-		i = -1;
-		while (right_args[++i])
-			free(right_args[i]);
-		free(right_args);
-	}
+	dup2(sent->content.input, 0);
+	dup2(sent->content.output, 1);
+	close_fdes(info);
 }
 
 int	do_the_execve(t_info *info, t_list_sent *sent)
@@ -66,9 +37,7 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 	pre_status = 0;
 	if (nbr_pid == 0)
 	{
-		dup2(sent->content.input, 0);
-		dup2(sent->content.output, 1);
-		close_fdes(info);
+		config_fd_system(sent, info);
 		success = execve(right_path, right_args, info->env_cpy);
 	}
 	else if (nbr_pid > 0)
@@ -135,7 +104,7 @@ void	create_forks(t_list_sent **senti, t_info *info)
 	}
 }
 
-int	count_sentence(t_list_sent *sentence)
+static int	count_sentence(t_list_sent *sentence)
 {
 	int	len;
 
@@ -161,8 +130,7 @@ void	golfer(t_list_sent *sent, t_info *info)
 	if (sent != NULL)
 	{
 		if (sent->content.command != no_builtin)
-			do_the_builtin(sent->content.command, sent->content.args,
-					sent->content.output, info);
+			do_the_builtin(sent, info);
 		else
 			return_execv = do_the_execve(info, sent);
 		if (return_execv == -1)

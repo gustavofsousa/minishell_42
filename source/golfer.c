@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 09:55:54 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 10:01:59 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,19 +118,19 @@ void	create_forks(t_list_sent **senti, t_info *info)
 	while (++n_sent < info->qtd_sent)
 	{
 		nbr_pid = fork();
+		info->last_pid = nbr_pid;
 		if (nbr_pid == 0)
 			break;
 		else if (nbr_pid > 0)
-			info->last_pid = nbr_pid;
-		else
 		{
-			perror("error in fork");
 			waitpid(info->last_pid, &pre_status, WNOHANG);
 			if (WIFEXITED(pre_status))
 				g_status = WEXITSTATUS(pre_status);
 			if (WIFSIGNALED(pre_status))
 				g_status = 128 + WTERMSIG(pre_status);
 		}
+		else
+			perror("error in fork");
 		*senti = (*senti)->next;
 	}
 }

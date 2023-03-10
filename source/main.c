@@ -6,41 +6,11 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 12:36:48 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 13:00:50 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence)
-{
-	info->prompt = NULL;
-	info->qtd_sent = 0;
-	info->last_pid = 0;
-	info->head = NULL;
-	*list_cells = NULL;	
-	*sentence = NULL;
-	info->fd_heredoc = NULL;
-}
-
-void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence)
-{
-	int	i;
-
-	free(info->prompt);
-	list_clear_cells(list_cells);
-	ft_lstclear_sent(&sentence);
-	if (info->fd_heredoc)
-	{
-		i = -1;
-		while (info->fd_heredoc[++i] != -1)
-			close(info->fd_heredoc[i]);
-		free(info->fd_heredoc);
-	}
-	point_to_null(info, list_cells, &sentence);
-	//close fd's i opened in redirect.
-	close_fdes(info);
-}
 
 void	print_all_list(t_cell *list)
 {
@@ -93,15 +63,16 @@ int	main(int argc, char **argv, char **envp)
 		divide_prompt(&info, &list_cells);
 		categorize_elements(&list_cells);
 		expand_variable(&list_cells, info);
-		//expand_variable(&list_cells);
 		if (handle_quotes(&list_cells) == -1)
 			finish_program(&info, &list_cells, sentence);
-		//print_all_list(list_cells);
 		sentence = create_sentence(list_cells, &info);
-		//print_sentence(sentence);
 		golfer(sentence, &info);
 		if (g_status != 0 || info.last_pid == 0)
+		{
+			printf("%d\n", g_status);
+			printf("%d\n", info.last_pid);
 			finish_program(&info, &list_cells, sentence);
+		}
 	}
 	finish_program(&info, &list_cells, sentence);
 	return (0);

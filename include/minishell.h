@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 12:31:54 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 12:55:13 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <sys/wait.h>//waitpid.
 
 int	g_status;
+extern int	errno;
 
 enum e_token
 {
@@ -131,6 +132,8 @@ int		len_word(char *str);
 //Finish program and things.
 void	close_fdes(t_info *info);
 void	freeing_local(char *right_path, char **right_args);
-void	finish_program(t_info *info, t_cell **list_cells, t_list_sente *sentence);
+void	finish_program(t_info *info, t_cell **list_cells, t_list_sent *sentence);
+void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence);
+void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence);
 
 #endif

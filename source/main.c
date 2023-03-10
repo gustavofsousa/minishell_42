@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 13:00:50 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 13:11:00 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ int	main(int argc, char **argv, char **envp)
 		golfer(sentence, &info);
 		if (g_status != 0 || info.last_pid == 0)
 		{
-			printf("%d\n", g_status);
-			printf("%d\n", info.last_pid);
+			puts("filho morreu");
 			finish_program(&info, &list_cells, sentence);
 		}
 	}

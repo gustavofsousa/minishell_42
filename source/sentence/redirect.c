@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 12:51:15 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 13:23:57 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@ void	do_heredoc(t_cell *list_in, t_info *info)
 	fd_write = open_pipe(info);
 	if (fd_write != -1)
 	{
+		g_status = 0;
 		while (42)
 		{
 			cmd = readline(">");
 			// Ou cmd == null
 			// se o g_global 'e 1.
-			if (!ft_strncmp(cmd, list_in->next->content, ft_strlen(cmd)))
+			if (!ft_strncmp(cmd, list_in->next->content, ft_strlen(cmd))
+					|| g_status == 1)
 				break;
 			ft_putendl_fd(cmd, fd_write);
 			free(cmd);

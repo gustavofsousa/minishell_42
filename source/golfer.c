@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 12:53:23 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 13:22:20 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,24 @@ void	config_fd_system(t_list_sent *sent, t_info *info)
 	close_fdes(info);
 }
 
+void	wait_children_die(t_info *info)
+{
+	int		pre_status;
+
+	pre_status = 0;
+	waitpid(info->last_pid, &pre_status, WUNTRACED);
+	if (WIFEXITED(pre_status))
+		g_status = WEXITSTATUS(pre_status);
+	if (WIFSIGNALED(pre_status))
+		g_status = 128 + WTERMSIG(pre_status);
+}
+
 int	do_the_execve(t_info *info, t_list_sent *sent)
 {
 	char	*right_path;
 	char	**right_args;
 	int		success;
 	int		nbr_pid;
-	int		pre_status;
 
 	nbr_pid = 0;
 	success = 0;
@@ -34,17 +45,13 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 
 	if (info->qtd_sent == 1)
 		nbr_pid = fork();
-	pre_status = 0;
 	if (nbr_pid == 0)
 	{
 		config_fd_system(sent, info);
 		success = execve(right_path, right_args, info->env_cpy);
 	}
 	else if (nbr_pid > 0)
-	{
-		//waitpid(info->last_pid);
-		// settar a global do pai
-	}
+		wait_children_die(info);
 	else
 		perror("error in fork");
 	freeing_local(right_path, right_args);
@@ -142,10 +149,6 @@ void	golfer(t_list_sent *sent, t_info *info)
 	}
 	else
 	{
-		waitpid(info->last_pid, &pre_status, WNOHANG);
-		if (WIFEXITED(pre_status))
-			g_status = WEXITSTATUS(pre_status);
-		if (WIFSIGNALED(pre_status))
-			g_status = 128 + WTERMSIG(pre_status);
+		wait_children_die(info);
 	}
 }

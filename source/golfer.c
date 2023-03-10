@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 18:58:38 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 09:55:54 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ void	close_fdes(t_info *info)
 			sentence->content.output = 1;
 		}
 		sentence = sentence->next;
+	}
+}
+
+void	freeing_local(char *right_path , char **right_args)
+{
+	int		i;
+
+	if (right_path)
+		free(right_path);
+	if (right_args)
+	{
+		i = -1;
+		while (right_args[++i])
+			free(right_args[i]);
+		free(right_args);
 	}
 }
 
@@ -63,12 +78,7 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 	}
 	else
 		perror("error in fork");
-	/*
-	free(right_path);
-	while (right_args)
-		free((*right_args)++);
-	free(right_args);
-	*/
+	freeing_local(right_path, right_args);
 	return (success);
 }
 

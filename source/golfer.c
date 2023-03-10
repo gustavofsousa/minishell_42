@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 13:22:20 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 17:20:36 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,18 @@ void	config_fd_system(t_list_sent *sent, t_info *info)
 void	wait_children_die(t_info *info)
 {
 	int		pre_status;
+	int		n_sent;
 
+	n_sent = -1;
 	pre_status = 0;
-	waitpid(info->last_pid, &pre_status, WUNTRACED);
-	if (WIFEXITED(pre_status))
-		g_status = WEXITSTATUS(pre_status);
-	if (WIFSIGNALED(pre_status))
-		g_status = 128 + WTERMSIG(pre_status);
+	while (++n_sent < info->qtd_sent)
+	{
+		waitpid(info->nbr_pids[n_sent], &pre_status, WUNTRACED);
+			if (WIFEXITED(pre_status))
+				g_status = WEXITSTATUS(pre_status);
+			if (WIFSIGNALED(pre_status))
+				g_status = 128 + WTERMSIG(pre_status);
+	}
 }
 
 int	do_the_execve(t_info *info, t_list_sent *sent)
@@ -52,8 +57,8 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 	}
 	else if (nbr_pid > 0)
 		wait_children_die(info);
-	else
-		perror("error in fork");
+	else if (nbr_pid == -1)
+		perror("error in fork unico");
 	freeing_local(right_path, right_args);
 	return (success);
 }
@@ -85,30 +90,22 @@ void	create_forks(t_list_sent **senti, t_info *info)
 {
 	int			n_sent;
 	int			nbr_pid;
-	int			pre_status;
 
-	pre_status = 0;
+	info->nbr_pids = malloc (sizeof(int) * info->qtd_sent);
 	open_pipes(senti, info);
 	n_sent = -1;
 	nbr_pid = 0;
 	while (++n_sent < info->qtd_sent)
 	{
 		nbr_pid = fork();
-		info->last_pid = nbr_pid;
+		info->nbr_pids[n_sent] = nbr_pid;
 		if (nbr_pid == 0)
 			break;
-		else if (nbr_pid > 0)
-		{
-			waitpid(info->last_pid, &pre_status, WNOHANG);
-			if (WIFEXITED(pre_status))
-				g_status = WEXITSTATUS(pre_status);
-			if (WIFSIGNALED(pre_status))
-				g_status = 128 + WTERMSIG(pre_status);
-		}
-		else
-			perror("error in fork");
+		else if (nbr_pid == -1)
+			perror("error in fork multiplo");
 		*senti = (*senti)->next;
 	}
+	wait_children_die(info);
 }
 
 static int	count_sentence(t_list_sent *sentence)
@@ -127,9 +124,7 @@ static int	count_sentence(t_list_sent *sentence)
 void	golfer(t_list_sent *sent, t_info *info)
 {
 	int return_execv;
-	int	pre_status;
 
-	pre_status = 0;
 	return_execv = 0;
 	info->qtd_sent = count_sentence(sent);
 	if (info->qtd_sent > 1)

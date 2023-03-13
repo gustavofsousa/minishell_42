@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 15:28:47 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:43:39 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ void	wait_children_die(t_info *info)
 	pre_status = 0;
 	while (++n_sent < info->qtd_sent)
 	{
-		waitpid(-1 , &pre_status, WUNTRACED);
-			if (WIFEXITED(pre_status))
-				g_status = WEXITSTATUS(pre_status);
-			if (WIFSIGNALED(pre_status))
-				g_status = 128 + WTERMSIG(pre_status);
+		waitpid(info->nbr_pids[n_sent] , &pre_status, WUNTRACED);
+		if (WIFEXITED(pre_status))
+			g_status = WEXITSTATUS(pre_status);
+		if (WIFSIGNALED(pre_status))
+			g_status = 128 + WTERMSIG(pre_status);
 	}
 }
 
-int	do_the_execve(t_info *info, t_list_sent *sent)
+int	do_the_execve(t_info *info, t_list_sent *sent, int i)
 {
 	char	*right_path;
 	char	**right_args;
@@ -45,7 +45,8 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 	right_args = ft_split(sent->content.args, ' ');
 
 	config_fd_system(sent, info);
-	if (fork() == 0)
+	info->nbr_pids[i] = fork();
+	if (info->nbr_pids[i] == 0)
 	{
 		execve(right_path, right_args, info->env_cpy);
 		perror("Error in execve");
@@ -57,18 +58,22 @@ int	do_the_execve(t_info *info, t_list_sent *sent)
 
 int	golfer(t_list_sent **sent, t_info *info)
 {
+	int	i;
+	
+	i = 0;
 	info->qtd_sent = count_sentence(*sent);
+	info->nbr_pids = malloc(sizeof(int) * info->qtd_sent);
 	open_pipes(sent, info);
 	while (*sent)
 	{
 		if ((*sent)->content.command != no_builtin)
 		{
-			if (do_the_builtin(*sent, info) == -1)
+			if (do_the_builtin(*sent, info, i) == -1)
 				return (-1);
 		}
 		else
 		{
-			if (do_the_execve(info, *sent) == -1)
+			if (do_the_execve(info, *sent, i) == -1)
 				{
 					// olhar o errno (do execve) e setar a global de acordo.
 					g_status = 127;
@@ -76,6 +81,7 @@ int	golfer(t_list_sent **sent, t_info *info)
 					// Limpar as paradas.
 				}
 		}
+		i++;
 		*sent = (*sent)->next;
 	}
 	wait_children_die(info);

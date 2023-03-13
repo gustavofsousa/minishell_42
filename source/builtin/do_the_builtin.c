@@ -6,17 +6,20 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:47:45 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 15:25:31 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:42:04 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	do_the_builtin(t_list_sent *sent, t_info *info)
+int	do_the_builtin(t_list_sent *sent, t_info *info, int i)
 {
 	if (info->qtd_sent > 1)
-		if (fork() > 0)
+	{
+		info->nbr_pids[i] = fork();
+		if (info->nbr_pids[i] > 0)
 			return (1);
+	}
 	if (sent->content.command == pwd)
 		ft_pwd(sent->content.output);
 	else if (sent->content.command == echo)

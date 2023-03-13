@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 15:16:51 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:38:16 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int			ft_unset(char *arg, struct s_info *info);
 char		**ft_cpy_env(char	**envs);
 int			ft_export(char *arg, struct s_info *info);
 void		ft_cd(char *path);
-int			do_the_builtin(t_list_sent *sent, t_info *info);
+int			do_the_builtin(t_list_sent *sent, t_info *info, int i);
 void		open_pipes(t_list_sent **senti, t_info *info);
 int			count_sentence(t_list_sent *sentence);
 

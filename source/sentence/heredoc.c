@@ -6,44 +6,32 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:09:37 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 19:10:58 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 19:49:08 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	open_pipe_redir(t_info *info)
+int	open_pipe_redir(t_sentence *sent)
 {
-	int		i;
-	int		*new_fd;
 	int		fildes[2];
 	int		success;
 
 	success = pipe(fildes);
 	if (success == -1)
 		return (-1);
-	i = 1;
-	if (info->fd_heredoc)
-	{
-		while (info->fd_heredoc[i] != -10)
-			i++;
-	}
-	new_fd = malloc (sizeof(int) * i);
-	new_fd[i--] = -10;
-	new_fd[i] = fildes[0];
-	while (i--)
-		new_fd[i] = info->fd_heredoc[i];
-	free(info->fd_heredoc);
-	info->fd_heredoc = new_fd;
+	if (sent->input != 0)
+		close(sent->input);
+	sent->input = fildes[0];
 	return (fildes[1]);
 }
 
-void	do_heredoc(t_cell *list_in, t_info *info)
+void	do_heredoc(t_cell *list_in, t_sentence *sent)
 {
 	char	*cmd;
 	int		fd_write;
 
-	fd_write = open_pipe_redir(info);
+	fd_write = open_pipe_redir(sent);
 	if (fd_write != -1)
 	{
 		g_status = 0;

@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 19:25:29 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 19:51:57 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_sentence
 {
 	int					input;
 	enum e_command		command;
-	char				*args;// Tem que ser ** por causa do execv.
+	char				*args;
 	int					output;
 }	t_sentence;
 
@@ -76,7 +76,6 @@ typedef struct s_info
 	char		*prompt;
 	int			qtd_sent;
 	char		**env_cpy;
-	int			*fd_heredoc;
 	int			last_pid;
 	int			*nbr_pids;
 	t_list_sent	*head;
@@ -127,8 +126,8 @@ int			len_word(char *str);
 
 //create_sentence.c
 t_list_sent	*create_sentence(t_cell *list_in, t_info *info);
-int			open_redirect(t_cell *list_in, t_sentence *sent, t_info *info);
-void		do_heredoc(t_cell *list_in, t_info *info);
+int			open_redirect(t_cell *list_in, t_sentence *sent);
+void		do_heredoc(t_cell *list_in, t_sentence *sent);
 
 //extern
 char		*prepare_path(t_info *info, t_list_sent *sent);

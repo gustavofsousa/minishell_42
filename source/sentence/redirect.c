@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 19:12:05 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 19:51:32 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	deal_error(t_sentence *sent, char redir)
 	}
 }
 
-void	create_new_fd(t_sentence *sent, t_cell *list, char redir, t_info *info)
+void	create_new_fd(t_sentence *sent, t_cell *list, char redir)
 {
 	char	redir2;
 
@@ -49,7 +49,7 @@ void	create_new_fd(t_sentence *sent, t_cell *list, char redir, t_info *info)
 	else
 	{
 		if (redir2 == '<')
-			do_heredoc(list, info);
+			do_heredoc(list, sent);
 		else
 			sent->input = open(list->next->content, O_RDONLY);
 	}
@@ -76,7 +76,7 @@ void	close_old_fd(t_sentence *sent, char redir)
  * E tratar error se o open falhar (retorno -1, e o errno diz qual foi)
  * Coloco o fd como output(> ou >>) ou input(<) daquela sentença.
  */
-int	open_redirect(t_cell *list_in, t_sentence *sent, t_info *info)
+int	open_redirect(t_cell *list_in, t_sentence *sent)
 {
 	char	redir;
 
@@ -86,7 +86,7 @@ int	open_redirect(t_cell *list_in, t_sentence *sent, t_info *info)
 		if (list_in->next && list_in->next->token == word)
 		{
 			close_old_fd(sent, redir);
-			create_new_fd(sent, list_in, redir, info);
+			create_new_fd(sent, list_in, redir);
 			deal_error(sent, redir);
 		}
 		else

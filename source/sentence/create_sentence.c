@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 19:26:43 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 19:53:24 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	fill_content(t_cell *list_in, t_sentence *sent_node, int *n_round)
 	}
 }
 
-t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence, t_info *info)
+t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence)
 {
 	int			n_round;
 	t_sentence	sent_node;
@@ -80,7 +80,7 @@ t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence, t_info *info)
 	sent_node.args = NULL;
 	while (list_in && list_in->token != piper)
 	{
-		if (open_redirect(list_in, &sent_node, info))
+		if (open_redirect(list_in, &sent_node))
 		{
 			list_in = list_in->next;
 			if (list_in == NULL)
@@ -110,12 +110,13 @@ t_list_sent	*create_sentence(t_cell *list_in, t_info *info)
 	i = 0;
 	while (i < info->qtd_sent)
 	{
-		list_in = new_sent(list_in, &sent, info);
+		list_in = new_sent(list_in, &sent);
 		if (list_in == NULL)
 			break ;
 		i++;
 		list_in = list_in->next;
 	}
 	info->head = sent;
+	print_sentence(sent);
 	return (sent);
 }

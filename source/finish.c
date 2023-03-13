@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 12:27:56 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 15:47:12 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 19:46:50 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,16 @@ void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 	info->nbr_pids= NULL;
 	*list_cells = NULL;	
 	*sentence = NULL;
-	info->fd_heredoc = NULL;
 	g_status = 0;
 }
 
 void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence)
 {
-	int	i;
-
 	free(info->prompt);
 	close_fdes(info);
 	list_clear_cells(list_cells);
 	ft_lstclear_sent(&sentence);
 	free(info->nbr_pids);
-	if (info->fd_heredoc)
-	{
-		i = -1;
-		while (info->fd_heredoc[++i] != -1)
-			close(info->fd_heredoc[i]);
-		free(info->fd_heredoc);
-	}
 	point_to_null(info, list_cells, &sentence);
 	//close fd's i opened in redirect.
 }

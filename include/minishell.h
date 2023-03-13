@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 19:08:51 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 19:25:29 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void	check_eof(t_info *info);
 void	set_signal_handler(void);
 
 // main
-void	expand_variable(t_cell **list_cell, t_info info);
 int		golfer(t_list_sent **sent, t_info *info);
 void	config_fd_system(t_list_sent *sent, t_info *info);
 
@@ -112,34 +111,35 @@ int			ft_unset(char *arg, struct s_info *info);
 char		**ft_cpy_env(char	**envs);
 int			ft_export(char *arg, struct s_info *info);
 void		ft_cd(char *path);
-int			do_the_builtin(t_list_sent *sent, t_info *info, int i);
-void		open_pipes(t_list_sent **senti, t_info *info);
-int			count_sentence(t_list_sent *sentence);
 
-// List_sentence
+// pipes
+void		open_pipes(t_list_sent **senti, t_info *info);
+void		config_fd_system(t_list_sent *sent, t_info *info);
+void		wait_children_die(t_info *info);
+
+// parser
 void		ft_lstclear_sent(t_list_sent **lst);
 void		ft_lstadd_back_sent(t_list_sent **lst, t_list_sent *new_node);
 t_list_sent	*ft_lstnew_sent(t_sentence content);
+void		expand_variable(t_cell **list_cell, t_info info);
+int			calc_len_content(t_cell **list, t_info info, int index);
+int			len_word(char *str);
 
 //create_sentence.c
 t_list_sent	*create_sentence(t_cell *list_in, t_info *info);
-int		open_redirect(t_cell *list_in, t_sentence *sent, t_info *info);
-void	do_heredoc(t_cell *list_in, t_info *info);
+int			open_redirect(t_cell *list_in, t_sentence *sent, t_info *info);
+void		do_heredoc(t_cell *list_in, t_info *info);
 
 //extern
-char	*prepare_path(t_info *info, t_list_sent *sent);
-
-// Expand Variable
-int		calc_len_content(t_cell **list, t_info info, int index);
-int		len_word(char *str);
+char		*prepare_path(t_info *info, t_list_sent *sent);
 
 //Finish program and things.
-void	close_fdes(t_info *info);
-void	freeing_local(char *right_path, char **right_args);
-void	finish_program(t_info *info, t_cell **list_cells, t_list_sent *sentence);
-void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence);
-void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence);
+void		close_fdes(t_info *info);
+void		freeing_local(char *right_path, char **right_args);
+void		finish_program(t_info *info, t_cell **list_cells, t_list_sent *sentence);
+void		point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence);
+void		reset(t_info *info, t_cell **list_cells, t_list_sent *sentence);
 
 // Testes
-void	print_sentence(t_list_sent * sent);
+void		print_sentence(t_list_sent * sent);
 #endif

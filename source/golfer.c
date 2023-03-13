@@ -6,36 +6,11 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 18:00:04 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 19:27:53 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	config_fd_system(t_list_sent *sent, t_info *info)
-{
-	dup2(sent->content.input, 0);
-	dup2(sent->content.output, 1);
-	close_fdes(info);
-}
-
-void	wait_children_die(t_info *info)
-{
-	int		pre_status;
-	int		n_sent;
-
-	n_sent = -1;
-	pre_status = 0;
-	while (++n_sent < info->qtd_sent)
-	{
-		waitpid(info->nbr_pids[n_sent], &pre_status, 0);
-		printf("The son-> %d has finished\n", info->nbr_pids[n_sent]);
-		if (WIFEXITED(pre_status))
-			g_status = WEXITSTATUS(pre_status);
-		if (WIFSIGNALED(pre_status))
-			g_status = 128 + WTERMSIG(pre_status);
-	}
-}
 
 int	do_the_execve(t_info *info, t_list_sent *sent, int i)
 {
@@ -44,7 +19,6 @@ int	do_the_execve(t_info *info, t_list_sent *sent, int i)
 
 	right_path = prepare_path(info, sent);
 	right_args = ft_split(sent->content.args, ' ');
-
 	info->nbr_pids[i] = fork();
 	if (info->nbr_pids[i] == 0)
 	{
@@ -57,10 +31,38 @@ int	do_the_execve(t_info *info, t_list_sent *sent, int i)
 	return (0);
 }
 
+int	do_the_builtin(t_list_sent *sent, t_info *info, int i)
+{
+	if (info->qtd_sent > 1)
+	{
+		info->nbr_pids[i] = fork();
+		if (info->nbr_pids[i] > 0)
+			return (1);
+	}
+	if (sent->content.command == pwd)
+		ft_pwd(sent->content.output);
+	else if (sent->content.command == echo)
+		ft_echo(sent->content.args, sent->content.output);
+	else if (sent->content.command == exiter)
+		ft_exit(sent->content.args);
+	else if (sent->content.command == env)
+		ft_env(info->env_cpy, sent->content.output);
+	else if (sent->content.command == unset)
+		ft_unset(sent->content.args, info);
+	else if (sent->content.command == cd)
+		ft_cd(sent->content.args);
+	else if (sent->content.command == exporter)
+		ft_export(sent->content.args, info);
+	printf("My PDI->%d\n", getpid());
+	if (info->qtd_sent > 1)
+		return (-1);
+	return (1);
+}
+
 int	golfer(t_list_sent **sent, t_info *info)
 {
 	int	i;
-	
+
 	i = 0;
 	info->nbr_pids = malloc(sizeof(int) * info->qtd_sent);
 	open_pipes(sent, info);
@@ -74,12 +76,12 @@ int	golfer(t_list_sent **sent, t_info *info)
 		else
 		{
 			if (do_the_execve(info, *sent, i) == -1)
-				{
-					// olhar o errno (do execve) e setar a global de acordo.
-					g_status = 127;
-					return (-1);
-					// Limpar as paradas.
-				}
+			{
+				// olhar o errno (do execve) e setar a global de acordo.
+				g_status = 127;
+				return (-1);
+				// Limpar as paradas.
+			}
 		}
 		i++;
 		*sent = (*sent)->next;

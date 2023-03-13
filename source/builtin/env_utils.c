@@ -33,11 +33,11 @@ int  is_equal_env(char *arg, char **env)
 	    {
 	        len_env = ft_strlen_env(arg);
 	        if (!ft_strncmp(arg, env[counter], len_env))
-			{
-				free(env[counter]);
-				env[counter] = ft_strdup(arg);
-				return (1);
-			}
+		{
+			free(env[counter]);
+			env[counter] = ft_strdup(arg);
+			return (1);
+		}
 		    counter++;
 		}
 		return (0);
@@ -53,6 +53,32 @@ int	check_is_status(char *content)
 	return (0);
 }
 
+void created_content(t_cell *list, char *str, char *num)
+{
+	int index;
+	int count;
+	int len_gstatus;
+
+	len_gstatus = 0;
+	index = 0;
+	count = 0;
+	while ((*list).content[index] !=  '$')
+	{
+		str[index] = (*list).content[index];
+		index++;
+	}
+	count = index + 2;
+	while (num[len_gstatus])
+	{
+		str[index] = num[len_gstatus];
+		len_gstatus++;
+		index++;
+	}
+	while((*list).content[count])
+		str[index++] = (*list).content[count++];
+	str[index] = '\0';
+}
+
 int	created_status(t_cell *list)
 {
 	int len_list;
@@ -61,26 +87,26 @@ int	created_status(t_cell *list)
 	char *new_str;
 	int	i;
 	int len_new_str;
-	//Preciso pegar o tamanho da list, saber se tem aspas simples, duplas ou simple e dupla
+
 	len_gstatus = 0;
 	len_list = ft_strlen((*list).content);
 	i = 0;
 	len_new_str = 0;
-	//pegar o tamanho do gstatus, passar para itoa
 	num = ft_itoa(g_status);
 	len_gstatus = ft_strlen(num);
-	printf("%d\n", g_status);
-	//criar uma nova string, copiar até $ e depois passar $?, copiar o retorno da itoa copiar o restoi
 	while ((*list).content[i])
 	{
-		if ((*list).content[i] != '$' && (*list).content[i] != '?')
+		if ((*list).content[i] != '$' && (*list).content[i+1] != '?')
 			len_new_str++;
-		i++;
+		if ((*list).content[i] == '$')
+			i += 2;		
+		else
+			i++;
 	}
-	printf("%d\n", len_gstatus);
-	(void) new_str;
-	//free no retorno do itoa
-	//free list->content
-	//\0 no final da nova string
+	new_str = malloc((len_new_str + len_gstatus) * sizeof(char));
+	created_content(list, new_str, num);
+	free(num);
+	free((*list).content);
+	(*list).content = new_str;
 	return (0);
 }

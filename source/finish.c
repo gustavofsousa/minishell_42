@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 12:27:56 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 14:58:29 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:47:12 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence)
 	close_fdes(info);
 	list_clear_cells(list_cells);
 	ft_lstclear_sent(&sentence);
-	//free(info->nbr_pids);
+	free(info->nbr_pids);
 	if (info->fd_heredoc)
 	{
 		i = -1;

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 15:43:39 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:53:56 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	wait_children_die(t_info *info)
 	while (++n_sent < info->qtd_sent)
 	{
 		waitpid(info->nbr_pids[n_sent] , &pre_status, WUNTRACED);
+		printf("\n");
+		printf("PID of wait%d\n", info->nbr_pids[n_sent]);
 		if (WIFEXITED(pre_status))
 			g_status = WEXITSTATUS(pre_status);
 		if (WIFSIGNALED(pre_status))
@@ -44,10 +46,10 @@ int	do_the_execve(t_info *info, t_list_sent *sent, int i)
 	right_path = prepare_path(info, sent);
 	right_args = ft_split(sent->content.args, ' ');
 
-	config_fd_system(sent, info);
 	info->nbr_pids[i] = fork();
 	if (info->nbr_pids[i] == 0)
 	{
+		config_fd_system(sent, info);
 		execve(right_path, right_args, info->env_cpy);
 		perror("Error in execve");
 		return (-1);

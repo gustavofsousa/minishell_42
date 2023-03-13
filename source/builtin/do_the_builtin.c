@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:47:45 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 10:36:46 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:17:02 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	do_the_builtin(t_list_sent *sent, t_info *info)
 {
-	
-	config_fd_system(sent, info);
+	if (info->qtd_sent > 1)
+		if (fork() > 0)
+			return (1);
 	if (sent->content.command == pwd)
 		ft_pwd(sent->content.output);
 	else if (sent->content.command == echo)
@@ -30,5 +31,43 @@ int	do_the_builtin(t_list_sent *sent, t_info *info)
 		ft_cd(sent->content.args);
 	else if (sent->content.command == exporter)
 		ft_export(sent->content.args, info);
+	if (info->qtd_sent > 1)
+		return (-1);
 	return (1);
+}
+
+void	open_pipes(t_list_sent **senti, t_info *info)
+{
+	int			i;
+	int			success;
+	int			fildes[2];
+	t_list_sent	*sent;
+
+	sent = *senti;
+	i = 0;
+	while (++i < info->qtd_sent)
+	{
+		success = pipe(fildes);//Primeiro le, segundo escreve.
+		if (success == 0)
+		{
+				sent->content.output = fildes[1];
+				sent = sent->next;
+				if (sent == NULL)
+					break;
+				sent->content.input = fildes[0];
+		}
+	}
+}
+
+int	count_sentence(t_list_sent *sentence)
+{
+	int	len;
+
+	len = 0;
+	while (sentence)
+	{
+		len++;
+		sentence = sentence->next;
+	}
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 17:57:19 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:09:43 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,12 @@ int	main(int argc, char **argv, char **envp)
 		categorize_elements(&list_cells);
 		expand_variable(&list_cells, info);
 		if (handle_quotes(&list_cells) == -1)
-			finish_program(&info, &list_cells, sentence);
+			break ;
 		sentence = create_sentence(list_cells, &info);
-		if (golfer(sentence, &info) == -1)
-		{
-			puts("filho morreu");
-			finish_program(&info, &list_cells, sentence);
-		}
+		if (golfer(&sentence, &info) == -1)
+			break ;
 	}
+	puts("filho morreu");
 	finish_program(&info, &list_cells, sentence);
 	return (0);
 }

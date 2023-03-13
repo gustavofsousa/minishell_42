@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 17:54:35 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:16:51 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	set_signal_handler(void);
 
 // main
 void	expand_variable(t_cell **list_cell, t_info info);
-int	golfer(t_list_sent *sent, t_info *info);
+int		golfer(t_list_sent **sent, t_info *info);
 void	config_fd_system(t_list_sent *sent, t_info *info);
 
 char	*ft_strjoin_free(char *s1, char *s2);
@@ -113,6 +113,8 @@ char		**ft_cpy_env(char	**envs);
 int			ft_export(char *arg, struct s_info *info);
 void		ft_cd(char *path);
 int			do_the_builtin(t_list_sent *sent, t_info *info);
+void		open_pipes(t_list_sent **senti, t_info *info);
+int			count_sentence(t_list_sent *sentence);
 
 // List_sentence
 void		ft_lstclear_sent(t_list_sent **lst);

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:47:45 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 15:17:02 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:25:31 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	do_the_builtin(t_list_sent *sent, t_info *info)
 		ft_cd(sent->content.args);
 	else if (sent->content.command == exporter)
 		ft_export(sent->content.args, info);
+	printf("My PDI->%d\n", getpid());
 	if (info->qtd_sent > 1)
 		return (-1);
 	return (1);

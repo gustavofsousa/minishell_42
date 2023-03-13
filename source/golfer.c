@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 15:12:57 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 15:28:47 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	wait_children_die(t_info *info)
 	pre_status = 0;
 	while (++n_sent < info->qtd_sent)
 	{
-		waitpid(-2 , &pre_status, WUNTRACED);
+		waitpid(-1 , &pre_status, WUNTRACED);
 			if (WIFEXITED(pre_status))
 				g_status = WEXITSTATUS(pre_status);
 			if (WIFSIGNALED(pre_status))
@@ -63,7 +63,8 @@ int	golfer(t_list_sent **sent, t_info *info)
 	{
 		if ((*sent)->content.command != no_builtin)
 		{
-			do_the_builtin(*sent, info);
+			if (do_the_builtin(*sent, info) == -1)
+				return (-1);
 		}
 		else
 		{

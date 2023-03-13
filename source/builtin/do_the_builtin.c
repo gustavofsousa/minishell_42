@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 14:47:45 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 15:42:04 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 17:46:40 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,4 @@ void	open_pipes(t_list_sent **senti, t_info *info)
 				sent->content.input = fildes[0];
 		}
 	}
-}
-
-int	count_sentence(t_list_sent *sentence)
-{
-	int	len;
-
-	len = 0;
-	while (sentence)
-	{
-		len++;
-		sentence = sentence->next;
-	}
-	return (len);
 }

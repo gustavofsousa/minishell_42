@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 15:53:56 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 18:00:04 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ void	wait_children_die(t_info *info)
 	pre_status = 0;
 	while (++n_sent < info->qtd_sent)
 	{
-		waitpid(info->nbr_pids[n_sent] , &pre_status, WUNTRACED);
-		printf("\n");
-		printf("PID of wait%d\n", info->nbr_pids[n_sent]);
+		waitpid(info->nbr_pids[n_sent], &pre_status, 0);
+		printf("The son-> %d has finished\n", info->nbr_pids[n_sent]);
 		if (WIFEXITED(pre_status))
 			g_status = WEXITSTATUS(pre_status);
 		if (WIFSIGNALED(pre_status))
@@ -63,7 +62,6 @@ int	golfer(t_list_sent **sent, t_info *info)
 	int	i;
 	
 	i = 0;
-	info->qtd_sent = count_sentence(*sent);
 	info->nbr_pids = malloc(sizeof(int) * info->qtd_sent);
 	open_pipes(sent, info);
 	while (*sent)

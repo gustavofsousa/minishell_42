@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 16:46:26 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 18:00:34 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,17 +129,22 @@ void	close_old_fd(t_sentence *sent, char redir)
  * E tratar error se o open falhar (retorno -1, e o errno diz qual foi)
  * Coloco o fd como output(> ou >>) ou input(<) daquela sentença.
  */
-void	open_redirect(t_cell *list_in, t_sentence *sent, t_info *info)
+int	open_redirect(t_cell *list_in, t_sentence *sent, t_info *info)
 {
 	char	redir;
 
-	redir = list_in->content[0];
-	if (list_in->next && list_in->next->token == word)
+	if (list_in->token == redirect)
 	{
-		close_old_fd(sent, redir);
-		create_new_fd(sent, list_in, redir, info);
-		deal_error(sent, redir);
+		redir = list_in->content[0];
+		if (list_in->next && list_in->next->token == word)
+		{
+			close_old_fd(sent, redir);
+			create_new_fd(sent, list_in, redir, info);
+			deal_error(sent, redir);
+		}
+		else
+			ft_putstr_fd("syntax error near unexpected token 'newline'", 2);
+		return (1);
 	}
-	else
-		ft_putstr_fd("syntax error near unexpected token 'newline'", 2);
+	return (0);
 }

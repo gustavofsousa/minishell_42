@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 15:38:16 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 18:02:00 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ t_list_sent	*ft_lstnew_sent(t_sentence content);
 
 //create_sentence.c
 t_list_sent	*create_sentence(t_cell *list_in, t_info *info);
-void		open_redirect(t_cell *list_in, t_sentence *sent, t_info *info);
+int		open_redirect(t_cell *list_in, t_sentence *sent, t_info *info);
 
 //extern
 char	*prepare_path(t_info *info, t_list_sent *sent);
@@ -139,4 +139,6 @@ void	finish_program(t_info *info, t_cell **list_cells, t_list_sent *sentence);
 void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence);
 void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence);
 
+// Testes
+void	print_sentence(t_list_sent * sent);
 #endif

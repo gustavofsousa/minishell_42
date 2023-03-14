@@ -7,6 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 11:23:25 by parnaldo          #+#    #+#             */
 /*   Updated: 2023/03/09 14:24:18 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/13 16:19:39 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,3 +46,12 @@ int	calc_len_content(t_cell **list, t_info info, int index)
 	len_new_content += len_content;
 	return (len_new_content);
 }
+
+/*void	clear_variable(t_cell **list_cell)
+{
+	int i;
+
+	i = 0;
+	//while (list){}
+	//ir até o $ de saber um substr dessa partte limpar e colocar no lulgar.
+}*/

@@ -97,7 +97,7 @@ int	ft_export(char *arg, struct s_info *info)
 	args = ft_split(arg, ' ');
 	while (args[i])
 	{
-		if (check_arg(args[i]))
+		if (check_arg(args[i]) && !is_equal_env(args[i], info->env_cpy))
 			new_envs++;
 		else
 			printf("export: `%s': not a valid identifier\n", args[i]);

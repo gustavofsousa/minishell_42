@@ -33,7 +33,13 @@ MAIN		:=	main.c	signal.c	golfer.c	utils_join.c	\
 PARSER		:=	parser.c list_cells.c token.c	handle_quotes.c	\
 				expand_variables.c	expand_variables_utils.c	
 BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c	\
-				do_the_builtin.c
+			      env_utils.c
+#MAIN		:=	main.c	signal.c	golfer.c	redirect.c	ft_strjoin_free.c \
+				create_sentence.c	list_sentence.c	expand_variables.c expand_variables_utils.c 
+
+#PARSER		:=	parser.c list_cells.c token.c	handle_quotes.c
+#BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c env_utils.c
+
 EXTERN		:= 	path.c
 SENTENCE	:=	create_sentence.c	redirect.c	list_sentence.c	heredoc.c
 

@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 19:51:57 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/10 12:45:38 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 
 int	g_status;
 extern int	errno;
+
+int	g_status;
 
 enum e_token
 {
@@ -138,6 +140,18 @@ void		freeing_local(char *right_path, char **right_args);
 void		finish_program(t_info *info, t_cell **list_cells, t_list_sent *sentence);
 void		point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence);
 void		reset(t_info *info, t_cell **list_cells, t_list_sent *sentence);
+
+// Expand Variable
+int		calc_len_content(t_cell **list, t_info info, int index);
+int		len_word(char *str);
+int		check_is_status(char *content);
+int		created_status(t_cell *list);
+
+// Env
+int	ft_strlen_env(char *s);
+int	is_equal_env(char *arg, char **env);
+
+void print_sentence(t_list_sent *sent);
 
 // Testes
 void		print_sentence(t_list_sent * sent);

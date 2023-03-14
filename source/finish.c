@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 12:27:56 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 19:46:50 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/14 17:34:52 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	close_fdes(t_info *info)
 {
-	t_list_sent *sentence;
+	t_list_sent	*sentence;
 
 	sentence = info->head;
 	while (sentence)
@@ -54,8 +54,8 @@ void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 	info->qtd_sent = 0;
 	info->last_pid = -1;
 	info->head = NULL;
-	info->nbr_pids= NULL;
-	*list_cells = NULL;	
+	info->nbr_pids = NULL;
+	*list_cells = NULL;
 	*sentence = NULL;
 	g_status = 0;
 }
@@ -68,7 +68,6 @@ void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence)
 	ft_lstclear_sent(&sentence);
 	free(info->nbr_pids);
 	point_to_null(info, list_cells, &sentence);
-	//close fd's i opened in redirect.
 }
 
 void	finish_program(t_info *info, t_cell **list_cells, t_list_sent *sentence)
@@ -86,4 +85,3 @@ void	finish_program(t_info *info, t_cell **list_cells, t_list_sent *sentence)
 	info->env_cpy = NULL;
 	exit (0);
 }
-

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/14 15:41:29 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/14 17:33:01 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	do_the_builtin(t_list_sent *sent, t_info *info, int i)
 		ft_cd(sent->content.args);
 	else if (sent->content.command == exporter)
 		ft_export(sent->content.args, info);
-	printf("My PDI->%d\n", getpid());
 	if (info->qtd_sent > 1)
 		return (-1);
 	return (1);
@@ -66,7 +65,6 @@ int	golfer(t_list_sent **sent, t_info *info)
 	i = 0;
 	info->nbr_pids = malloc(sizeof(int) * info->qtd_sent);
 	open_pipes(sent, info);
-	print_sentence(*sent);
 	while (*sent)
 	{
 		if ((*sent)->content.command != no_builtin)
@@ -83,7 +81,6 @@ int	golfer(t_list_sent **sent, t_info *info)
 				return (-1);
 				// Limpar as paradas.
 			}
-
 		}
 		i++;
 		*sent = (*sent)->next;

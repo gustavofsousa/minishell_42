@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:51:14 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/14 15:53:23 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/14 15:59:02 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,13 @@ char	*get_right_path(char **mtx_path, char *command)
 char	*prepare_path(t_info *info, t_list_sent *sent)
 {
 	char	**mtx_path;
+	char	*right_path;
 	char	*command;
 	int		i;
 
 	mtx_path = get_path(info->env_cpy);
 	command = get_command(sent->content.args);
+	right_path = get_right_path(mtx_path, command);
 	free(command);
 	i = -1;
 	if (mtx_path)
@@ -81,5 +83,5 @@ char	*prepare_path(t_info *info, t_list_sent *sent)
 			free(mtx_path[i]);
 		free(mtx_path);
 	}
-	return (get_right_path(mtx_path, command));
+	return (right_path);
 }

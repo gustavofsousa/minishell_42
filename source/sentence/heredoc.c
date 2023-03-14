@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:09:37 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/14 14:46:45 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/14 17:32:09 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	open_pipe_redir(t_sentence *sent)
 	int		success;
 
 	success = pipe(fildes);
-	printf("Novo letura\t%d\n", fildes[0]);
-	printf("Novo escrita\t%d\n", fildes[1]);
 	if (success == -1)
 		return (-1);
 	sent->input = fildes[0];

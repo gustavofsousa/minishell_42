@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:19:23 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/14 15:32:29 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/14 17:36:16 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	open_pipes(t_list_sent **senti, t_info *info)
 				close (fildes[1]);
 			sent = sent->next;
 			if (sent == NULL)
-				break;
+				break ;
 			if (sent->content.input == 0)
 				sent->content.input = fildes[0];
 			else
@@ -60,7 +60,6 @@ void	wait_children_die(t_info *info)
 	while (++n_sent < info->qtd_sent)
 	{
 		waitpid(info->nbr_pids[n_sent], &pre_status, 0);
-		printf("The son-> %d has finished\n", info->nbr_pids[n_sent]);
 		if (WIFEXITED(pre_status))
 			g_status = WEXITSTATUS(pre_status);
 		if (WIFSIGNALED(pre_status))

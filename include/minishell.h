@@ -127,4 +127,6 @@ int		created_status(t_cell *list);
 int	ft_strlen_env(char *s);
 int	is_equal_env(char *arg, char **env);
 
+void print_sentence(t_list_sent *sent);
+
 #endif

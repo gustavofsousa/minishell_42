@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 19:53:24 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/14 14:52:28 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,5 @@ t_list_sent	*create_sentence(t_cell *list_in, t_info *info)
 		list_in = list_in->next;
 	}
 	info->head = sent;
-	print_sentence(sent);
 	return (sent);
 }

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:19:23 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 19:47:20 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/14 14:48:26 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	wait_children_die(t_info *info)
 	pre_status = 0;
 	while (++n_sent < info->qtd_sent)
 	{
-		waitpid(info->nbr_pids[n_sent], &pre_status, 0);
+		waitpid(info->nbr_pids[n_sent], &pre_status, WUNTRACED);
 		printf("The son-> %d has finished\n", info->nbr_pids[n_sent]);
 		if (WIFEXITED(pre_status))
 			g_status = WEXITSTATUS(pre_status);

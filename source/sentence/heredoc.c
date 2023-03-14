@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:09:37 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/14 14:41:06 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/14 14:46:45 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,16 @@ void	do_heredoc(t_cell *list_in, t_sentence *sent)
 
 	cmd = NULL;
 	fd_write = open_pipe_redir(sent);
-	printf("-----------\n");
-	printf("Input->\t%d\n", sent->input);
-	printf("Output->\t%d\n", sent->output);
-	printf("-----------\n");
 	if (fd_write != -1)
 	{
 		g_status = 0;
-		printf("heredoc with %s\n", list_in->next->content);
 		while (42)
 		{
 			cmd = readline(">");
-			if (cmd == NULL || 
-				!ft_strncmp(cmd, list_in->next->content, ft_strlen(cmd))
-				|| g_status == 1) 
-			{
-				printf("deu break\n");
+			if (cmd == NULL
+				|| !ft_strncmp(cmd, list_in->next->content, ft_strlen(cmd))
+				|| g_status == 1)
 				break ;
-			}
-			printf("My fd->%d\n", fd_write);
 			ft_putendl_fd(cmd, fd_write);
 			free(cmd);
 			cmd = NULL;

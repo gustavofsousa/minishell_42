@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 19:27:53 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/14 14:52:53 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	golfer(t_list_sent **sent, t_info *info)
 	i = 0;
 	info->nbr_pids = malloc(sizeof(int) * info->qtd_sent);
 	open_pipes(sent, info);
+	print_sentence(*sent);
 	while (*sent)
 	{
 		if ((*sent)->content.command != no_builtin)

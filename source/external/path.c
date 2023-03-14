@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:51:14 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/09 14:49:12 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/14 15:53:23 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ char	*get_command(char *str)
 	return (ft_substr(str, 0, i));
 }
 
-char **get_path(char **envp)
+char	**get_path(char **envp)
 {
-	char *path;
-	char **path_mtx;
-	
+	char	*path;
+	char	**path_mtx;
+
 	path = NULL;
 	path_mtx = NULL;
 	while (*envp)
@@ -43,11 +43,11 @@ char **get_path(char **envp)
 	return (path_mtx);
 }
 
-char *get_right_path(char **mtx_path, char *command)
+char	*get_right_path(char **mtx_path, char *command)
 {
-	int	i;
-	int access_return;
-	char *path_command;
+	int		i;
+	int		access_return;
+	char	*path_command;
 
 	path_command = NULL;
 	i = 0;
@@ -57,7 +57,7 @@ char *get_right_path(char **mtx_path, char *command)
 		path_command = ft_strjoin_free(path_command, command);
 		access_return = access(path_command, F_OK);
 		if (access_return == 0)
-			break;
+			break ;
 		free(path_command);
 		path_command = NULL;
 		i++;
@@ -69,14 +69,17 @@ char	*prepare_path(t_info *info, t_list_sent *sent)
 {
 	char	**mtx_path;
 	char	*command;
+	int		i;
 
 	mtx_path = get_path(info->env_cpy);
 	command = get_command(sent->content.args);
-	/*
 	free(command);
-	while (mtx_path)
-		free((*mtx_path)++);
-	free(mtx_path);
-	*/
+	i = -1;
+	if (mtx_path)
+	{
+		while (mtx_path[++i])
+			free(mtx_path[i]);
+		free(mtx_path);
+	}
 	return (get_right_path(mtx_path, command));
 }

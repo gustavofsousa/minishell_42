@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/14 14:52:53 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/14 15:41:29 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,12 @@ int	golfer(t_list_sent **sent, t_info *info)
 				return (-1);
 				// Limpar as paradas.
 			}
+
 		}
 		i++;
 		*sent = (*sent)->next;
 	}
+	close_fdes(info);
 	wait_children_die(info);
 	*sent = info->head;
 	return (0);

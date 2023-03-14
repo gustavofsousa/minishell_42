@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:19:23 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/14 14:48:26 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/14 15:32:29 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ void	open_pipes(t_list_sent **senti, t_info *info)
 
 void	config_fd_system(t_list_sent *sent, t_info *info)
 {
-	dup2(sent->content.input, 0);
-	dup2(sent->content.output, 1);
+	if (sent->content.input != 0)
+		dup2(sent->content.input, 0);
+	if (sent->content.output != 1)
+		dup2(sent->content.output, 1);
 	close_fdes(info);
 }
 
@@ -57,7 +59,7 @@ void	wait_children_die(t_info *info)
 	pre_status = 0;
 	while (++n_sent < info->qtd_sent)
 	{
-		waitpid(info->nbr_pids[n_sent], &pre_status, WUNTRACED);
+		waitpid(info->nbr_pids[n_sent], &pre_status, 0);
 		printf("The son-> %d has finished\n", info->nbr_pids[n_sent]);
 		if (WIFEXITED(pre_status))
 			g_status = WEXITSTATUS(pre_status);

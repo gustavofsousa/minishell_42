@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 21:01:14 by gusousa           #+#    #+#             */
-/*   Updated: 2023/02/24 18:31:25 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/15 20:29:44 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ void	categorize_elements(t_cell **list)
 			(*list)->token = redirect;
 		else
 			(*list)->token = word;
+		if ((*list)->next == NULL && (*list)->token == piper)
+			ft_putstr_fd("foi error", 2);
 		*list = (*list)->next;
 	}
+	if (list_keep->token == piper)
+		ft_putstr_fd("foi erro", 2);
 	*list = list_keep;
 }

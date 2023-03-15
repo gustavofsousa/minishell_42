@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/15 20:05:18 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/15 20:13:07 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ t_list_sent	*create_sentence(t_cell *list_in, t_info *info)
 	sent = NULL;
 	info->qtd_sent = count_sentences(list_in);
 	i = 0;
-	while (i < info->qtd_sent)
+	while (i < info->qtd_sent && list_in != NULL)
 	{
 		list_in = new_sent(list_in, &sent);
 		if (list_in == NULL)

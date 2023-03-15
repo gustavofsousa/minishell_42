@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:44:56 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/01 11:02:27 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/15 13:42:26 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	count_args(char *str)
 	i = -1;
 	while (mtx_str[++i])
 		free(mtx_str[i]);
-	free(mtx_str[i]);
+	free(mtx_str);
 	return (len);
 }
 

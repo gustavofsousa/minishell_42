@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:54:12 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/05 18:22:39 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/15 13:52:46 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ static char	**created_new_env(struct s_info *info, int amount_args)
 	while (info->env_cpy[i])
 		i++;
 	i += amount_args;
-	new_env = malloc(i * sizeof(char *));
+	new_env = malloc((i + 1) * sizeof(char *));
 	if (!new_env)
 		return (NULL);
+	new_env[i] = NULL;
 	return (new_env);
 }
 
@@ -107,6 +108,6 @@ int	ft_export(char *arg, struct s_info *info)
 	i = 0;
 	while (args[i])
 		free(args[i++]);
-	free(args[i]);
+	free(args);
 	return (0);
 }

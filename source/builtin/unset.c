@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:07:03 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/09 12:10:34 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/15 14:02:24 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	ft_unset(char *arg, struct s_info *info)
 	char		**args;
 	int			len_envs;
 	char		**new_env;
+	int			i;
 
 	len_envs = 0;
 	if (!arg)
@@ -85,5 +86,9 @@ int	ft_unset(char *arg, struct s_info *info)
 		return (0);
 	cpy_variable(info, args, new_env);
 	info->env_cpy = new_env;
+	i = -1;
+	while (args[++i])
+		free(args[i]);
+	free(args);
 	return (1);
 }

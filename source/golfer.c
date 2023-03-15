@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/14 17:33:01 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/15 10:04:04 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	golfer(t_list_sent **sent, t_info *info)
 	int	i;
 
 	i = 0;
-	info->nbr_pids = malloc(sizeof(int) * info->qtd_sent);
+	info->nbr_pids = ft_calloc(info->qtd_sent, sizeof(int));
 	open_pipes(sent, info);
 	while (*sent)
 	{

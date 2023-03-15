@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/15 16:39:07 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/15 18:27:20 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ int	do_the_execve(t_info *info, t_list_sent *sent, int i)
 	char	**right_args;
 
 	right_path = prepare_path(info, sent);
+	//printf("%s\n", right_path);
 	right_args = ft_split(sent->content.args, ' ');
-	right_args[0] = ft_substitute(right_args[0]);
+	//printf("%s\n", right_args[0]);
+	//right_args[0] = ft_substitute(right_args[0]);
 	info->nbr_pids[i] = fork();
 	if (info->nbr_pids[i] == 0)
 	{

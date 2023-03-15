@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:51:14 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/15 16:39:29 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/15 18:29:28 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ char	*prepare_path(t_info *info, t_list_sent *sent)
 	char	*command;
 	int		i;
 
-	if (sent->content.args[0] == '/')
+	if (sent->content.args[0] == '/' || sent->content.args[0] == '.')
 	{
 		i = 0;
-		while (sent->content.args[i] || sent->content.args[i] != ' ')
+		while (sent->content.args[i] && sent->content.args[i] != ' ')
 			i++;
 		return (ft_substr(sent->content.args, 0, i));
 	}
@@ -90,18 +90,4 @@ char	*prepare_path(t_info *info, t_list_sent *sent)
 		free(mtx_path);
 	}
 	return (free(command), right_path);
-}
-
-char	*ft_substitute(char *str)
-{
-	char	*tmp;
-
-	if (str[0] == '/')
-	{
-		tmp = ft_strrchr(str, '/');
-		tmp = ft_strdup(tmp + 1);
-		free(str);
-		return (tmp);
-	}
-	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 12:45:38 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/15 16:38:56 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void		do_heredoc(t_cell *list_in, t_sentence *sent);
 
 //extern
 char		*prepare_path(t_info *info, t_list_sent *sent);
+char		*ft_substitute(char *str);
 
 //Finish program and things.
 void		close_fdes(t_info *info);

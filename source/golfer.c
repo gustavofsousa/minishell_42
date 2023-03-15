@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/15 18:27:20 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/15 18:42:47 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ int	do_the_execve(t_info *info, t_list_sent *sent, int i)
 	char	**right_args;
 
 	right_path = prepare_path(info, sent);
-	//printf("%s\n", right_path);
 	right_args = ft_split(sent->content.args, ' ');
-	//printf("%s\n", right_args[0]);
-	//right_args[0] = ft_substitute(right_args[0]);
+	printf("Golfer: %s\n", right_args[0]);
 	info->nbr_pids[i] = fork();
 	if (info->nbr_pids[i] == 0)
 	{
@@ -73,6 +71,7 @@ int	golfer(t_list_sent **sent, t_info *info)
 	{
 		if ((*sent)->content.command != no_builtin)
 		{
+			printf("Belong\n");
 			if (do_the_builtin(*sent, info, i) == -1)
 				return (-1);
 		}

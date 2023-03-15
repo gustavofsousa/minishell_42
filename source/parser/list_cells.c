@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 13:09:14 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 14:10:43 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/15 13:19:37 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	list_clear_cells(t_cell **list)
 	while (*list)
 	{
 		tmp = (*list)->next;
+		free((*list)->content);
 		free(*list);
 		*list = NULL;
 		*list = tmp;

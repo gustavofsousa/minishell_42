@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:07:01 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 18:13:17 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/15 13:21:44 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_lstclear_sent(t_list_sent **lst)
 	while (*lst)
 	{
 		aux = (*lst)->next;
+		free((*lst)->content.args);
 		free(*lst);
 		*lst = aux;
 	}

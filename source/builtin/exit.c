@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:46:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 18:58:10 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/15 19:58:49 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 int	is_numeric(char *str)
 {
+	char *num;
+
+	num = ft_itoa(ft_atoi(str));
+	if (ft_strncmp(num, str, ft_strlen(str)))
+	{
+		free(num);
+		return (0);
+	}
+	/*
 	if (*str == '-' || *str == '+')
 		str++;
 	while (*str)
@@ -22,6 +31,8 @@ int	is_numeric(char *str)
 			return (0);
 		str++;
 	}
+	*/
+	free(num);
 	return (1);
 }
 

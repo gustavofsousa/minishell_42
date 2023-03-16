@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/16 10:49:32 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/16 14:02:42 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	divide_prompt(t_info *info, t_cell **list_cells);
 void	categorize_elements(t_cell **list);
 int		handle_quotes(t_cell **list_cells);
 void	delete_cell(t_cell **init_cell, t_cell **list);
-
+void	handle_space(t_list_sent sent, t_info info);
 void	list_clear_cells(t_cell **list);
 void	create_new_cell(t_cell **list_cells, char *str, int spce);
 
@@ -114,7 +114,7 @@ int			ft_export(char *arg, struct s_info *info);
 void		ft_cd(char *path);
 
 // pipes
-void		open_pipes(t_list_sent **senti, t_info *info);
+void		open_pipes(t_list_sent **sent, t_info *info);
 void		config_fd_system(t_list_sent *sent, t_info *info);
 void		wait_children_die(t_info *info);
 

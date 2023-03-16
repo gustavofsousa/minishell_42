@@ -6,7 +6,7 @@
 #    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/03/13 19:26:16 by gusousa          ###   ########.fr        #
+#    Updated: 2023/03/16 14:58:08 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c	\
 #BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c env_utils.c
 
 EXTERN		:= 	path.c
-SENTENCE	:=	create_sentence.c	redirect.c	list_sentence.c	heredoc.c
+SENTENCE	:=	create_sentence.c	redirect.c	list_sentence.c	heredoc.c	\
+				handle_space.c
 
 SRC		:=	$(MAIN)				\
 			$(addprefix parser/, $(PARSER))			\

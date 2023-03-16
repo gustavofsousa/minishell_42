@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/16 13:57:45 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/16 14:42:19 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ int	main(int argc, char **argv, char **envp)
 		check_eof(&info);
 		divide_prompt(&info, &list_cells);
 		categorize_elements(&list_cells);
-		handle_space(sent, info);
 		expand_variable(&list_cells, info);
 		if (handle_quotes(&list_cells) == -1)
 			break ;
 		sentence = create_sentence(list_cells, &info);
+		handle_space(&sentence, info);
 		if (golfer(&sentence, &info) == -1)
 			break ;
 	}

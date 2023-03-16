@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 12:09:06 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/13 14:32:54 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/16 14:57:22 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,11 @@ void	created_content(t_cell *list, char *str, char *num)
 
 int	created_status(t_cell *list)
 {
-	int		len_list;
 	char	*new_str;
 	int		i;
 	int		len_new_str;
 	char	*num;
 
-	len_list = ft_strlen((*list).content);
 	i = 0;
 	len_new_str = 0;
 	num = ft_itoa(g_status);

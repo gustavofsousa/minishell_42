@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 13:48:14 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/16 19:58:00 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	divide_prompt(t_info *info, t_cell **list_cells)
 	char	**mtx_str;
 	int		i;
 
-	mtx_str = ft_split(info->prompt, ' ');
+	mtx_str = ft_split_mod(info->prompt, ' ');
 	i = 0;
 	while (mtx_str[i])
 	{

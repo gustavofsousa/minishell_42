@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/16 14:55:41 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/16 19:51:02 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,12 +124,11 @@ t_list_sent	*ft_lstnew_sent(t_sentence content);
 void		expand_variable(t_cell **list_cell, t_info info);
 int			calc_len_content(t_cell **list, t_info info, int index);
 int			len_word(char *str);
-
+char		**ft_split_mod(char const *s, char c);
 //create_sentence.c
 t_list_sent	*create_sentence(t_cell *list_in, t_info *info);
 int			open_redirect(t_cell *list_in, t_sentence *sent);
 void		do_heredoc(t_cell *list_in, t_sentence *sent);
-void		handle_space(t_list_sent **sent, t_info info);
 
 //extern
 char		*prepare_path(t_info *info, t_list_sent *sent);

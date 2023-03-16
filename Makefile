@@ -6,7 +6,7 @@
 #    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/03/16 14:58:08 by gusousa          ###   ########.fr        #
+#    Updated: 2023/03/16 19:43:26 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIBDIR	:=	libft/
 MAIN		:=	main.c	signal.c	golfer.c	utils_join.c	\
 				finish.c	pipes.c
 PARSER		:=	parser.c list_cells.c token.c	handle_quotes.c	\
-				expand_variables.c	expand_variables_utils.c	
+				expand_variables.c	expand_variables_utils.c	ft_split_mod.c
 BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c	\
 			      env_utils.c
 #MAIN		:=	main.c	signal.c	golfer.c	redirect.c	ft_strjoin_free.c \
@@ -41,8 +41,7 @@ BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c	\
 #BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c env_utils.c
 
 EXTERN		:= 	path.c
-SENTENCE	:=	create_sentence.c	redirect.c	list_sentence.c	heredoc.c	\
-				handle_space.c
+SENTENCE	:=	create_sentence.c	redirect.c	list_sentence.c	heredoc.c
 
 SRC		:=	$(MAIN)				\
 			$(addprefix parser/, $(PARSER))			\

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/09 14:10:49 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/16 18:43:54 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	join_cells(t_cell **init_cell, char *content, int *fq, char *quote)
 	free(content);
 }
 
-char	which_quotes(char *str)
+static char	which_quotes(char *str)
 {
 	while (*str)
 	{

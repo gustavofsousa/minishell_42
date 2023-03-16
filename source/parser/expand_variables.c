@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/10 11:38:11 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/16 10:59:04 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,10 @@ void	expand_variable(t_cell **list_cell, t_info info)
 		//vai ter duas condições e a com aspas
 		if (ft_strchr(list_move->content, '$'))
 		{
-			if (ft_strchr(list_move->content, 39))
-				if (ft_strnstr(list_move->content, "'\"", 3)
-					|| (ft_strchr(list_move->content, 39)
-						&& !ft_strchr(list_move->content, 34)))
-					break ;
+			if (check_quotes(list_move->content))
+				break ;
 			if (check_is_status((*list_move).content))
-			{
 				created_status(list_move);
-			}
 			index = look_for_variable(list_move, info);
 			if (index > -1)
 				substitute(&list_move, info, index);

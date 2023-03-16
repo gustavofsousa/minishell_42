@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/15 16:38:56 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/16 10:49:32 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ int		calc_len_content(t_cell **list, t_info info, int index);
 int		len_word(char *str);
 int		check_is_status(char *content);
 int		created_status(t_cell *list);
+int		check_quotes(char *content);
 
 // Env
 int	ft_strlen_env(char *s);

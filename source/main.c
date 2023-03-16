@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/13 16:35:35 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/16 11:21:57 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	main(int argc, char **argv, char **envp)
 	point_to_null(&info, &list_cells, &sentence);
 	set_signal_handler();
 	info.env_cpy = ft_cpy_env(envp);
+	//fazer uma função para inicialização
+	ft_unset("OLDPWD", &info);
 	while (42)
 	{
 		reset(&info, &list_cells, sentence);

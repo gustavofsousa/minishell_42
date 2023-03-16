@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:07:03 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/15 14:02:24 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/16 11:28:14 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ int	ft_unset(char *arg, struct s_info *info)
 	while (args[++i])
 		free(args[i]);
 	free(args);
+	g_status = 0;
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:44:56 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/15 13:42:26 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/16 11:15:54 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	ft_cd(char *path)
 	if (count_args(path) > 1)
 	{
 		ft_putstr_fd("cd: too many args\n", 2);
-		//return (1);//Which number?
 	}
 	else
 	{
@@ -51,8 +50,10 @@ void	ft_cd(char *path)
 		if (status == -1)
 		{
 			ft_putstr_fd("cd failed. path not found(?)", 2);
-			//return (1);//Retorna qual numero?
+			g_status = 1;
+			return ;
 		}
 	}
+	g_status = 0;
 }
 // Usar perror() para esses e outros?

@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:54:17 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/09 13:37:13 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/16 11:26:19 by parnaldo         ###   ########.fr       */
 /*   Updated: 2023/03/04 09:57:42 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -59,4 +59,5 @@ void	ft_echo(char *str, int fd)
 	ready_str = reduce_flag(str);
 	ft_putstr_fd(ready_str, fd);
 	free(ready_str);
+	g_status = 0;
 }

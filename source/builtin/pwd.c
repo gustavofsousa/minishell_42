@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 17:17:39 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/04 12:07:44 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/16 11:25:25 by parnaldo         ###   ########.fr       */
 /*   Updated: 2023/03/04 10:13:43 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -20,4 +20,5 @@ void	ft_pwd(int fd)
 	path = getcwd(NULL, 0);
 	ft_putendl_fd(path, fd);
 	free(path);
+	g_status = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:54:12 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/15 13:52:46 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/16 11:27:28 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,6 @@ int	ft_export(char *arg, struct s_info *info)
 	while (args[i])
 		free(args[i++]);
 	free(args);
+	g_status = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 08:10:50 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/05 18:41:59 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/16 11:25:02 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ int	ft_env(char **envs, int fd)
 		ft_putendl_fd(envs[i], fd);
 		i++;
 	}
+	g_status = 0;
 	return (1);
 }

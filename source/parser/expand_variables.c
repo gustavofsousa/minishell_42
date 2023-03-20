@@ -6,44 +6,48 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/20 18:11:07 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/20 19:48:34 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/*
- * Apaga onde estava o nome da variável e coloca o valor dela.
- */
-void	create_new_content(t_cell **list, t_info info)
-{	
-	
-}
-
-void	sth()
+void	dup_or_join_char(t_cell **list, char c)
 {
-
-}
-
-void	trade_value(t_cell **list, t_info info, char *args)
-{
-	int	len_in;
-	int	index_env;
-
-	if (args[0] == '\0')
-		return ;
-	len_in = 0;
-	while ((str[i] == '_' || ft_isalnum(str[i])) && str[i])
-		len_in++; 
-	new_value = get_value_env(info, args, len_in);
-	if (index_env != -1)
-	{
-		// dup da primeira linha
-		// jion_char dos env + len + 1
-		// join da linha + len
-	}
+	if ((*list)->content == NULL)
+		(*list)->content = ft_strdup_char(c);
 	else
-		//substitute for space
+		ft_strjoin_char((*list)->content, c);
+}
+
+int	get_value_env(t_info info, t_cell **list,  char *str, int i)
+{	
+	int	len;
+	int	line;
+	char *new_value;
+
+	i++;
+	if (str[i] == '\0')
+		return (0);
+	len = 1;
+	while ((str[i + len] == '_' || ft_isalnum(str[i + len])) && str[i + len])
+		len++;
+	line = -1;
+	while (info.env_cpy[++line])
+	{
+		if (!ft_strncmp(str, info.env_cpy[line], len))
+		{
+			printf("Minha linha: %s\n", info.env_cpy[line]);
+			new_value = info.env_cpy[line] + (len + 1);
+			printf("%s\n", new_value);
+			break ;
+		}
+	}
+	if ((*list)->content == NULL)
+		(*list)->content = ft_strdup(new_value);
+	else
+		ft_strjoin_free((*list)->content, new_value);
+	return (len - 1);
 }
 
 int	change_flag_quote(char c, int fq)
@@ -56,53 +60,55 @@ int	change_flag_quote(char c, int fq)
 			return (1);
 	}
 	else if (fq == 1)
+	{
 		if (c == '\'')
 			return (0);
+	}
 	else if (fq == 2)
+	{
 		if (c == '"')
 			return (0);
+	}
+	return (0);
 }
 
-void	substitute(t_cell **list, t_info info, char **args)
+void	substitute(t_cell **list, t_info info, char *str)
 {	
 	int		fq;
 	int		i;
-	int		j;
 
+	free((*list)->content);
+	(*list)->content = NULL;
 	i = -1;
 	fq = 0;
-	while (args[++i])
+	while (str[++i])
 	{
-		j = -1;
-		while (args[i][++j])
+		fq = change_flag_quote(str[i], fq);
+		if (fq != 1 && str[i] == '$')
 		{
-			fq = change_flag_quote(args[i][j], fq);
-			if (fq != 1)
-				trade_value(list, info, args[i]);
+			if (str[i + 1] == ' ')
+				dup_or_join_char(list, ' ');
+			else
+				i += get_value_env(info, list, str, i) + 1;
+			if (str[i] == '\0')
+				break ;
 		}
+		else
+			dup_or_join_char(list, str[i]);
 	}
 }
-/*
- * Compara se depois do $ a variável está com nome igual.
- */
 
 void	expand_variable(t_cell **list_cell, t_info info)
 {
 	t_cell	*list_move;
-	char	**args;
-	int		i;
 
 	list_move = *list_cell;
 	while (list_move != NULL)
 	{
 		if (ft_strchr(list_move->content, '$'))
 		{
-			args = ft_split(list_move->content, '$');
-			substitute(list_move, info, args);
-			i = -1;
-			while (args[++i])
-				free(args[i]);
-			free(args);
+		printf("first while\n");
+			substitute(&list_move, info, list_move->content);
 		}
 		list_move = list_move->next;
 	}

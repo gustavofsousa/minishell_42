@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/20 16:33:23 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:11:07 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,22 @@ void	create_new_content(t_cell **list, t_info info)
 	
 }
 
+void	sth()
+{
+
+}
+
 void	trade_value(t_cell **list, t_info info, char *args)
 {
-	int	i;
+	int	len_in;
 	int	index_env;
 
 	if (args[0] == '\0')
 		return ;
-	index_env = get_index_env(info, args);
+	len_in = 0;
+	while ((str[i] == '_' || ft_isalnum(str[i])) && str[i])
+		len_in++; 
+	new_value = get_value_env(info, args, len_in);
 	if (index_env != -1)
 	{
 		// dup da primeira linha
@@ -69,7 +77,7 @@ void	substitute(t_cell **list, t_info info, char **args)
 		while (args[i][++j])
 		{
 			fq = change_flag_quote(args[i][j], fq);
-			if (fq != 1 && j == 0)
+			if (fq != 1)
 				trade_value(list, info, args[i]);
 		}
 	}

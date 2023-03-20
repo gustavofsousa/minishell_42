@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/16 10:59:04 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:33:23 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,95 +15,86 @@
 /*
  * Apaga onde estava o nome da variável e coloca o valor dela.
  */
-void	create_new_content(t_cell **list, t_info info, int index, int len_w)
+void	create_new_content(t_cell **list, t_info info)
 {	
-	int		aux;
-	int		i;
-	char	*str;
-	int		len_new_content;
-
-	len_new_content = calc_len_content(list, info, index);
-	i = 0;
-	str = malloc(len_new_content * sizeof(char));
-	if (!str)
-		return ;
-	while ((*list)->content[i] != '$')
-	{
-		str[i] = (*list)->content[i];
-		i++;
-	}
-	aux = i + (len_w + 1);
-	//free na list->content
-	while (info.env_cpy[index][++len_w])
-		str[i++] = info.env_cpy[index][len_w];
-	while ((*list)->content[aux])
-		str[i++] = (*list)->content[aux++];
-	str[i] = '\0';
-	free((*list)->content);
-	(*list)->content = NULL;
-	(*list)->content = str;
+	
 }
 
-void	substitute(t_cell **list, t_info info, int index)
+void	trade_value(t_cell **list, t_info info, char *args)
 {
-	int		len_w;
+	int	i;
+	int	index_env;
 
-	len_w = 0;
-	while (info.env_cpy[index][len_w] != '=')
-		len_w++;
-	create_new_content(list, info, index, len_w);
+	if (args[0] == '\0')
+		return ;
+	index_env = get_index_env(info, args);
+	if (index_env != -1)
+	{
+		// dup da primeira linha
+		// jion_char dos env + len + 1
+		// join da linha + len
+	}
+	else
+		//substitute for space
+}
+
+int	change_flag_quote(char c, int fq)
+{
+	if (fq == 0)
+	{
+		if ('"' == c)
+			return (2);
+		else if (c == '\'')
+			return (1);
+	}
+	else if (fq == 1)
+		if (c == '\'')
+			return (0);
+	else if (fq == 2)
+		if (c == '"')
+			return (0);
+}
+
+void	substitute(t_cell **list, t_info info, char **args)
+{	
+	int		fq;
+	int		i;
+	int		j;
+
+	i = -1;
+	fq = 0;
+	while (args[++i])
+	{
+		j = -1;
+		while (args[i][++j])
+		{
+			fq = change_flag_quote(args[i][j], fq);
+			if (fq != 1 && j == 0)
+				trade_value(list, info, args[i]);
+		}
+	}
 }
 /*
  * Compara se depois do $ a variável está com nome igual.
  */
 
-int	look_for_variable(t_cell *list, t_info info)
-{
-	int		index;
-	char	*str;
-	char	*str_env;
-	int		len;
-	int		len_w;
-
-	len = 0;
-	len_w = 0;
-	index = 0;
-	str = list->content;
-	len_w = len_word(str);
-	while (str[index] != '$')
-		index++;
-	str_env = ft_substr(str, index, len_w);
-	index = 0;
-	while (info.env_cpy[index])
-	{
-		len = ft_strlen(str_env + 1);
-		if (!ft_strncmp(str_env + 1, info.env_cpy[index], len))
-			return (index);
-		index++;
-	}
-	free(str_env);
-	return (-1);
-}
-
 void	expand_variable(t_cell **list_cell, t_info info)
 {
 	t_cell	*list_move;
-	int		index;
+	char	**args;
+	int		i;
 
-	index = 0;
 	list_move = *list_cell;
 	while (list_move != NULL)
 	{
-		//vai ter duas condições e a com aspas
 		if (ft_strchr(list_move->content, '$'))
 		{
-			if (check_quotes(list_move->content))
-				break ;
-			if (check_is_status((*list_move).content))
-				created_status(list_move);
-			index = look_for_variable(list_move, info);
-			if (index > -1)
-				substitute(&list_move, info, index);
+			args = ft_split(list_move->content, '$');
+			substitute(list_move, info, args);
+			i = -1;
+			while (args[++i])
+				free(args[i]);
+			free(args);
 		}
 		list_move = list_move->next;
 	}

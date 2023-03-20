@@ -6,13 +6,13 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:29:46 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/20 08:31:14 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/20 11:41:29 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static int	check_quotes(char s, size_t *fq, char *quote)
+static void	is_quotes(char s, size_t *fq, char *quote)
 {
 	// Abre aspas
 	if ((s == '"' || s == '\'') && *fq == 0)
@@ -38,7 +38,7 @@ static size_t	count_words(char const *s, char sep)
 	fq = 0;
 	while (s[i])
 	{
-		check_quotes(s[i], &fq, &quote);
+		is_quotes(s[i], &fq, &quote);
 		next = i + 1;
 		if (s[i] != sep && (s[next] == sep || s[next] == '\0') && fq != 1)
 			qtd_word++;
@@ -63,7 +63,7 @@ static char	**split(char	**str_splitted, char const *s, char sep)
 		word_len = 0;
 		while (*s && (word_len == 0 || *s != sep || fq == 1))
 		{
-			check_quotes(*s, &fq, &quote);
+			is_quotes(*s, &fq, &quote);
 			if (*s != sep || fq == 1)
 				word_len++;
 			s++;

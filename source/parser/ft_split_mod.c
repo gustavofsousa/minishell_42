@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_mod.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
+/*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:29:46 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/16 20:01:48 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/20 08:31:14 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+static int	check_quotes(char s, size_t *fq, char *quote)
+{
+	// Abre aspas
+	if ((s == '"' || s == '\'') && *fq == 0)
+	{
+		*fq = 1;
+		*quote = s;
+	}
+	// Fechar aspas
+	else if (*fq == 1 && s == *quote)
+		*fq = 0;
+}
 
 static size_t	count_words(char const *s, char sep)
 {
@@ -25,15 +38,7 @@ static size_t	count_words(char const *s, char sep)
 	fq = 0;
 	while (s[i])
 	{
-		// Abre aspas
-		if ((s[i] == '"' || s[i] == '\'') && fq == 0)
-		{
-			fq = 1;
-			quote = s[i];
-		}
-		// Fechar aspas
-		else if (fq == 1 && s[i] == quote)
-			fq = 0;
+		check_quotes(s[i], &fq, &quote);
 		next = i + 1;
 		if (s[i] != sep && (s[next] == sep || s[next] == '\0') && fq != 1)
 			qtd_word++;
@@ -58,14 +63,7 @@ static char	**split(char	**str_splitted, char const *s, char sep)
 		word_len = 0;
 		while (*s && (word_len == 0 || *s != sep || fq == 1))
 		{
-			if ((*s == '"' || *s == '\'') && fq == 0)
-			{
-				fq = 1;
-				quote = *s;
-			}
-			// Fechar aspas
-			else if (fq == 1 && *s == quote)
-				fq = 0;
+			check_quotes(*s, &fq, &quote);
 			if (*s != sep || fq == 1)
 				word_len++;
 			s++;

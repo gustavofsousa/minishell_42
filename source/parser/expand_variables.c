@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/21 16:42:47 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:53:41 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int	get_value_env(t_info info, t_cell **list,  char *str, int i)
 	new_value = NULL;
 	if (str[i] == '\0')
 		return (0);
+	if (str[i] == '?')
+	{
+		dup_or_join_string(list, ft_itoa(g_status));
+		return (1);
+	}
 	len = 0;
 	while ((str[i + len] == '_' || ft_isalnum(str[i + len])) && str[i + len])
 		len++;

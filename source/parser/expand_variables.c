@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/21 16:25:36 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/21 16:42:47 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	substitute(t_cell **list, t_info info, char *str)
 		else
 			dup_or_join_char(list, str[i]);
 	}
+	free(str);
+	str = NULL;
 }
 
 void	expand_variable(t_cell **list_cell, t_info info)
@@ -111,7 +113,7 @@ void	expand_variable(t_cell **list_cell, t_info info)
 	while (list_move != NULL)
 	{
 		if (ft_strchr(list_move->content, '$'))
-			substitute(&list_move, info, list_move->content);
+			substitute(&list_move, info, ft_strdup(list_move->content));
 		list_move = list_move->next;
 	}
 }

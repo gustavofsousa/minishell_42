@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/20 19:50:33 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/20 20:42:58 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	get_value_env(t_info info, t_cell **list,  char *str, int i)
 	line = -1;
 	while (info.env_cpy[++line])
 	{
-		if (!ft_strncmp(str, info.env_cpy[line], len))
+		if (!ft_strncmp(str+1, info.env_cpy[line], len))
 		{
 			// Acho que problema está aqui
 			printf("Minha linha: %s\n", info.env_cpy[line]);

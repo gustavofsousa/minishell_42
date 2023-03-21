@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/21 16:08:41 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/21 16:18:59 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	dup_or_join_char(t_cell **list, char c)
 	if ((*list)->content == NULL)
 		(*list)->content = ft_strdup_char(c);
 	else
-		ft_strjoin_char((*list)->content, c);
+		(*list)->content = ft_strjoin_char((*list)->content, c);
 }
 
 void	dup_or_join_string(t_cell **list, char *new_value)
@@ -27,7 +27,7 @@ void	dup_or_join_string(t_cell **list, char *new_value)
 	if ((*list)->content == NULL)
 		(*list)->content = ft_strdup(new_value);
 	else
-		ft_strjoin_free((*list)->content, new_value);
+		(*list)->content = ft_strjoin_free((*list)->content, new_value);
 }
 
 int	get_value_env(t_info info, t_cell **list,  char *str, int i)
@@ -45,7 +45,7 @@ int	get_value_env(t_info info, t_cell **list,  char *str, int i)
 	line = -1;
 	while (info.env_cpy[++line])
 	{
-		printf("At row\t%s\n", str + i);
+		printf("At row\t%s\n", info.env_cpy[line]);
 		if (!ft_strncmp(str + i, info.env_cpy[line], len))
 		{
 			printf("Minha linha: %s\n", info.env_cpy[line]);

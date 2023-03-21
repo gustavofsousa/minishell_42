@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/21 16:21:18 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/21 16:25:36 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,14 @@ int	get_value_env(t_info info, t_cell **list,  char *str, int i)
 	line = -1;
 	while (info.env_cpy[++line])
 	{
-		printf("At row\t%s\n", info.env_cpy[line]);
 		if (!ft_strncmp(str + i, info.env_cpy[line], len))
 		{
-			printf("Minha linha: %s\n", info.env_cpy[line]);
 			new_value = info.env_cpy[line] + (len + 1);
 			break ;
 		}
 	}
 	dup_or_join_string(list, new_value);
-	return (len + 1);
+	return (len);
 }
 
 int	change_flag_quote(char c, int fq)
@@ -113,9 +111,7 @@ void	expand_variable(t_cell **list_cell, t_info info)
 	while (list_move != NULL)
 	{
 		if (ft_strchr(list_move->content, '$'))
-		{
 			substitute(&list_move, info, list_move->content);
-		}
 		list_move = list_move->next;
 	}
 }

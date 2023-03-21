@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/20 20:42:58 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:58:15 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,41 @@ void	dup_or_join_char(t_cell **list, char c)
 		ft_strjoin_char((*list)->content, c);
 }
 
+void	dup_or_join_string(t_cell **list, char *new_value)
+{
+	if (new_value == NULL)
+		return ;
+	if ((*list)->content == NULL)
+		(*list)->content = ft_strdup(new_value);
+	else
+		ft_strjoin_free((*list)->content, new_value);
+}
+
 int	get_value_env(t_info info, t_cell **list,  char *str, int i)
 {	
 	int	len;
 	int	line;
 	char *new_value;
 
-	i++;
+	new_value = NULL;
 	if (str[i] == '\0')
 		return (0);
-	len = 1;
+	len = 0;
 	while ((str[i + len] == '_' || ft_isalnum(str[i + len])) && str[i + len])
 		len++;
 	line = -1;
 	while (info.env_cpy[++line])
 	{
-		if (!ft_strncmp(str+1, info.env_cpy[line], len))
+		printf("At row\t%s\n", str + i);
+		if (!ft_strncmp(str + i, info.env_cpy[line], len))
 		{
-			// Acho que problema está aqui
 			printf("Minha linha: %s\n", info.env_cpy[line]);
 			new_value = info.env_cpy[line] + (len + 1);
-			printf("%s\n", new_value);
 			break ;
 		}
 	}
-	if ((*list)->content == NULL)
-		(*list)->content = ft_strdup(new_value);
-	else
-		ft_strjoin_free((*list)->content, new_value);
-	return (len - 1);
+	dup_or_join_string(list, new_value);
+	return (len + 1);
 }
 
 int	change_flag_quote(char c, int fq)
@@ -90,7 +96,7 @@ void	substitute(t_cell **list, t_info info, char *str)
 			if (str[i + 1] == ' ')
 				dup_or_join_char(list, ' ');
 			else
-				i += get_value_env(info, list, str, i) + 1;
+				i += get_value_env(info, list, str, i + 1);
 			if (str[i] == '\0')
 				break ;
 		}
@@ -108,7 +114,6 @@ void	expand_variable(t_cell **list_cell, t_info info)
 	{
 		if (ft_strchr(list_move->content, '$'))
 		{
-		printf("first while\n");
 			substitute(&list_move, info, list_move->content);
 		}
 		list_move = list_move->next;

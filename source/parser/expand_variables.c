@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/21 15:58:15 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/21 16:08:41 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	get_value_env(t_info info, t_cell **list,  char *str, int i)
 		}
 	}
 	dup_or_join_string(list, new_value);
-	return (len + 1);
+	return (len);
 }
 
 int	change_flag_quote(char c, int fq)

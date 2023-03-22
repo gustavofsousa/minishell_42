@@ -6,7 +6,7 @@
 #    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/03/16 19:43:26 by gusousa          ###   ########.fr        #
+#    Updated: 2023/03/22 17:56:07 by parnaldo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		:=	minishell
 
 ####	Compilers & flags	####
 CC		:=	cc
-CFLAGS	:=	-Wextra -Wall -Werror -g -I ~/.brew/opt/readline/include
+CFLAGS	:=	-Wextra -Wall -Werror -g  -I ~/.brew/opt/readline/include
 
 ####	linkers		####
 LINK		:=	-lreadline -L ~/.brew/opt/readline/lib

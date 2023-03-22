@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/22 15:35:26 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/22 17:41:50 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	do_the_execve(t_info *info, t_list_sent *sent, int i)
 	info->nbr_pids[i] = fork();
 	if (info->nbr_pids[i] == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		config_fd_system(sent, info);
 		execve(right_path, right_args, info->env_cpy);// /bin/bin/ls /bin/ls
 		perror("Error in execve");

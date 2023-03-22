@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:38:39 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/22 15:30:42 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:02:25 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	check_eof(t_info *info)
 		ft_putstr_fd("\x1b[1A", 1);
 		ft_putstr_fd("\033[17C", 1);
 		write(1, "exit\n", 5);
-		//free
 		g_status = 0;
 		exit(0);
 	}
@@ -27,11 +26,16 @@ void	check_eof(t_info *info)
 
 void	handler(int sig)
 {
-	(void) sig;
-		write(1, "\n", 1);
+	
+	if (sig == SIGINT)
+	{
+		if (RL_ISSTATE(RL_STATE_READCMD))
+			ioctl(STDIN_FILENO, TIOCSTI, "\n");
+		else
+			write(1, "\n", 1);
+	}
 	rl_on_new_line();
 	rl_replace_line("", 0);
-	rl_redisplay();
 	g_status = 130;
 }
 

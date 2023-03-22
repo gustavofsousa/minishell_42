@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/22 15:32:47 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:06:03 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,19 @@ int	main(int argc, char **argv, char **envp)
 	{
 		reset(&info, &list_cells, sentence);
 		info.prompt = readline("🦞our_minishell> ");
-		add_history(info.prompt);
-		check_eof(&info);
-		divide_prompt(&info, &list_cells);
-		categorize_elements(&list_cells);
-		expand_variable(&list_cells, info);
-		if (handle_quotes(&list_cells) == -1)
-			break ;
-		sentence = create_sentence(list_cells, &info);
-		if (golfer(&sentence, &info) == -1)
-			break ;
+		if (info.prompt && *info.prompt)
+		{
+			add_history(info.prompt);
+			check_eof(&info);
+			divide_prompt(&info, &list_cells);
+			categorize_elements(&list_cells);
+			expand_variable(&list_cells, info);
+			if (handle_quotes(&list_cells) == -1)
+				break ;
+			sentence = create_sentence(list_cells, &info);
+			if (golfer(&sentence, &info) == -1)
+				break ;
+		}
 	}
 	finish_program(&info, &list_cells, sentence);
 	return (0);

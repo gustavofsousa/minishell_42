@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/16 19:41:26 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/22 15:32:47 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	main(int argc, char **argv, char **envp)
 		if (golfer(&sentence, &info) == -1)
 			break ;
 	}
-	puts("filho morreu");
 	finish_program(&info, &list_cells, sentence);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/21 16:53:41 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/22 15:16:01 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int	get_value_env(t_info info, t_cell **list,  char *str, int i)
 			break ;
 		}
 	}
+	if (new_value == NULL)
+		new_value = ft_cpychar_noprint(new_value);
 	dup_or_join_string(list, new_value);
 	return (len);
 }
@@ -97,7 +99,7 @@ void	substitute(t_cell **list, t_info info, char *str)
 		if (fq != 1 && str[i] == '$')
 		{
 			if (str[i + 1] == ' ')
-				dup_or_join_char(list, ' ');
+				dup_or_join_char(list, '$');
 			else
 				i += get_value_env(info, list, str, i + 1);
 			if (str[i] == '\0')

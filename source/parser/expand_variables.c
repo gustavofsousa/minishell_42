@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/23 17:22:11 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/23 19:07:32 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	expand_variable(t_cell **list_cell, t_info info)
 	t_cell	*list_move;
 
 	list_move = *list_cell;
-	while (list_move != NULL)
+	while (list_move != NULL && list_move->content != NULL)
 	{
 		if (ft_strchr(list_move->content, '$'))
 			substitute(&list_move, info, ft_strdup(list_move->content));

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/23 19:07:32 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/23 19:19:21 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_value_env(t_info info, t_cell **list, char *str, int i)
 	int		line;
 	char	*new_value;
 
-	if (handle_excpt(list, str, i) != 48)
+	if (str[i] == '\0' || str[i] == '?')
 		return (handle_excpt(list, str, i));
 	new_value = NULL;
 	len = 0;

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:09:37 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/14 17:32:09 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/23 18:24:27 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	do_heredoc(t_cell *list_in, t_sentence *sent)
 			cmd = readline(">");
 			if (cmd == NULL
 				|| !ft_strncmp(cmd, list_in->next->content, ft_strlen(cmd))
-				|| g_status == 1)
+				|| g_status != 0)
 				break ;
 			ft_putendl_fd(cmd, fd_write);
 			free(cmd);

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/22 17:41:50 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:48:05 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,8 @@ int	golfer(t_list_sent **sent, t_info *info)
 		{
 			if (do_the_execve(info, *sent, i) == -1)
 			{
-				// olhar o errno (do execve) e setar a global de acordo.
-				g_status = 127;
+				g_status = 1;
 				return (-1);
-				// Limpar as paradas.
 			}
 		}
 		i++;

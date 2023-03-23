@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 11:23:25 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/22 15:16:27 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:21:08 by gusousa          ###   ########.fr       */
 /*   Updated: 2023/03/13 16:19:39 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -30,4 +30,22 @@ char	*ft_cpychar_noprint(char *str)
 		my_str[i++] = 1;
 	my_str[i] = '\0';
 	return (my_str);
+}
+
+void	dup_or_join_char(t_cell **list, char c)
+{
+	if ((*list)->content == NULL)
+		(*list)->content = ft_strdup_char(c);
+	else
+		(*list)->content = ft_strjoin_char((*list)->content, c);
+}
+
+void	dup_or_join_string(t_cell **list, char *new_value)
+{
+	if (new_value == NULL)
+		return ;
+	if ((*list)->content == NULL)
+		(*list)->content = ft_strdup(new_value);
+	else
+		(*list)->content = ft_strjoin_free((*list)->content, new_value);
 }

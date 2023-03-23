@@ -6,37 +6,14 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/22 15:16:01 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:22:11 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	dup_or_join_char(t_cell **list, char c)
+int	handle_excpt(t_cell **list, char *str, int i)
 {
-	if ((*list)->content == NULL)
-		(*list)->content = ft_strdup_char(c);
-	else
-		(*list)->content = ft_strjoin_char((*list)->content, c);
-}
-
-void	dup_or_join_string(t_cell **list, char *new_value)
-{
-	if (new_value == NULL)
-		return ;
-	if ((*list)->content == NULL)
-		(*list)->content = ft_strdup(new_value);
-	else
-		(*list)->content = ft_strjoin_free((*list)->content, new_value);
-}
-
-int	get_value_env(t_info info, t_cell **list,  char *str, int i)
-{	
-	int	len;
-	int	line;
-	char *new_value;
-
-	new_value = NULL;
 	if (str[i] == '\0')
 		return (0);
 	if (str[i] == '?')
@@ -44,6 +21,18 @@ int	get_value_env(t_info info, t_cell **list,  char *str, int i)
 		dup_or_join_string(list, ft_itoa(g_status));
 		return (1);
 	}
+	return (48);
+}
+
+int	get_value_env(t_info info, t_cell **list, char *str, int i)
+{	
+	int		len;
+	int		line;
+	char	*new_value;
+
+	if (handle_excpt(list, str, i) != 48)
+		return (handle_excpt(list, str, i));
+	new_value = NULL;
 	len = 0;
 	while ((str[i + len] == '_' || ft_isalnum(str[i + len])) && str[i + len])
 		len++;

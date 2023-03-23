@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/22 15:36:07 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:13:30 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ int			calc_len_content(t_cell **list, t_info info, int index);
 int			len_word(char *str);
 char		**ft_split_mod(char const *s, char c);
 char		*ft_strdup_char(char c);
+void		dup_or_join_char(t_cell **list, char c);
+void		dup_or_join_string(t_cell **list, char *new_value);
 
 //create_sentence.c
 t_list_sent	*create_sentence(t_cell *list_in, t_info *info);

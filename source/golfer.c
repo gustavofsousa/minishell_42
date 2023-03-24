@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 09:02:26 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 09:54:33 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	do_the_execve(t_info *info, t_list_sent *sent, int i)
 		else
 			perror("error");
 		freeing_local(right_path, right_args);
+		g_status = 1;
 		return (-1);
 	}
 	freeing_local(right_path, right_args);
@@ -81,10 +82,7 @@ int	golfer(t_list_sent **sent, t_info *info)
 		else
 		{
 			if (do_the_execve(info, *sent, i) == -1)
-			{
-				g_status = 1;
 				return (-1);
-			}
 		}
 		i++;
 		*sent = (*sent)->next;

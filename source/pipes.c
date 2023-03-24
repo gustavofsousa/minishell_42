@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:19:23 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/14 17:36:16 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 09:27:02 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,3 @@ void	wait_children_die(t_info *info)
 			g_status = 128 + WTERMSIG(pre_status);
 	}
 }
-

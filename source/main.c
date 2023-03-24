@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 00:44:20 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 09:52:28 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,8 @@ int	minishell(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 		expand_variable(list_cells, *info);
 		handle_quotes(list_cells);
 		*sentence = create_sentence(*list_cells, info);
-		if (g_status != 130)
-		{
-			if (golfer(sentence, info) == -1)
-				return (-1);
-		}
+		if (golfer(sentence, info) == -1)
+			return (-1);
 	}
 	return (0);
 }
@@ -42,6 +39,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
+	g_status = 0;
 	point_to_null(&info, &list_cells, &sentence);
 	set_signal_handler();
 	info.env_cpy = ft_cpy_env(envp);
@@ -51,7 +49,7 @@ int	main(int argc, char **argv, char **envp)
 		reset(&info, &list_cells, sentence);
 		if (minishell(&info, &list_cells, &sentence) == -1)
 			break ;
-		g_status = 0;
+		//g_status = 0;
 	}
 	printf("Filho morreu\n");
 	finish_program(&info, &list_cells, sentence);

@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 13:51:14 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/15 18:29:28 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/23 21:56:12 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ char	**get_path(char **envp)
 		}
 		envp++;
 	}
+	if (*envp == NULL)
+		return (NULL);
 	path_mtx = ft_split(path, ':');
 	free(path);
 	return (path_mtx);
@@ -51,7 +53,7 @@ char	*get_right_path(char **mtx_path, char *command)
 
 	path_command = NULL;
 	i = 0;
-	while (mtx_path[i] != NULL)
+	while (mtx_path != NULL && mtx_path[i] != NULL)
 	{
 		path_command = ft_strjoin(mtx_path[i], "/");
 		path_command = ft_strjoin_free(path_command, command);

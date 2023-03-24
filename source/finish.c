@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 12:27:56 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/23 21:35:26 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 11:11:49 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 	info->nbr_pids = NULL;
 	*list_cells = NULL;
 	*sentence = NULL;
+	info->stop = 0;
 }
 
 void	reset(t_info *info, t_cell **list_cells, t_list_sent *sentence)

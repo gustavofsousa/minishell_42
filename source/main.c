@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 10:57:44 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 11:20:17 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int	minishell(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 		expand_variable(list_cells, *info);
 		handle_quotes(list_cells);
 		*sentence = create_sentence(*list_cells, info);
-		if (golfer(sentence, info) == -1)
-			return (-1);
+		if (info->stop != 1)
+			if (golfer(sentence, info) == -1)
+				return (-1);
 	}
 	return (0);
 }

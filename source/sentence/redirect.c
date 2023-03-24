@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/14 14:40:11 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 00:32:58 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	deal_error(t_sentence *sent, char redir)
 		if (sent->output == -1)
 		{
 			perror("Error in redirect");
-			//finish_program();
 		}
 	}
 	else if (redir == '<')
@@ -27,7 +26,6 @@ void	deal_error(t_sentence *sent, char redir)
 		if (sent->input == -1)
 		{
 			perror("Error in redirect");
-			//finish_program();
 		}
 	}
 }

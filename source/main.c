@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 00:18:15 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 00:44:20 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		g_status = 0;
 	}
+	printf("Filho morreu\n");
 	finish_program(&info, &list_cells, sentence);
 	return (0);
 }

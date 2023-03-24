@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 09:52:28 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 10:57:44 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ int	main(int argc, char **argv, char **envp)
 		reset(&info, &list_cells, sentence);
 		if (minishell(&info, &list_cells, &sentence) == -1)
 			break ;
-		//g_status = 0;
 	}
-	printf("Filho morreu\n");
 	finish_program(&info, &list_cells, sentence);
 	return (0);
 }

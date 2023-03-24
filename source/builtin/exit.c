@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:46:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/16 11:12:43 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:05:27 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ int	count_words(char *str)
 	return (qtd_word);
 }
 
-void	exit_with_args(char *str, int id)
+void	exit_with_args(char *str, int id, int fd)
 {
 	if (is_numeric(str))
 	{
 		g_status = id;
-		ft_putstr_fd("exit\n", 1);
+		ft_putstr_fd("exit\n", fd);
 		exit(id);
 	}
 	else
 	{
-		ft_putstr_fd("exit\nexit: ", 2);
+		ft_putstr_fd("exit: ", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd(" numeric argument required\n", 2);
 		g_status = 255;
@@ -62,19 +62,19 @@ void	exit_with_args(char *str, int id)
 	}
 }
 
-void	ft_exit(char *str)
+void	ft_exit(char *str, int fd)
 {
 	int				qtd_args;
 
 	qtd_args = count_words(str);
 	if (qtd_args == 0)
 	{
-		ft_putstr_fd("exit\n", 1);
+		ft_putstr_fd("exit\n", fd);
 		exit(0);
 	}
 	else if (qtd_args == 1)
 	{
-		exit_with_args(str, ft_atoi(str));
+		exit_with_args(str, ft_atoi(str), fd);
 	}
 	else if (qtd_args > 1)
 	{

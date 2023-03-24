@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 09:02:05 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 10:05:54 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	*ft_strjoin_char(char *s1, char c);
 // Builtin
 void		ft_pwd();
 void		ft_echo(char *str, int fd);
-void		ft_exit(char *str);
+void		ft_exit(char *str, int fd);
 int			ft_env(char	**envsi, int fd);
 int			ft_unset(char *arg, struct s_info *info);
 char		**ft_cpy_env(char	**envs);

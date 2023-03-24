@@ -6,11 +6,25 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:44:56 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/24 08:46:05 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 09:05:13 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	do_the_change(char *path, t_info *info)
+{
+	int	status;
+	char	*str;
+
+	str = strdup("OLDPWD");
+	str = ft_strjoin_free(str, "=");
+	str = ft_strjoin_free(str, getcwd(NULL, 0));
+	ft_export(str, info);
+	status = chdir(path);
+	free(str);
+	return (status);
+}
 
 int	count_args(char *str)
 {
@@ -32,8 +46,7 @@ int	count_args(char *str)
 	return (len);
 }
 
-// Atualizar $OLDPWD?
-void	ft_cd(char *path)
+void	ft_cd(char *path, t_info *info)
 {
 	int	status;
 
@@ -46,7 +59,7 @@ void	ft_cd(char *path)
 		if (path == NULL)
 			status = chdir(getenv("HOME"));
 		else
-			status = chdir(path);
+			status = do_the_change(path, info);
 		if (status == -1)
 		{
 			if (errno == 14)

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 08:39:42 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 09:02:26 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	do_the_builtin(t_list_sent *sent, t_info *info, int i)
 	else if (sent->content.command == unset)
 		ft_unset(sent->content.args, info);
 	else if (sent->content.command == cd)
-		ft_cd(sent->content.args);
+		ft_cd(sent->content.args, info);
 	else if (sent->content.command == exporter)
 		ft_export(sent->content.args, info);
 	if (info->qtd_sent > 1)

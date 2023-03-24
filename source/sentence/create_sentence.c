@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/15 20:13:07 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 11:07:22 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ enum e_command	set_command(char *command)
 {
 	int	len;
 
-	len = ft_strlen(command)+1;
+	len = ft_strlen(command) + 1;
 	if (!ft_strncmp(command, "pwd", len))
 		return (pwd);
 	else if (!ft_strncmp(command, "echo", len))

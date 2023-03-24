@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:38:39 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/23 18:16:11 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 10:59:47 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	check_eof(t_info *info)
 
 void	handler(int sig)
 {
-	
 	if (sig == SIGINT)
 	{
 		if (RL_ISSTATE(RL_STATE_READCMD))

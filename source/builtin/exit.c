@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 15:46:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 10:05:27 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 11:35:19 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_numeric(char *str)
 {
-	char *num;
+	char	*num;
 
 	num = ft_itoa(ft_atoi(str));
 	if (ft_strncmp(num, str, ft_strlen(str)))

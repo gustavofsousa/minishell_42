@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:44:56 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/24 09:19:40 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 11:32:38 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	do_the_change(char *path, t_info *info)
 {
-	int	status;
+	int		status;
 	char	*str;
 
 	str = strdup("OLDPWD");
@@ -36,7 +36,7 @@ char	*get_my_home(char **envp)
 		}
 		envp++;
 	}
-	return (NULL);	
+	return (NULL);
 }
 
 int	count_args(char *str)
@@ -79,11 +79,9 @@ void	ft_cd(char *path, t_info *info)
 				ft_putendl_fd("No such file or directory", 2);
 			else
 				perror("our_minishell: cd");
-
 			g_status = 1;
 			return ;
 		}
 	}
 	g_status = 0;
 }
-// Usar perror() para esses e outros?

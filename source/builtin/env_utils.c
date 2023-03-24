@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 12:09:06 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/16 14:57:22 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 11:31:53 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,10 @@ int	created_status(t_cell *list)
 	num = ft_itoa(g_status);
 	while ((*list).content[i])
 	{
-		if ((*list).content[i] != '$' && (*list).content[i+1] != '?')
+		if ((*list).content[i] != '$' && (*list).content[i + 1] != '?')
 			len_new_str++;
 		if ((*list).content[i] == '$')
-			i += 2;	
+			i += 2;
 		else
 			i++;
 	}

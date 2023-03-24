@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 11:27:04 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 11:41:38 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # include <fcntl.h>//open().
 # include <sys/types.h>//waitpid.
 # include <sys/wait.h>//waitpid.
+# include <errno.h>
 
-int	g_status;
-extern int	errno;
+int			g_status;
 
 enum e_token
 {
@@ -82,26 +82,26 @@ typedef struct s_info
 }	t_info;
 
 //Parser
-int		divide_prompt(t_info *info, t_cell **list_cells);
-void	categorize_elements(t_cell **list);
-int		handle_quotes(t_cell **list_cells);
-void	delete_cell(t_cell **init_cell, t_cell **list);
-void	list_clear_cells(t_cell **list);
-void	create_new_cell(t_cell **list_cells, char *str, int spce);
+int			divide_prompt(t_info *info, t_cell **list_cells);
+void		categorize_elements(t_cell **list);
+int			handle_quotes(t_cell **list_cells);
+void		delete_cell(t_cell **init_cell, t_cell **list);
+void		list_clear_cells(t_cell **list);
+void		create_new_cell(t_cell **list_cells, char *str, int spce);
 
 //Signal
-void	check_eof(t_info *info);
-void	set_signal_handler(void);
+void		check_eof(t_info *info);
+void		set_signal_handler(void);
 
 // main
-int		golfer(t_list_sent **sent, t_info *info);
-void	config_fd_system(t_list_sent *sent, t_info *info);
+int			golfer(t_list_sent **sent, t_info *info);
+void		config_fd_system(t_list_sent *sent, t_info *info);
 
-char	*ft_strjoin_free(char *s1, char *s2);
-char	*ft_strjoin_char(char *s1, char c);
+char		*ft_strjoin_free(char *s1, char *s2);
+char		*ft_strjoin_char(char *s1, char c);
 
 // Builtin
-void		ft_pwd();
+void		ft_pwd(void);
 void		ft_echo(char *str, int fd);
 void		ft_exit(char *str, int fd);
 int			ft_env(char	**envsi, int fd);
@@ -139,17 +139,17 @@ char		*ft_substitute(char *str);
 //Finish program and things.
 void		close_fdes(t_info *info);
 void		freeing_local(char *right_path, char **right_args);
-void		finish_program(t_info *info, t_cell **list_cells, t_list_sent *sentence);
-void		point_to_null(t_info *info, t_cell **list_cells, t_list_sent **sentence);
+void		finish_program(t_info *info, t_cell **list_cells,
+				t_list_sent *sentence);
+void		point_to_null(t_info *info, t_cell **list_cells,
+				t_list_sent **sentence);
 void		reset(t_info *info, t_cell **list_cells, t_list_sent *sentence);
 
 // Expand Variable
 char		*ft_cpychar_noprint(char *str);
 
 // Env
-int	ft_strlen_env(char *s);
-int	is_equal_env(char *arg, char **env);
+int			ft_strlen_env(char *s);
+int			is_equal_env(char *arg, char **env);
 
-// Testes
-void		print_sentence(t_list_sent * sent);
 #endif

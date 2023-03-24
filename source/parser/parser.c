@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 00:04:25 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 06:17:57 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ int	divide_prompt(t_info *info, t_cell **list_cells)
 			create_new_cell(list_cells, mtx_str[i], 1);
 		i++;
 	}
+	set_free_mtx(mtx_str);
 	return (0);
 }

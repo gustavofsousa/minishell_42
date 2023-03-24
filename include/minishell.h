@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/23 17:13:30 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/23 23:48:24 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_info
 }	t_info;
 
 //Parser
-void	divide_prompt(t_info *info, t_cell **list_cells);
+int		divide_prompt(t_info *info, t_cell **list_cells);
 void	categorize_elements(t_cell **list);
 int		handle_quotes(t_cell **list_cells);
 void	delete_cell(t_cell **init_cell, t_cell **list);
@@ -122,7 +122,7 @@ t_list_sent	*ft_lstnew_sent(t_sentence content);
 void		expand_variable(t_cell **list_cell, t_info info);
 int			calc_len_content(t_cell **list, t_info info, int index);
 int			len_word(char *str);
-char		**ft_split_mod(char const *s, char c);
+char		**ft_split_mod(char const *s, char c, int *fq);
 char		*ft_strdup_char(char c);
 void		dup_or_join_char(t_cell **list, char c);
 void		dup_or_join_string(t_cell **list, char *new_value);

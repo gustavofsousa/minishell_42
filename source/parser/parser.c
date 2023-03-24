@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/16 19:58:00 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 00:04:25 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,37 @@ int	has_metadado_together(char *str)
 	return (0);
 }
 
+void	set_free_mtx(char **mtx_str)
+{
+	int		i;
+
+	if (mtx_str)
+	{
+		i = -1;
+		while (mtx_str[++i])
+			free(mtx_str[i]);
+		free (mtx_str);
+	}
+}
+
 /*
  * Função para dividir as palavras do prompt em nós de uma lista.
  * o primeiro if é para quando o metadado está colado na paralavra.
  * O segundo if é para quando o metadado ou palavra está separado sozinho.
  */
-void	divide_prompt(t_info *info, t_cell **list_cells)
+int	divide_prompt(t_info *info, t_cell **list_cells)
 {
 	char	**mtx_str;
 	int		i;
+	int		fq;
 
-	mtx_str = ft_split_mod(info->prompt, ' ');
+	fq = 0;
+	mtx_str = ft_split_mod(info->prompt, ' ', &fq);
+	if (fq == 1)
+	{
+		ft_putstr_fd("Missing final quote\n", 2);
+		return (-1);
+	}
 	i = 0;
 	while (mtx_str[i])
 	{
@@ -99,11 +119,5 @@ void	divide_prompt(t_info *info, t_cell **list_cells)
 			create_new_cell(list_cells, mtx_str[i], 1);
 		i++;
 	}
-	if (mtx_str)
-	{
-		i = -1;
-		while (mtx_str[++i])
-			free(mtx_str[i]);
-		free (mtx_str);
-	}
+	return (0);
 }

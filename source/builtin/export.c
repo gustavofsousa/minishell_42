@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:54:12 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/24 11:08:23 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:23:31 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	ft_export(char *arg, struct s_info *info)
 		if (check_arg(args[i]) && !is_equal_env(args[i], info->env_cpy))
 			new_envs++;
 		else if (!check_arg(args[i])) 
-			printf("export: `%s': not a valid identifier\n", args[i]);
+			print_err_export(args[i]);
 		i++;
 	}
 	replace_env(info, args, new_envs);

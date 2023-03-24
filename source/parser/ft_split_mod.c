@@ -6,21 +6,20 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:29:46 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/20 11:41:29 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/23 19:21:02 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+// Check when quotes open and close.
 static void	is_quotes(char s, size_t *fq, char *quote)
 {
-	// Abre aspas
 	if ((s == '"' || s == '\'') && *fq == 0)
 	{
 		*fq = 1;
 		*quote = s;
 	}
-	// Fechar aspas
 	else if (*fq == 1 && s == *quote)
 		*fq = 0;
 }

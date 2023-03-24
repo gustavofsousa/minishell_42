@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/16 18:43:54 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/23 20:21:12 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ void	search_quotes(t_cell **init_cell, t_cell **list, int *fq, char *quote)
 {
 	char	*first_word;
 
-	if (*fq == 0
-		&& (ft_strchr((*list)->content, '"')
+	if (*fq == 0 && (ft_strchr((*list)->content, '"')
 			|| ft_strchr((*list)->content, '\'')))
 	{
 		*fq = 1;
@@ -124,10 +123,10 @@ int	handle_quotes(t_cell **list_cells)
 		else
 			list_move = list_move->next;
 	}
-	if (fq > 0)
+	if (fq == 1)
 	//Tratamento de erro é aqui.
 	{
-		printf("Error, aspas não fechou");
+		ft_putstr_fd("Error, aspas não fechou", 2);
 		return (-1);
 	}
 	return (1);

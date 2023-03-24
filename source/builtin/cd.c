@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:44:56 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/24 09:05:13 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 09:19:40 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ int	do_the_change(char *path, t_info *info)
 	status = chdir(path);
 	free(str);
 	return (status);
+}
+
+char	*get_my_home(char **envp)
+{
+	while (*envp)
+	{
+		if (!ft_strncmp("HOME", *envp, 4))
+		{
+			return (ft_strdup((*envp + 5)));
+		}
+		envp++;
+	}
+	return (NULL);	
 }
 
 int	count_args(char *str)
@@ -57,7 +70,7 @@ void	ft_cd(char *path, t_info *info)
 	else
 	{
 		if (path == NULL)
-			status = chdir(getenv("HOME"));
+			status = chdir(get_my_home(info->env_cpy));
 		else
 			status = do_the_change(path, info);
 		if (status == -1)

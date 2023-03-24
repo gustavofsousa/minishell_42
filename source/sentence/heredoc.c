@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:09:37 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 11:17:07 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 11:27:55 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	open_pipe_redir(t_sentence *sent)
 	return (fildes[1]);
 }
 
-void	do_heredoc(t_cell *list_in, t_sentence *sent, t_info *info)
+int	do_heredoc(t_cell *list_in, t_sentence *sent, t_info *info)
 {
 	char	*cmd;
 	int		fd_write;
@@ -37,9 +37,8 @@ void	do_heredoc(t_cell *list_in, t_sentence *sent, t_info *info)
 		while (42)
 		{
 			cmd = readline(">");
-			if (cmd == NULL
-				|| !ft_strncmp(cmd, list_in->next->content, ft_strlen(cmd))
-				|| g_status != 0)
+			if (cmd == NULL || g_status != 0
+				|| !ft_strncmp(cmd, list_in->next->content, ft_strlen(cmd)))
 				break ;
 			ft_putendl_fd(cmd, fd_write);
 			free(cmd);
@@ -47,8 +46,7 @@ void	do_heredoc(t_cell *list_in, t_sentence *sent, t_info *info)
 		}
 		if (g_status == 130)
 			info->stop = 1;
-		free(cmd);
-		cmd = NULL;
-		close(fd_write);
+		return (free(cmd), close(fd_write), 0);
 	}
+	return (0);
 }

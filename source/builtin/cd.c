@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 21:44:56 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/16 11:15:54 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/24 08:46:05 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,11 @@ void	ft_cd(char *path)
 			status = chdir(path);
 		if (status == -1)
 		{
-			ft_putstr_fd("cd failed. path not found(?)", 2);
+			if (errno == 14)
+				ft_putendl_fd("No such file or directory", 2);
+			else
+				perror("our_minishell: cd");
+
 			g_status = 1;
 			return ;
 		}

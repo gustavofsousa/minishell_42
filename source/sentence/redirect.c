@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 00:32:58 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 07:50:40 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	open_redirect(t_cell *list_in, t_sentence *sent)
 		{
 			close_old_fd(sent, redir);
 			create_new_fd(sent, list_in, redir);
-			//deal_error(sent, redir);
+			deal_error(sent, redir);
 		}
 		else
 			ft_putstr_fd("syntax error near unexpected token 'newline'", 2);

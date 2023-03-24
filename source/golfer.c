@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 07:43:38 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/24 08:39:42 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	do_the_execve(t_info *info, t_list_sent *sent, int i)
 	if (info->nbr_pids[i] == 0)
 	{
 		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		config_fd_system(sent, info);
 		execve(right_path, right_args, info->env_cpy);
 		if (errno == 14)

@@ -6,11 +6,24 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 12:23:27 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/25 17:54:34 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	set_error(void)
+{
+	g_status = 1;
+	if (errno == 14)
+		ft_putendl_fd(strerror(2), 2);
+	else
+	{
+		perror("error");
+		g_status = 127;
+	}
+	return (-1);
+}
 
 int	do_the_execve(t_info *info, t_list_sent *sent, int i)
 {
@@ -26,14 +39,8 @@ int	do_the_execve(t_info *info, t_list_sent *sent, int i)
 		signal(SIGQUIT, SIG_DFL);
 		config_fd_system(sent, info);
 		execve(right_path, right_args, info->env_cpy);
-		// fazer uma funçao config error
-		if (errno == 14)
-			ft_putendl_fd(strerror(2), 2);
-		else
-			perror("error");
 		freeing_local(right_path, right_args);
-		g_status = 1;
-		return (-1);
+		return (set_error());
 	}
 	freeing_local(right_path, right_args);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 11:23:25 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/25 11:35:14 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/25 18:05:33 by parnaldo         ###   ########.fr       */
 /*   Updated: 2023/03/13 16:19:39 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -62,10 +62,11 @@ int	cpy_str(t_cell **list, char *str, int i)
 
 int	is_variable(char *str, char *env, int len_str, int i)
 {
-	int len_env;
+	int	len_env;
 
+	(void) i;
 	len_env = ft_strlen_env(env);
-	if (!ft_strncmp(str + i, env, len_str) && len_str == len_env)
+	if (!ft_strncmp(str, env, len_str) && len_str == len_env)
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/23 19:19:21 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/25 15:10:36 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	get_value_env(t_info info, t_cell **list, char *str, int i)
 	line = -1;
 	while (info.env_cpy[++line])
 	{
-		if (!ft_strncmp(str + i, info.env_cpy[line], len))
+		if (is_variable(str + i, info.env_cpy[line], len, i))
 		{
 			new_value = info.env_cpy[line] + (len + 1);
 			break ;
@@ -48,6 +48,11 @@ int	get_value_env(t_info info, t_cell **list, char *str, int i)
 	if (new_value == NULL)
 		new_value = ft_cpychar_noprint(new_value);
 	dup_or_join_string(list, new_value);
+	if (new_value != NULL)
+	{
+		free(new_value);
+		new_value = NULL;
+	}
 	return (len);
 }
 
@@ -87,13 +92,16 @@ void	substitute(t_cell **list, t_info info, char *str)
 		fq = change_flag_quote(str[i], fq);
 		if (fq != 1 && str[i] == '$')
 		{
-			if (str[i + 1] == ' ')
+			if (str[i + 1] == ' ' || str[i + 1] == '\0'
+				|| str[i + 1] == 34 || str[i + 1] == 39)
 				dup_or_join_char(list, '$');
 			else
 				i += get_value_env(info, list, str, i + 1);
 			if (str[i] == '\0')
 				break ;
 		}
+		else if (fq == 1)
+			i = cpy_str(list, str, i + 1);
 		else
 			dup_or_join_char(list, str[i]);
 	}

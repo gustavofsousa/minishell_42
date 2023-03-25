@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 11:52:42 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/25 11:31:46 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,8 @@ void		reset(t_info *info, t_cell **list_cells, t_list_sent *sentence);
 
 // Expand Variable
 char		*ft_cpychar_noprint(char *str);
+int			cpy_str(t_cell **list, char *str, int i);
+int			is_variable(char *str, char *env, int len_str, int i);
 
 // Env
 int			ft_strlen_env(char *s);

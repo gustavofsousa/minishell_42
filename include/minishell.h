@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/25 11:31:46 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/25 18:21:54 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ enum e_token
 
 enum e_command
 {
+	start,
 	pwd,
 	echo,
 	exiter,

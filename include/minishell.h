@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:45:17 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/25 18:21:54 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/25 18:46:33 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,8 @@ void		reset(t_info *info, t_cell **list_cells, t_list_sent *sentence);
 char		*ft_cpychar_noprint(char *str);
 int			cpy_str(t_cell **list, char *str, int i);
 int			is_variable(char *str, char *env, int len_str, int i);
+int			deal_with_dollar(t_cell **list, t_info info, char *str, int i);
+int			get_value_env(t_info info, t_cell **list, char *str, int i);
 
 // Env
 int			ft_strlen_env(char *s);

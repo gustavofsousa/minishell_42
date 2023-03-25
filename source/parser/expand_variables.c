@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/25 18:12:54 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/25 18:45:25 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,9 @@ int	get_value_env(t_info info, t_cell **list, char *str, int i)
 			return (len);
 		}
 	}
-	if (new_value == NULL)
-	{
-		new_value = ft_cpychar_noprint(new_value);
-		dup_or_join_string(list, new_value);
-		free(new_value);
-	}
+	new_value = ft_cpychar_noprint(new_value);
+	dup_or_join_string(list, new_value);
+	free(new_value);
 	return (len);
 }
 
@@ -91,11 +88,7 @@ void	substitute(t_cell **list, t_info info, char *str)
 		fq = change_flag_quote(str[i], fq);
 		if (fq != 1 && str[i] == '$')
 		{
-			if (str[i + 1] == ' ' || str[i + 1] == '\0'
-				|| str[i + 1] == 34 || str[i + 1] == 39)
-				dup_or_join_char(list, '$');
-			else
-				i += get_value_env(info, list, str, i + 1);
+			i = deal_with_dollar(list, info, str, i);
 			if (str[i] == '\0')
 				break ;
 		}

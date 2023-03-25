@@ -6,7 +6,7 @@
 #    By: parnaldo <parnaldo@student.42.rio >        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/25 13:13:20 by gusousa           #+#    #+#              #
-#    Updated: 2023/03/24 11:24:25 by parnaldo         ###   ########.fr        #
+#    Updated: 2023/03/25 18:43:15 by gusousa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ LIBDIR	:=	libft/
 MAIN		:=	main.c	signal.c	golfer.c	utils_join.c	\
 				finish.c	pipes.c
 PARSER		:=	parser.c list_cells.c token.c	handle_quotes.c	\
-				expand_variables.c	expand_variables_utils.c	ft_split_mod.c
+				expand_variables.c	expand_variables_utils.c	ft_split_mod.c	\
+				utils_2.c
 BUILTIN		:=	pwd.c echo.c exit.c env.c unset.c export.c cd.c	\
 			      env_utils.c export_utils.c
 

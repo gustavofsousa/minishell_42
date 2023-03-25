@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/25 15:10:36 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/25 18:12:54 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,15 @@ int	get_value_env(t_info info, t_cell **list, char *str, int i)
 		if (is_variable(str + i, info.env_cpy[line], len, i))
 		{
 			new_value = info.env_cpy[line] + (len + 1);
-			break ;
+			dup_or_join_string(list, new_value);
+			return (len);
 		}
 	}
 	if (new_value == NULL)
-		new_value = ft_cpychar_noprint(new_value);
-	dup_or_join_string(list, new_value);
-	if (new_value != NULL)
 	{
+		new_value = ft_cpychar_noprint(new_value);
+		dup_or_join_string(list, new_value);
 		free(new_value);
-		new_value = NULL;
 	}
 	return (len);
 }

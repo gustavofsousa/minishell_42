@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:29:46 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/26 13:16:54 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/26 16:23:55 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ static int	build_line(const char **s, char sep, int *fq)
 	word_len = 0;
 	while (**s && (word_len == 0 || **s != sep || *fq == 1))
 	{
-		if (is_quotes(**s, fq, &quote) == 0)
-			if (**s != sep || *fq == 1)
-				word_len++;
+		is_quotes(**s, fq, &quote);
+		if (**s != sep || *fq == 1)
+			word_len++;
 		(*s)++;
 	}
 	return (word_len);

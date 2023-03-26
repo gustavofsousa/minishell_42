@@ -6,22 +6,27 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:29:46 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 00:16:18 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/26 13:16:54 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 // Check when quotes open and close.
-static void	is_quotes(char s, int *fq, char *quote)
+static int	is_quotes(char s, int *fq, char *quote)
 {
 	if ((s == '"' || s == '\'') && *fq == 0)
 	{
 		*fq = 1;
 		*quote = s;
+		return (1);
 	}
 	else if (*fq == 1 && s == *quote)
+	{
 		*fq = 0;
+		return (1);
+	}
+	return (0);
 }
 
 static size_t	count_words(char const *s, char sep, int *fq)
@@ -44,26 +49,35 @@ static size_t	count_words(char const *s, char sep, int *fq)
 	return (qtd_word);
 }
 
+static int	build_line(const char **s, char sep, int *fq)
+{
+	size_t	word_len;
+	char	quote;
+
+	word_len = 0;
+	while (**s && (word_len == 0 || **s != sep || *fq == 1))
+	{
+		if (is_quotes(**s, fq, &quote) == 0)
+			if (**s != sep || *fq == 1)
+				word_len++;
+		(*s)++;
+	}
+	return (word_len);
+}
+
 static char	**split(char **str_splitted, char const *s, char sep, int *fq)
 {
 	size_t	qtd_words;
 	size_t	line;
-	size_t	word_len;
-	char	quote;
+	int		word_len;
 
 	qtd_words = count_words(s, sep, fq);
 	line = 0;
 	while (line < qtd_words)
 	{
-		word_len = 0;
-		while (*s && (word_len == 0 || *s != sep || *fq == 1))
-		{
-			is_quotes(*s, fq, &quote);
-			if (*s != sep || *fq == 1)
-				word_len++;
-			s++;
-		}
+		word_len = build_line(&s, sep, fq);
 		str_splitted[line] = ft_substr(s - word_len, 0, word_len);
+		s++;
 		line++;
 	}
 	str_splitted[line] = 0;

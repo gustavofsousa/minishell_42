@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/10 12:27:56 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/27 17:25:41 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:28:48 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ void	reset(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 	point_to_null(info, list_cells, sentence);
 }
 
-void	finish_program(t_info *info, t_cell **list_cells, t_list_sent **sentence)
+void	finish_program(t_info *info, t_cell **list_c, t_list_sent **sentence)
 {
 	int	i;
 
-	reset(info, list_cells, sentence);
+	reset(info, list_c, sentence);
 	i = -1;
 	if (info->env_cpy)
 	{

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:57:41 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/25 18:45:25 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/27 16:48:59 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 
 int	handle_excpt(t_cell **list, char *str, int i)
 {
+	char	*tmp;
+
 	if (str[i] == '\0')
 		return (0);
 	if (str[i] == '?')
 	{
-		dup_or_join_string(list, ft_itoa(g_status));
+		tmp = ft_itoa(g_status);
+		dup_or_join_string(list, tmp);
+		free (tmp);
 		return (1);
 	}
 	return (48);

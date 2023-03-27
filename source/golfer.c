@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 10:58:48 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/25 17:54:34 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:34:27 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ int	set_error(void)
 {
 	g_status = 1;
 	if (errno == 14)
-		ft_putendl_fd(strerror(2), 2);
+	{
+		ft_putendl_fd("command not found", 2);
+		g_status = 127;
+	}
 	else
 	{
 		perror("error");

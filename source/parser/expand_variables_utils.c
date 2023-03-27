@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 11:23:25 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/25 18:05:33 by parnaldo         ###   ########.fr       */
+/*   Updated: 2023/03/27 17:10:58 by gusousa          ###   ########.fr       */
 /*   Updated: 2023/03/13 16:19:39 by parnaldo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -48,19 +48,6 @@ void	dup_or_join_string(t_cell **list, char *new_value)
 		(*list)->content = ft_strdup(new_value);
 	else
 		(*list)->content = ft_strjoin_free((*list)->content, new_value);
-}
-
-int	cpy_str(t_cell **list, char *str, int i)
-{
-	i = 0;
-	if (str[i + 1] == '"')
-		return (i);
-	while (str[i])
-	{
-		dup_or_join_char(list, str[i]);
-		i++;
-	}
-	return (i);
 }
 
 int	is_variable(char *str, char *env, int len_str, int i)

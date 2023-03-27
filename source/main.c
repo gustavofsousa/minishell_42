@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 11:20:17 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:25:48 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int	main(int argc, char **argv, char **envp)
 	ft_unset("OLDPWD", &info);
 	while (42)
 	{
-		reset(&info, &list_cells, sentence);
+		reset(&info, &list_cells, &sentence);
 		if (minishell(&info, &list_cells, &sentence) == -1)
 			break ;
 	}
-	finish_program(&info, &list_cells, sentence);
+	finish_program(&info, &list_cells, &sentence);
 	return (0);
 }

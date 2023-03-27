@@ -52,7 +52,10 @@ void	dup_or_join_string(t_cell **list, char *new_value)
 
 int	cpy_str(t_cell **list, char *str, int i)
 {
-	while ((str[i] == '_' || ft_isalnum(str[i])) && str[i])
+	i = 0;
+	if (str[i + 1] == '"')
+		return (i);
+	while (str[i])
 	{
 		dup_or_join_char(list, str[i]);
 		i++;

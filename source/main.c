@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 13:43:47 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/27 17:25:48 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:46:41 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	minishell(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 	if (info->prompt && (*info).prompt)
 	{
 		add_history(info->prompt);
-		if (divide_prompt(info, list_cells) == -1)
+		if (divide_prompt(info, list_cells) == -1
+			 || categorize_elements(list_cells) == -1)
 			return (0);
-		categorize_elements(list_cells);
 		expand_variable(list_cells, *info);
 		handle_quotes(list_cells);
 		*sentence = create_sentence(*list_cells, info);

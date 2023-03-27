@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 19:16:19 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 00:20:16 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:44:25 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,6 @@ char	*ft_strdup_char(char c)
 	return (str);
 }
 
-/*
- * O primeiro if é quando reecontro a 1ˆa aspas.
- * O segundo if é quandoo encontro a 2^a aspas, fechando as aspas.
- * O terceiro if é quando acho outro início de aspas.
- * O quarto if é quando começa o célula com nova aspas.
- * O else é quando encontro palavra, copio a letra.
- */
 void	join_cells(t_cell **init_cell, char *content, int *fq, char *quote)
 {
 	int	i;
@@ -68,12 +61,6 @@ static char	which_quotes(char *str)
 	return (0);
 }
 
-/*
- * Acho a primeira aspas e defino a célula inicial.
- * Copio a primeira célula tirando a aspas.
- * Junto as outras células nessa célula definida inicial.
- * até que a fq(flag quote) seja desligada.
- */
 void	search_quotes(t_cell **init_cell, t_cell **list, int *fq, char *quote)
 {
 	char	*first_word;
@@ -100,10 +87,6 @@ void	search_quotes(t_cell **init_cell, t_cell **list, int *fq, char *quote)
 	}
 }
 
-/*
- * Tratativa de aspas.
- * Objetivo é juntar em uma única célula tudo que tiver entre aspas.
- */
 int	handle_quotes(t_cell **list_cells)
 {
 	t_cell	*list_move;

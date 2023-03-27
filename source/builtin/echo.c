@@ -6,7 +6,7 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 19:54:17 by parnaldo          #+#    #+#             */
-/*   Updated: 2023/03/24 12:18:05 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:43:40 by gusousa          ###   ########.fr       */
 /*   Updated: 2023/03/04 09:57:42 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -36,7 +36,6 @@ char	*reduce_flag(char *str)
 				i++;
 			if (*(str + i) != ' ' && (*(str + i) != '\0'))
 				return (create_str(str, trail));
-			// A flag -n pode ser ativada.
 			if (i > 1)
 				trail = 1;
 		}

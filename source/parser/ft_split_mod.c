@@ -6,13 +6,12 @@
 /*   By: parnaldo <parnaldo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 19:29:46 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/26 16:23:55 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/27 18:38:15 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// Check when quotes open and close.
 static int	is_quotes(char s, int *fq, char *quote)
 {
 	if ((s == '"' || s == '\'') && *fq == 0)

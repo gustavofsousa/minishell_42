@@ -6,17 +6,12 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:40:15 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 06:17:57 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:44:51 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/*
- *	Verifico se tem duplo(metadado)
- *	Verifico se tem flag space
- *	Crio a nova célula.
- */
 int	copy_to_cell(t_cell **list_cells, char *str)
 {
 	char	*new_word;
@@ -41,11 +36,6 @@ int	copy_to_cell(t_cell **list_cells, char *str)
 	return (i);
 }
 
-/*
- * Percorre a string criando substrings
- * Com metadado ou só palavra
- * E cria uma nova célula.
- */
 void	split_and_create(t_cell **list_cells, char *str)
 {
 	int		i;
@@ -92,11 +82,6 @@ void	set_free_mtx(char **mtx_str)
 	}
 }
 
-/*
- * Função para dividir as palavras do prompt em nós de uma lista.
- * o primeiro if é para quando o metadado está colado na paralavra.
- * O segundo if é para quando o metadado ou palavra está separado sozinho.
- */
 int	divide_prompt(t_info *info, t_cell **list_cells)
 {
 	char	**mtx_str;

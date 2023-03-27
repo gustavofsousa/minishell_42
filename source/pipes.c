@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:19:23 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 09:27:02 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/27 17:42:43 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	open_pipes(t_list_sent **senti, t_info *info)
 	i = 0;
 	while (++i < info->qtd_sent)
 	{
-		success = pipe(fildes);//Primeiro le, segundo escreve.
+		success = pipe(fildes);
 		if (success == 0)
 		{
 			if (sent->content.output == 1)

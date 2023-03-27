@@ -6,13 +6,31 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 21:01:14 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 11:05:39 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/27 18:37:45 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	categorize_elements(t_cell **list)
+int	call_error(t_cell **list, t_cell *list_keep)
+{
+	if (list_keep && list_keep->token == piper)
+	{
+		ft_putendl_fd("error: missing operand", 2);
+		return (-1);
+	}
+	if (*list)
+	{
+		if ((*list)->next == NULL && (*list)->token == piper)
+		{
+			ft_putendl_fd("error: missing operand", 2);
+			return (-1);
+		}
+	}
+	return (0);
+}
+
+int	categorize_elements(t_cell **list)
 {
 	t_cell	*list_keep;
 
@@ -29,11 +47,12 @@ void	categorize_elements(t_cell **list)
 			(*list)->token = redirect;
 		else
 			(*list)->token = word;
-		if ((*list)->next == NULL && (*list)->token == piper)
-			ft_putstr_fd("error: missing operand", 2);
+		if (call_error(list, list_keep) == -1)
+			return (-1);
 		*list = (*list)->next;
 	}
-	if (list_keep && list_keep->token == piper)
-		ft_putstr_fd("error: missing operand", 2);
+	if (call_error(list, list_keep) == -1)
+		return (-1);
 	*list = list_keep;
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/25 18:33:17 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/27 18:38:29 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,6 @@ t_cell	*new_sent(t_cell *list_in, t_list_sent **list_sentence, t_info *info)
 	return (list_in);
 }
 
-/*
- * Criar a sentença para enviar para os comandos.
- */
 t_list_sent	*create_sentence(t_cell *list_in, t_info *info)
 {
 	int			i;

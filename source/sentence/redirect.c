@@ -6,7 +6,7 @@
 /*   By: gusousa <gusousa@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 11:18:42 by gusousa           #+#    #+#             */
-/*   Updated: 2023/03/24 11:17:58 by gusousa          ###   ########.fr       */
+/*   Updated: 2023/03/27 18:38:43 by gusousa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,6 @@ void	close_old_fd(t_sentence *sent, char redir)
 	}
 }
 
-/*
- * Tenho que fechar o fd anterior do output ou input(se nao for o padrao 0 e 1).
- * Cro um fd novo (com open), criando o arquivo.
- * A flag do open vai depende do tipo de seta.
- * E tratar error se o open falhar (retorno -1, e o errno diz qual foi)
- * Coloco o fd como output(> ou >>) ou input(<) daquela sentença.
- */
 int	open_redirect(t_cell *list_in, t_sentence *sent, t_info *info)
 {
 	char	redir;

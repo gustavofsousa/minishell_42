@@ -12,6 +12,8 @@
 
 #include "../include/minishell.h"
 
+int g_status = 0;
+
 int	minishell(t_info *info, t_cell **list_cells, t_list_sent **sentence)
 {
 	info->prompt = readline("🦞our_minishell> ");

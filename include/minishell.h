@@ -28,7 +28,7 @@
 # include <sys/wait.h>//waitpid.
 # include <errno.h>
 
-int			g_status;
+extern int			g_status;
 
 enum e_token
 {

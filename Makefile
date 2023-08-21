@@ -81,11 +81,11 @@ $(OBJDIR):
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "objects created 😉 ->$(MAGENTA) $@$(WHITE)"
+	@printf "$(MAGENTA)*$(WHITE)"
 
 $(NAME): $(OBJ)
 	@$(CC) $(OBJ) $(LIBLIB) $(LINK) -o $@
-	@echo "Awesome! just execute it now 🤪"
+	@printf "\nAwesome! just execute it now 🤪\n"
 
 $(LIBLIB):
 	@make -C $(LIBDIR) all

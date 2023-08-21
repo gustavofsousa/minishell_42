@@ -36,9 +36,11 @@ $(OBJDIR):
 
 $(NAME): $(OBJ)
 	ar -rcs $(NAME) $(OBJ)
+	printf "\nLibft is ready\n"
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@
+	printf "*"
 
 clean:
 	$(RM) $(OBJDIR)

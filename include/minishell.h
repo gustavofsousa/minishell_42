@@ -28,6 +28,9 @@
 # include <sys/wait.h>//waitpid.
 # include <errno.h>
 
+// to install readline please execute:
+// sudo apt-get install libreadline8 && sudo apt-get install libreadline-dev
+
 extern int			g_status;
 
 enum e_token
